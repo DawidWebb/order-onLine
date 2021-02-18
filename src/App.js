@@ -1,5 +1,5 @@
 import StoreProvider from "../src/Store/StoreProvider";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 
 import Header from "./vievs/Header/Header";
 import MainSwitch from "./components/MainSwitch/MainSwitch";
@@ -9,12 +9,12 @@ function App() {
   return (
     <StoreProvider>
       <Router>
+        <Header />
         <>
-          <Header />
           <MainSwitch />
-          <Footer />
         </>
       </Router>
+      <Footer />
     </StoreProvider>
   );
 }
