@@ -1,7 +1,12 @@
-import styles from "./FormSection.module.scss";
+import BackButton from "../../components/Buttons/BackButton/BackButton";
 
-function FormSection() {
-  return <h2>In this place will be form</h2>;
-}
+const FormSection = () => {
+  return (
+    <>
+      <h2>Form is redy to use - user is looged</h2>
+      <BackButton />
+    </>
+  );
+};
 
 export default FormSection;
