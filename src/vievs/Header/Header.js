@@ -8,11 +8,17 @@ import LoginForm from "../LoginForm/LoginForm";
 import styles from "./Header.module.scss";
 
 function Header() {
-  const { loginModalOpen, setLoginModalOpen, user } = useContext(StoreContext);
+  const { loginModalOpen, setLoginModalOpen, user, setUser } = useContext(
+    StoreContext
+  );
 
-  console.log(user);
-  const handleOpenLoginModal = () => {
-    setLoginModalOpen(true);
+  const buttonName = !user ? "logowanie" : "wyloguj";
+
+  const handleLoginLogout = () => {
+    if (!user) {
+      setLoginModalOpen(true);
+    }
+    setUser(false);
   };
 
   const handleCloseModal = () => {
@@ -24,16 +30,20 @@ function Header() {
       <h1>Header - Welcome</h1>
       <div className={styles.buttons}>
         <div className={styles.loginAppBtn}>
-          <SelectButton name={"logowanie"} onClick={handleOpenLoginModal} />
+          <SelectButton name={buttonName} onClick={handleLoginLogout} />
           <LoginForm
             isModalOpen={loginModalOpen}
             handleCloseModal={handleCloseModal}
           />
         </div>
         <div className={styles.testAppBtn}>
-          <Link to={"/test-form"}>
-            <SelectButton name={"testuj"} />
-          </Link>
+          {!user ? (
+            <Link to={"/test-form"}>
+              <SelectButton name={"testuj"} />
+            </Link>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

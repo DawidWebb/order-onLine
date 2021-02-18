@@ -9,9 +9,18 @@ const StoreProvider = ({ children }) => {
   // user login
   const [user, setUser] = useState(null);
 
+  // AddClientModal viev
+  const [addClientModalOpen, setAddClientModalOpen] = useState(null);
   return (
     <StoreContext.Provider
-      value={{ loginModalOpen, setLoginModalOpen, user, setUser }}
+      value={{
+        loginModalOpen,
+        setLoginModalOpen,
+        user,
+        setUser,
+        addClientModalOpen,
+        setAddClientModalOpen,
+      }}
     >
       {children}
     </StoreContext.Provider>
