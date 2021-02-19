@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import request from "../helpers/request";
 
 export const StoreContext = createContext(null);
 
@@ -11,6 +12,19 @@ const StoreProvider = ({ children }) => {
 
   // AddClientModal viev
   const [addClientModalOpen, setAddClientModalOpen] = useState(null);
+
+  // Get all clients
+  const [clients, setClients] = useState([]);
+
+  const fetchData = async () => {
+    const { data } = await request.get("/clients");
+
+    setClients(data.clients);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <StoreContext.Provider
       value={{
@@ -20,6 +34,8 @@ const StoreProvider = ({ children }) => {
         setUser,
         addClientModalOpen,
         setAddClientModalOpen,
+        clients,
+        setClients,
       }}
     >
       {children}

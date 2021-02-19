@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Form, Field } from "react-final-form";
 import Modal from "../Modal/Modal";
-
+import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
 
 import styles from "./AddClientForm.module.scss";
@@ -9,9 +9,35 @@ import styles from "./AddClientForm.module.scss";
 const required = (value) => (value ? undefined : "Pole wymagane");
 
 const AddClientForm = (props) => {
+  const [validateMessage, setValidateMessage] = useState("");
+
+  const resetStateOfInput = () => {
+    setValidateMessage("");
+  };
+
+  // useEffect(() => {
+  //   if (props.isModalOpen) {
+  //     resetStateOfInput();
+  //   }
+  // }, [props.isModalOpen]);
+
   const onSubmit = async (values) => {
-    console.log(JSON.stringify(values));
-    props.handleOnClose();
+    const clientObject = {
+      companyName: values.companyName,
+      companyAdress: values.companyAdress,
+      vatNo: values.vatNo,
+      eMail: values.eMail,
+      info: values.info,
+    };
+    const { data, status } = await request.post("/clients", clientObject);
+    console.log(status);
+    if (status === 201) {
+      console.log(JSON.stringify(values));
+      props.handleOnClose();
+    } else {
+      setValidateMessage(data.message);
+      console.log(data.message);
+    }
   };
   return (
     <Modal
@@ -27,7 +53,7 @@ const AddClientForm = (props) => {
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.inputs}>
-                <Field name="Nazwa Firmy" validate={required}>
+                <Field name="companyName" validate={required}>
                   {({ input, meta }) => (
                     <div>
                       <label>Nazwa Firmy</label>
@@ -40,7 +66,7 @@ const AddClientForm = (props) => {
                     </div>
                   )}
                 </Field>
-                <Field name="Adres Firmy" validate={required}>
+                <Field name="companyAdress" validate={required}>
                   {({ input, meta }) => (
                     <div>
                       <label>Adres Firmy</label>
@@ -53,7 +79,7 @@ const AddClientForm = (props) => {
                     </div>
                   )}
                 </Field>
-                <Field name="Nip" validate={required}>
+                <Field name="vatNo" validate={required}>
                   {({ input, meta }) => (
                     <div>
                       <label>Nip</label>
@@ -66,7 +92,7 @@ const AddClientForm = (props) => {
                     </div>
                   )}
                 </Field>
-                <Field name="mail" validate={required}>
+                <Field name="eMail" validate={required}>
                   {({ input, meta }) => (
                     <div className={styles.name}>
                       <label>Adres eMail</label>
