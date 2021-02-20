@@ -8,7 +8,7 @@ const BackButton = () => {
     history.goBack();
   };
   return (
-    <button onClick={handleGoBack} className={styles.selectButton}>
+    <button onClick={handleGoBack} className={styles.backButton}>
       wstecz
     </button>
   );

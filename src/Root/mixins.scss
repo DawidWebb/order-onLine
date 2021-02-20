@@ -1,0 +1,10 @@
+@mixin sectionWrapper {
+  width: 90vw;
+  height: calc(100vh - 270px);
+  margin: 0 auto;
+}
+@mixin backButtonPosition {
+  position: absolute;
+  right: 30px;
+  bottom: 100px;
+}

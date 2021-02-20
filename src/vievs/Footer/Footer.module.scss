@@ -2,9 +2,9 @@
 
 .container {
   width: 95vw;
-  height: 100px;
+  height: $footer-height;
   margin: 0 auto;
   border: 1px solid black;
   text-align: center;
-  line-height: 100px;
+  line-height: $footer-height;
 }

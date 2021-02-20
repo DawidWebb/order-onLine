@@ -1,0 +1,10 @@
+@import "../../Root/common.scss";
+
+.wrapper {
+  @include sectionWrapper;
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 30px;
+  }
+}

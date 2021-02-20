@@ -10,7 +10,7 @@ function MainSection() {
   const { user } = useContext(StoreContext);
 
   const mainViev = user ? <LoggedMenu /> : <WelcomeSite />;
-  return <>{mainViev}</>;
+  return <div className={styles.wrapper}>{mainViev}</div>;
 }
 
 export default MainSection;
