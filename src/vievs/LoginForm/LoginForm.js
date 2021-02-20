@@ -2,12 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import request from "../../helpers/request";
 
+import Spinner from "../../components/Spinner/Spinner";
+
 import { StoreContext } from "../../Store/StoreProvider";
 
 import styles from "./LoginForm.module.scss";
 
 const LoginForm = (props) => {
-  const { setUser } = useContext(StoreContext);
+  const { setUser, showSpinner, setShowSpinner } = useContext(StoreContext);
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -25,16 +27,22 @@ const LoginForm = (props) => {
     setPassword("");
     setValidateMessage("");
   };
+
+  const spinner = showSpinner ? <Spinner /> : "";
+
   const handleOnSubmit = async (event) => {
     event.preventDefault();
+    setShowSpinner(true);
     const { data, status } = await request.post("/users", { login, password });
 
     if (status === 200) {
+      setShowSpinner(false);
       setUser(data.user);
       resetStateOfInput();
       props.handleCloseModal();
     } else {
       setValidateMessage(data.message);
+      setShowSpinner(false);
     }
   };
 
@@ -80,6 +88,7 @@ const LoginForm = (props) => {
           </div>
         </form>
       </div>
+      {spinner}
     </Modal>
   );
 };

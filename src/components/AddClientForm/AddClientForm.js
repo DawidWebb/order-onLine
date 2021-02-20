@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Form, Field } from "react-final-form";
 import Modal from "../Modal/Modal";
+import Spinner from "../../components/Spinner/Spinner";
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
 
@@ -9,6 +10,9 @@ import styles from "./AddClientForm.module.scss";
 const required = (value) => (value ? undefined : "Pole wymagane");
 
 const AddClientForm = (props) => {
+  const { showSpinner, setShowSpinner, setClientAdded } = useContext(
+    StoreContext
+  );
   const [validateMessage, setValidateMessage] = useState("");
 
   const resetStateOfInput = () => {
@@ -21,7 +25,10 @@ const AddClientForm = (props) => {
   //   }
   // }, [props.isModalOpen]);
 
+  const spinner = showSpinner ? <Spinner /> : "";
+
   const onSubmit = async (values) => {
+    setShowSpinner(true);
     const clientObject = {
       companyName: values.companyName,
       companyAdress: values.companyAdress,
@@ -32,9 +39,12 @@ const AddClientForm = (props) => {
     const { data, status } = await request.post("/clients", clientObject);
     console.log(status);
     if (status === 201) {
+      setShowSpinner(false);
       console.log(JSON.stringify(values));
       props.handleOnClose();
+      setClientAdded(true);
     } else {
+      setShowSpinner(false);
       setValidateMessage(data.message);
       console.log(data.message);
     }
@@ -137,6 +147,7 @@ const AddClientForm = (props) => {
           )}
         />
       </div>
+      {spinner}
     </Modal>
   );
 };
