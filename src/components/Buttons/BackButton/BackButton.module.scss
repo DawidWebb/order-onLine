@@ -2,7 +2,14 @@
 
 .backButton {
   padding: 10px 20px;
-  border: 1px solid $fifth-color;
-
+  background-color: $fifth-color;
+  color: $fourth-color;
+  border: 1px solid $text-warring-color;
   font-size: $l-font-size;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.4s;
+  &:hover {
+    background-color: $border-first-color;
+  }
 }

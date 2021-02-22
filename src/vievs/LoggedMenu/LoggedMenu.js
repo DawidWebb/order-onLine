@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import MainButton from "../../components/Buttons/MainButton/MainButton";
+import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 import styles from "./LoggedMenu.module.scss";
 
 const LoggedMenu = () => {
@@ -7,10 +7,10 @@ const LoggedMenu = () => {
     <div className={styles.wrapper}>
       <div className={styles.buttons}>
         <Link to="/orders">
-          <MainButton name="zlecenia" />
+          <SelectButton name="zlecenia" />
         </Link>
         <Link to="/customers">
-          <MainButton name="klienci" />
+          <SelectButton name="klienci" />
         </Link>
       </div>
     </div>

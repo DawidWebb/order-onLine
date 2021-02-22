@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
 import AddClientForm from "../../components/AddClientForm/AddClientForm";
-import MainButton from "../../components/Buttons/MainButton/MainButton";
+import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 import BackButton from "../../components/Buttons/BackButton/BackButton";
 import Spinner from "../../components/Spinner/Spinner";
 import CustomerData from "./CustomerData";
@@ -71,7 +71,7 @@ const Customers = () => {
   };
   const getAllClientsButton =
     clientsData.length === 0 ? (
-      <MainButton name="lista kontrahentów" onClick={handleGetClients} />
+      <SelectButton name="lista kontrahentów" onClick={handleGetClients} />
     ) : (
       ""
     );
@@ -84,13 +84,13 @@ const Customers = () => {
         <p>{showInformationRemoved}</p>
       </div>
       <div className={styles.selectButttons}>
-        <MainButton name="dodaj kontrahenta" onClick={handleModalOpen} />
+        <SelectButton name="dodaj kontrahenta" onClick={handleModalOpen} />
         <AddClientForm
           isModalOpen={addClientModalOpen}
           handleOnClose={handleCloseModal}
           setClientAdded={setClientAdded}
         />
-        <MainButton
+        <SelectButton
           name="wyszukaj kontrahenta"
           onClick={handleSerchModalOpen}
         />

@@ -51,7 +51,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: black;
+  background: $fifth-color;
   animation: ldioMgr4cnjavzn-s 1s linear infinite;
 }
 .ldioMgr4cnjavzn > div > div:last-child {
@@ -59,14 +59,13 @@
 }
 .ldioMgr4cnjavzn > div > div:last-child > div > div {
   animation-delay: -0.5s;
-  background: grey;
+  background: $text-information-color;
 }
 .loadingioSpinnerInterwindAomtfdrgrj6 {
   width: 200px;
   height: 200px;
   display: inline-block;
   overflow: hidden;
-  // background: #ffffff;
 }
 .ldioMgr4cnjavzn {
   width: 100%;

@@ -1,1 +1,8 @@
 @import "../../Root/common.scss";
+
+.wrapper {
+  position: relative;
+  .backButton {
+    @include backButtonPosition;
+  }
+}

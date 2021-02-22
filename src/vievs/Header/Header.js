@@ -27,7 +27,7 @@ function Header() {
 
   return (
     <div className={styles.container}>
-      <h1>Header - Welcome</h1>
+      <h1>Zlecenia on-line</h1>
       <div className={styles.buttons}>
         <div className={styles.loginAppBtn}>
           <SelectButton name={buttonName} onClick={handleLoginLogout} />

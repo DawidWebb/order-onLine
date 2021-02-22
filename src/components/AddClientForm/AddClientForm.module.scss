@@ -1,0 +1,41 @@
+@import "../../Root/common.scss";
+
+.wrapper {
+  h3 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .form {
+    .inputs {
+      div {
+        display: flex;
+        flex-wrap: wrap;
+        ::placeholder {
+          color: $fifth-color;
+          font-weight: 700;
+        }
+        input,
+        textarea {
+          height: 35px;
+          width: 90%;
+          margin-top: 10px;
+          background-color: $basic-color;
+          border: none;
+          border-bottom: 2px solid $fifth-color;
+          color: $fourth-color;
+        }
+        span {
+          flex-basis: 90%;
+          color: $text-warring-color;
+          text-align: left;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+  }
+}

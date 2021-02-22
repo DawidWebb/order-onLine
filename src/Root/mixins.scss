@@ -6,6 +6,11 @@
 }
 @mixin backButtonPosition {
   position: absolute;
-  right: 30px;
-  bottom: 100px;
+  right: 20px;
+  bottom: 20px;
+}
+@mixin spinnerWrapper {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
 }

@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { Form, Field } from "react-final-form";
 import Modal from "../Modal/Modal";
 import Spinner from "../../components/Spinner/Spinner";
+import MainButton from "../../components/Buttons/MainButton/MainButton";
+
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
 
@@ -46,8 +48,8 @@ const AddClientForm = (props) => {
       isModalOpen={props.isModalOpen}
     >
       <div className={styles.wrapper}>
-        <p>Dodawanie nowego kontrahenta</p>
-        <h3>{props.name}</h3>
+        <h3>Dodawanie nowego kontrahenta</h3>
+        {/* <h3>{props.name}</h3> */}
         <Form
           onSubmit={onSubmit}
           // validate={validate}
@@ -57,7 +59,6 @@ const AddClientForm = (props) => {
                 <Field name="companyName" validate={required}>
                   {({ input, meta }) => (
                     <div>
-                      <label>Nazwa Firmy</label>
                       <input
                         {...input}
                         type="text"
@@ -70,7 +71,6 @@ const AddClientForm = (props) => {
                 <Field name="companyAdress" validate={required}>
                   {({ input, meta }) => (
                     <div>
-                      <label>Adres Firmy</label>
                       <input
                         {...input}
                         type="text"
@@ -83,11 +83,10 @@ const AddClientForm = (props) => {
                 <Field name="vatNo" validate={required}>
                   {({ input, meta }) => (
                     <div>
-                      <label>Nip</label>
                       <input
                         {...input}
                         type="text"
-                        placeholder="PL0000000000"
+                        placeholder="Nip: PL0000000000"
                       />
                       {meta.error && meta.touched && <span>{meta.error}</span>}
                     </div>
@@ -96,18 +95,16 @@ const AddClientForm = (props) => {
                 <Field name="eMail" validate={required}>
                   {({ input, meta }) => (
                     <div className={styles.name}>
-                      <label>Adres eMail</label>
                       <input
                         {...input}
                         type="text"
-                        placeholder="example@example.pl"
+                        placeholder="eMail: example@example.pl"
                       />
                       {meta.error && meta.touched && <span>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
                 <div className={styles.notes}>
-                  <label>Dodatkowe info</label>
                   <Field
                     name="info"
                     component="textarea"
@@ -116,23 +113,21 @@ const AddClientForm = (props) => {
                 </div>
               </div>
               <div className={styles.buttons}>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  //   onClick={props.handleOnClose}
-                >
-                  Zapisz
-                </button>
+                <MainButton type="submit" disabled={submitting} name="zapisz" />
                 <button
                   type="button"
                   onClick={form.reset}
                   disabled={submitting || pristine}
+                  className={styles.resetButton}
                 >
-                  Reset
+                  reset
                 </button>
-                <button onClick={props.handleOnClose} type="button">
-                  Wyjdź
-                </button>
+
+                <MainButton
+                  type="button"
+                  onClick={props.handleOnClose}
+                  name="wyjdź"
+                />
               </div>
             </form>
           )}

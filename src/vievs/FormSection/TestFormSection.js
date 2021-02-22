@@ -4,10 +4,12 @@ import styles from "./TestFormSection.module.scss";
 
 function TestFormSection() {
   return (
-    <>
+    <div className={styles.wrapper}>
       <h2>In this place will be form</h2>
-      <BackButton />
-    </>
+      <div className={styles.backButton}>
+        <BackButton />
+      </div>
+    </div>
   );
 }
 

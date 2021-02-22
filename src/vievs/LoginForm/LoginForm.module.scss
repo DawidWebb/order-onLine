@@ -1,5 +1,34 @@
 @import "../../Root/common.scss";
 
-.validateMessage {
-  color: red;
+.wrapper {
+  position: relative;
+  width: 60vw;
+  height: 250px;
+  .infromation {
+    color: $text-warring-color;
+    text-align: center;
+    font-weight: 700;
+  }
+  .form {
+    .login,
+    .password {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px auto;
+      input {
+        margin-left: 10px;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px auto;
+    }
+  }
+  .spinnerWrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import request from "../../helpers/request";
-
+import MainButton from "../../components/Buttons/MainButton/MainButton";
 import Spinner from "../../components/Spinner/Spinner";
 
 import { StoreContext } from "../../Store/StoreProvider";
@@ -62,7 +62,7 @@ const LoginForm = (props) => {
       handleOnCloseModal={props.handleCloseModal}
     >
       <div className={styles.wrapper}>
-        {validateMessageComponent}
+        <div className={styles.infromation}>{validateMessageComponent}</div>
         <form className={styles.form} method="post" onSubmit={handleOnSubmit}>
           <div className={styles.login}>
             <label>
@@ -81,14 +81,16 @@ const LoginForm = (props) => {
             </label>
           </div>
           <div className={styles.buttons}>
-            <button type="submit">Zaloguj</button>
-            <button onClick={handleOnCloseModal} type="button">
-              Wyjdź
-            </button>
+            <MainButton type="submit" name="zaloguj" />
+            <MainButton
+              type="button"
+              name="wyjdź"
+              onClick={handleOnCloseModal}
+            />
           </div>
         </form>
+        <div className={styles.spinnerWrapper}>{spinner}</div>
       </div>
-      {spinner}
     </Modal>
   );
 };

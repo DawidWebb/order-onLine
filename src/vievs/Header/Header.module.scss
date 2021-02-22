@@ -8,11 +8,12 @@
   width: 95vw;
   height: $header-height;
   margin: 0 auto;
-  border: 1px solid black;
+  border-bottom: 2px solid $fifth-color;
   text-align: center;
 
   h1 {
     flex-basis: 45%;
+    color: $fifth-color;
   }
   .buttons {
     flex-basis: 45%;

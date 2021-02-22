@@ -1,8 +1,16 @@
 @import "../../../Root/common.scss";
 
 .mainButton {
-  min-width: 120px;
-  padding: 10px 20px;
-  border: 1px solid $basic-color;
-  font-size: $l-font-size;
+  min-width: 100px;
+  padding: 5px 10px;
+  background-color: $first-color;
+  color: $fourth-color;
+  font-size: $s-font-size;
+  border: 2px solid $third-color;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.4s;
+  &:hover {
+    background-color: $third-color;
+  }
 }
