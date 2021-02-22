@@ -10,20 +10,12 @@ import styles from "./AddClientForm.module.scss";
 const required = (value) => (value ? undefined : "Pole wymagane");
 
 const AddClientForm = (props) => {
-  const { showSpinner, setShowSpinner, setClientAdded } = useContext(
-    StoreContext
-  );
-  const [validateMessage, setValidateMessage] = useState("");
-
-  const resetStateOfInput = () => {
-    setValidateMessage("");
-  };
-
-  // useEffect(() => {
-  //   if (props.isModalOpen) {
-  //     resetStateOfInput();
-  //   }
-  // }, [props.isModalOpen]);
+  const {
+    showSpinner,
+    setShowSpinner,
+    clientsData,
+    setClientsData,
+  } = useContext(StoreContext);
 
   const spinner = showSpinner ? <Spinner /> : "";
 
@@ -40,12 +32,11 @@ const AddClientForm = (props) => {
     console.log(status);
     if (status === 201) {
       setShowSpinner(false);
-      console.log(JSON.stringify(values));
       props.handleOnClose();
-      setClientAdded(true);
+      props.setClientAdded(true);
+      setClientsData((prev) => [...prev, clientObject]);
     } else {
       setShowSpinner(false);
-      setValidateMessage(data.message);
       console.log(data.message);
     }
   };

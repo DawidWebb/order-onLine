@@ -4,6 +4,7 @@ import AddClientForm from "../../components/AddClientForm/AddClientForm";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
 import BackButton from "../../components/Buttons/BackButton/BackButton";
 import Spinner from "../../components/Spinner/Spinner";
+import CustomerData from "./CustomerData";
 
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
@@ -12,51 +13,39 @@ import styles from "./Customers.module.scss";
 
 const Customers = () => {
   const {
+    clientsData,
+    setClientsData,
     addClientModalOpen,
     setAddClientModalOpen,
-    clientAdded,
-    setClientAdded,
     showSpinner,
     setShowSpinner,
   } = useContext(StoreContext);
 
-  const [clientsData, setClientsData] = useState([]);
+  const [clientAdded, setClientAdded] = useState(false);
+  const [clientEdited, setClientEdited] = useState(false);
+  const [clientRemoved, setClientRemoved] = useState(false);
 
-  const showInformation = clientAdded ? "Dodano nowego klienta" : "";
+  const showInformationAdded = clientAdded ? "Dodano nowego klienta" : "";
+  const showInformationRemoved = clientRemoved ? "Usunieto klienta" : "";
   const spinner = showSpinner ? <Spinner /> : "";
 
   //all clients from handleGetClients
   const clientsInfo = clientsData.map((client) => (
-    <div key={client._id} className={styles.clientItem}>
-      <h3>{client.companyName}</h3>
-      <p>
-        adres: <span>{client.companyAdress}</span>
-      </p>
-      <p>
-        nip: <span>{client.vatNo}</span>
-      </p>
-      <p>
-        mail: <span>{client.eMail}</span>
-      </p>
-      <p>
-        uwagi: <span>{client.info}</span>
-      </p>
-      <div className={styles.clientButtons}>
-        <button>Edytuj</button>
-        <button onClick={handleDeleteClient} id={client.vatNo}>
-          Usuń
-        </button>
-      </div>
-    </div>
+    <CustomerData
+      key={client._id}
+      client={client}
+      setClientRemoved={setClientRemoved}
+    />
   ));
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setClientAdded(false);
+      setClientRemoved(false);
     }, 3000);
 
     return () => clearInterval(timeout);
-  }, [clientAdded]);
+  }, [clientAdded, clientRemoved]);
 
   const handleModalOpen = () => {
     setAddClientModalOpen(true);
@@ -80,39 +69,35 @@ const Customers = () => {
       console.log(data.message);
     }
   };
+  const getAllClientsButton =
+    clientsData.length === 0 ? (
+      <MainButton name="lista kontrahentów" onClick={handleGetClients} />
+    ) : (
+      ""
+    );
 
-  const handleDeleteClient = async (e) => {
-    try {
-      const { status } = await request.delete(`/courses/${e.target.id}`);
-
-      if (status === 200) {
-        setClientsData((prev) =>
-          prev.filter((client) => client.vatNo !== e.target.id)
-        );
-      }
-    } catch (error) {
-      console.warn("cos nie taK");
-    }
-  };
   return (
     <div className={styles.wrapper}>
       <h1>Moduł klienta</h1>
       <div className={styles.information}>
-        <p>{showInformation}</p>
+        <p>{showInformationAdded}</p>
+        <p>{showInformationRemoved}</p>
       </div>
       <div className={styles.selectButttons}>
         <MainButton name="dodaj kontrahenta" onClick={handleModalOpen} />
         <AddClientForm
           isModalOpen={addClientModalOpen}
           handleOnClose={handleCloseModal}
+          setClientAdded={setClientAdded}
         />
         <MainButton
           name="wyszukaj kontrahenta"
           onClick={handleSerchModalOpen}
         />
-        <MainButton name="lista kontrahentów" onClick={handleGetClients} />
+        {getAllClientsButton}
       </div>
       {spinner}
+      <div className={styles.clientItem}></div>
       <div className={styles.clientsList}>{clientsInfo}</div>
       <div className={styles.backButton}>
         <BackButton />
