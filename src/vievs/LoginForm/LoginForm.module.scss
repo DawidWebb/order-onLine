@@ -3,7 +3,6 @@
 .wrapper {
   position: relative;
   width: 60vw;
-  height: 250px;
   .infromation {
     color: $text-warring-color;
     text-align: center;
@@ -27,8 +26,6 @@
     }
   }
   .spinnerWrapper {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    @include spinnerWrapper;
   }
 }

@@ -24,9 +24,7 @@
     align-items: center;
     height: 200px;
   }
-  .spinnerWrapper {
-    @include spinnerWrapper;
-  }
+
   .clientItem {
     min-height: 100px;
   }

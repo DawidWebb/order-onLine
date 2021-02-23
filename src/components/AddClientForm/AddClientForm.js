@@ -132,7 +132,7 @@ const AddClientForm = (props) => {
           )}
         />
       </div>
-      {spinner}
+      <div className={styles.spinnerWrapper}>{spinner}</div>
     </Modal>
   );
 };
