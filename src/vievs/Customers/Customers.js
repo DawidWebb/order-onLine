@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
 import AddClientForm from "../../components/AddClientForm/AddClientForm";
+import SearchModal from "../../components/SearchModal/SearchModal";
 import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 import BackButton from "../../components/Buttons/BackButton/BackButton";
 import Spinner from "../../components/Spinner/Spinner";
@@ -24,6 +25,7 @@ const Customers = () => {
   const [clientAdded, setClientAdded] = useState(false);
   const [clientEdited, setClientEdited] = useState(false);
   const [clientRemoved, setClientRemoved] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   const showInformationAdded = clientAdded ? "Dodano nowego klienta" : "";
   const showInformationRemoved = clientRemoved ? "Usunieto klienta" : "";
@@ -53,9 +55,12 @@ const Customers = () => {
 
   const handleCloseModal = () => {
     setAddClientModalOpen(false);
+    setSearchModalOpen(false);
   };
 
-  const handleSerchModalOpen = () => {};
+  const handleSerchModalOpen = () => {
+    setSearchModalOpen(true);
+  };
 
   const handleGetClients = async () => {
     setShowSpinner(true);
@@ -93,6 +98,10 @@ const Customers = () => {
         <SelectButton
           name="wyszukaj kontrahenta"
           onClick={handleSerchModalOpen}
+        />
+        <SearchModal
+          isModalOpen={searchModalOpen}
+          handleCloseModal={handleCloseModal}
         />
         {getAllClientsButton}
       </div>

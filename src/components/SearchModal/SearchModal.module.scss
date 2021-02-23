@@ -1,0 +1,24 @@
+@import "../../Root/common.scss";
+
+.wrapper {
+  .infromation {
+    color: $text-warring-color;
+    text-align: center;
+    font-weight: 700;
+  }
+  .search {
+    ::placeholder {
+      color: $fifth-color;
+      font-weight: 700;
+    }
+    input {
+      @include inputViev;
+    }
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    margin-top: 20px;
+  }
+}

@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 @mixin sectionWrapper {
   position: relative;
   width: 90vw;
@@ -16,4 +18,13 @@
   width: 100px;
   height: 100px;
   padding: 10px;
+}
+@mixin inputViev {
+  height: 35px;
+  width: 90%;
+  margin-top: 10px;
+  background-color: $basic-color;
+  border: none;
+  border-bottom: 2px solid $fifth-color;
+  color: $fourth-color;
 }
