@@ -73,7 +73,7 @@ const Customers = () => {
     clientsData.length === 0 ? (
       <SelectButton name="lista kontrahentów" onClick={handleGetClients} />
     ) : (
-      ""
+      <SelectButton name="odśwież listę" onClick={handleGetClients} />
     );
 
   return (
@@ -96,7 +96,7 @@ const Customers = () => {
         />
         {getAllClientsButton}
       </div>
-      {spinner}
+      <div className={styles.spinnerWrapper}> {spinner}</div>
       <div className={styles.clientItem}></div>
       <div className={styles.clientsList}>{clientsInfo}</div>
       <div className={styles.backButton}>

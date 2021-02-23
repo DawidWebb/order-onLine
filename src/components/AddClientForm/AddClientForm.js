@@ -36,7 +36,6 @@ const AddClientForm = (props) => {
       setShowSpinner(false);
       props.handleOnClose();
       props.setClientAdded(true);
-      setClientsData((prev) => [...prev, clientObject]);
     } else {
       setShowSpinner(false);
       console.log(data.message);

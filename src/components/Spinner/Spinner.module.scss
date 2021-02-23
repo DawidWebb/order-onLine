@@ -62,9 +62,13 @@
   background: $text-information-color;
 }
 .loadingioSpinnerInterwindAomtfdrgrj6 {
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
   width: 200px;
   height: 200px;
-  display: inline-block;
+  display: block;
   overflow: hidden;
 }
 .ldioMgr4cnjavzn {
