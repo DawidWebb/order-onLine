@@ -7,9 +7,6 @@ const StoreProvider = ({ children }) => {
   // login Modal viev
   const [loginModalOpen, setLoginModalOpen] = useState(false);
 
-  // show Spinner
-  const [showSpinner, setShowSpinner] = useState(false);
-
   // user login
   const [user, setUser] = useState(null);
 
@@ -27,8 +24,6 @@ const StoreProvider = ({ children }) => {
       value={{
         loginModalOpen,
         setLoginModalOpen,
-        showSpinner,
-        setShowSpinner,
         user,
         setUser,
         addClientModalOpen,

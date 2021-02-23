@@ -18,17 +18,20 @@ const Customers = () => {
     setClientsData,
     addClientModalOpen,
     setAddClientModalOpen,
-    showSpinner,
-    setShowSpinner,
   } = useContext(StoreContext);
 
   const [clientAdded, setClientAdded] = useState(false);
   const [clientEdited, setClientEdited] = useState(false);
   const [clientRemoved, setClientRemoved] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [serchedClient, setSerchedClient] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const showInformationAdded = clientAdded ? "Dodano nowego klienta" : "";
   const showInformationRemoved = clientRemoved ? "Usunieto klienta" : "";
+  const showInformationNoSelected = !serchedClient
+    ? "Nie wybrałeś klienta"
+    : "";
   const spinner = showSpinner ? <Spinner /> : "";
 
   //all clients from handleGetClients
@@ -39,6 +42,17 @@ const Customers = () => {
       setClientRemoved={setClientRemoved}
     />
   ));
+
+  //one client from search
+  const serchClientInfo = !serchedClient ? (
+    <p className={styles.info}>{showInformationNoSelected}</p>
+  ) : (
+    <CustomerData
+      key={serchedClient[0]._id}
+      client={serchedClient[0]}
+      setClientRemoved={setClientRemoved}
+    />
+  );
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -51,11 +65,13 @@ const Customers = () => {
 
   const handleModalOpen = () => {
     setAddClientModalOpen(true);
+    setSerchedClient(false);
   };
 
   const handleCloseModal = () => {
     setAddClientModalOpen(false);
     setSearchModalOpen(false);
+    console.log(serchedClient);
   };
 
   const handleSerchModalOpen = () => {
@@ -63,6 +79,7 @@ const Customers = () => {
   };
 
   const handleGetClients = async () => {
+    setSerchedClient(false);
     setShowSpinner(true);
     const { data, status } = await request.get("/clients");
     console.log(status);
@@ -102,11 +119,12 @@ const Customers = () => {
         <SearchModal
           isModalOpen={searchModalOpen}
           handleCloseModal={handleCloseModal}
+          setSerchedClient={setSerchedClient}
         />
         {getAllClientsButton}
       </div>
       <div className={styles.spinnerWrapper}> {spinner}</div>
-      <div className={styles.clientItem}></div>
+      <div className={styles.clientItem}>{serchClientInfo}</div>
       <div className={styles.clientsList}>{clientsInfo}</div>
       <div className={styles.backButton}>
         <BackButton />

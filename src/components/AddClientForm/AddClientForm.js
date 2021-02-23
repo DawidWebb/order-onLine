@@ -12,12 +12,9 @@ import styles from "./AddClientForm.module.scss";
 const required = (value) => (value ? undefined : "Pole wymagane");
 
 const AddClientForm = (props) => {
-  const {
-    showSpinner,
-    setShowSpinner,
-    clientsData,
-    setClientsData,
-  } = useContext(StoreContext);
+  const { clientsData, setClientsData } = useContext(StoreContext);
+
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const spinner = showSpinner ? <Spinner /> : "";
 

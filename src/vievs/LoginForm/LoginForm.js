@@ -9,11 +9,12 @@ import { StoreContext } from "../../Store/StoreProvider";
 import styles from "./LoginForm.module.scss";
 
 const LoginForm = (props) => {
-  const { setUser, showSpinner, setShowSpinner } = useContext(StoreContext);
+  const { setUser } = useContext(StoreContext);
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [validateMessage, setValidateMessage] = useState("");
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const handleOnChangeLogin = (event) => setLogin(event.target.value);
   const handleOnChangePassword = (event) => setPassword(event.target.value);
