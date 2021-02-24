@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import request from "../../helpers/request";
+import { addCookie } from "../../helpers/session";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
 import Spinner from "../../components/Spinner/Spinner";
 
@@ -9,7 +10,7 @@ import { StoreContext } from "../../Store/StoreProvider";
 import styles from "./LoginForm.module.scss";
 
 const LoginForm = (props) => {
-  const { setUser } = useContext(StoreContext);
+  const { setUser, setCookie } = useContext(StoreContext);
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -34,13 +35,18 @@ const LoginForm = (props) => {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     setShowSpinner(true);
-    const { data, status } = await request.post("/users", { login, password });
+    const { data, status } = await request.post("/users", {
+      login,
+      password,
+    });
 
     if (status === 200) {
       setShowSpinner(false);
       setUser(data.user);
       resetStateOfInput();
       props.handleCloseModal();
+      addCookie();
+      setCookie("appFormAdmin");
     } else {
       setValidateMessage(data.message);
       setShowSpinner(false);

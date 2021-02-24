@@ -2,8 +2,8 @@ import styles from "./Spinner.module.scss";
 
 const Spinner = () => {
   return (
-    <div class={styles.loadingioSpinnerInterwindAomtfdrgrj6}>
-      <div class={styles.ldioMgr4cnjavzn}>
+    <div className={styles.loadingioSpinnerInterwindAomtfdrgrj6}>
+      <div className={styles.ldioMgr4cnjavzn}>
         <div>
           <div>
             <div>

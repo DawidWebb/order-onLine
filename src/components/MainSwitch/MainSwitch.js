@@ -10,17 +10,23 @@ import { StoreContext } from "../../Store/StoreProvider";
 // import ErrorPage from "../ErrorPage/ErrorPage";
 
 const MainSwitch = () => {
-  const { user } = useContext(StoreContext);
-
-  console.log(user);
+  const { user, cookie } = useContext(StoreContext);
 
   return (
     <main>
       <Switch>
         <Route exact path="/" render={() => <MainSection />} />
         <Route exact path="/test-form" render={() => <TestFormSection />} />
-        {user && <Route exact path="/orders" render={() => <Orders />} />}
-        {user && <Route exact path="/customers" render={() => <Customers />} />}
+        {user || cookie ? (
+          <Route exact path="/orders" render={() => <Orders />} />
+        ) : (
+          ""
+        )}
+        {user || cookie ? (
+          <Route exact path="/customers" render={() => <Customers />} />
+        ) : (
+          ""
+        )}
 
         {/* <Route component={ErrorPage} /> */}
         <Redirect to="/" />

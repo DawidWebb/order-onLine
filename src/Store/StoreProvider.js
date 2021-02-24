@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from "react";
-import request from "../helpers/request";
 
 export const StoreContext = createContext(null);
 
@@ -9,6 +8,17 @@ const StoreProvider = ({ children }) => {
 
   // user login
   const [user, setUser] = useState(null);
+
+  // cookie
+  const [cookie, setCookie] = useState(false);
+  const checkCookie = () => {
+    if (document.cookie === "appFormAdmin") {
+      setCookie("appFormAdmin");
+    }
+  };
+  useEffect(() => {
+    checkCookie();
+  }, []);
 
   // AddClientModal viev
   const [addClientModalOpen, setAddClientModalOpen] = useState(null);
@@ -24,6 +34,8 @@ const StoreProvider = ({ children }) => {
       value={{
         loginModalOpen,
         setLoginModalOpen,
+        cookie,
+        setCookie,
         user,
         setUser,
         addClientModalOpen,

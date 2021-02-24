@@ -33,7 +33,6 @@ const SearchModal = (props) => {
 
     if (status === 200) {
       setShowSpinner(false);
-      console.log(data);
       props.setSerchedClient(data.client);
       resetStateOfInput();
       props.handleCloseModal();
@@ -67,6 +66,7 @@ const SearchModal = (props) => {
               type="text"
               value={vatNo}
               placeholder="podaj nip klienta"
+              required={true}
             />
           </div>
 

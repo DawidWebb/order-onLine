@@ -1,3 +1,5 @@
+import styles from "./WelcomeSite.module.scss";
+
 const WelcomeSite = () => {
   return (
     <div>

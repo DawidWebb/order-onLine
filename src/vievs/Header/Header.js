@@ -1,24 +1,33 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { StoreContext } from "../../Store/StoreProvider";
+import { deleteCoockie } from "../../helpers/session";
 
 import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 import LoginForm from "../LoginForm/LoginForm";
 
+import { StoreContext } from "../../Store/StoreProvider";
+
 import styles from "./Header.module.scss";
 
 function Header() {
-  const { loginModalOpen, setLoginModalOpen, user, setUser } = useContext(
-    StoreContext
-  );
+  const {
+    loginModalOpen,
+    setLoginModalOpen,
+    user,
+    setUser,
+    cookie,
+    setCookie,
+  } = useContext(StoreContext);
 
-  const buttonName = !user ? "logowanie" : "wyloguj";
+  const buttonName = !user && !cookie ? "logowanie" : "wyloguj";
 
   const handleLoginLogout = () => {
-    if (!user) {
+    if (!user && !cookie) {
       setLoginModalOpen(true);
     }
     setUser(false);
+    deleteCoockie(cookie);
+    setCookie(false);
   };
 
   const handleCloseModal = () => {
@@ -37,7 +46,7 @@ function Header() {
           />
         </div>
         <div className={styles.testAppBtn}>
-          {!user ? (
+          {!cookie ? (
             <Link to={"/test-form"}>
               <SelectButton name={"testuj"} />
             </Link>

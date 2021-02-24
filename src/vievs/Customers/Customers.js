@@ -29,9 +29,7 @@ const Customers = () => {
 
   const showInformationAdded = clientAdded ? "Dodano nowego klienta" : "";
   const showInformationRemoved = clientRemoved ? "Usunieto klienta" : "";
-  const showInformationNoSelected = !serchedClient
-    ? "Nie wybrałeś klienta"
-    : "";
+
   const spinner = showSpinner ? <Spinner /> : "";
 
   //all clients from handleGetClients
@@ -45,7 +43,7 @@ const Customers = () => {
 
   //one client from search
   const serchClientInfo = !serchedClient ? (
-    <p className={styles.info}>{showInformationNoSelected}</p>
+    ""
   ) : (
     <CustomerData
       key={serchedClient[0]._id}
@@ -58,7 +56,7 @@ const Customers = () => {
     const timeout = setTimeout(() => {
       setClientAdded(false);
       setClientRemoved(false);
-    }, 3000);
+    }, 3500);
 
     return () => clearInterval(timeout);
   }, [clientAdded, clientRemoved]);
@@ -71,7 +69,6 @@ const Customers = () => {
   const handleCloseModal = () => {
     setAddClientModalOpen(false);
     setSearchModalOpen(false);
-    console.log(serchedClient);
   };
 
   const handleSerchModalOpen = () => {
@@ -82,7 +79,7 @@ const Customers = () => {
     setSerchedClient(false);
     setShowSpinner(true);
     const { data, status } = await request.get("/clients");
-    console.log(status);
+
     if (status === 200) {
       setShowSpinner(false);
       setClientsData(data.data);
