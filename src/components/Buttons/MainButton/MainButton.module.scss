@@ -13,4 +13,7 @@
   &:hover {
     background-color: $third-color;
   }
+  @media screen and (min-width: map-get($breakpoints, sl)) {
+    font-size: $l-font-size/1.1;
+  }
 }

@@ -2,30 +2,40 @@
 
 .wrapper {
   position: relative;
-  width: 60vw;
+  width: 50vw;
   .infromation {
     color: $text-warring-color;
     text-align: center;
     font-weight: 700;
   }
   .form {
+    ::placeholder {
+      color: $fifth-color;
+      font-weight: 700;
+    }
     .login,
     .password {
       display: flex;
       justify-content: space-around;
       margin: 20px auto;
-      input {
-        margin-left: 10px;
-      }
     }
-
+    .input {
+      @include inputViev;
+    }
     .buttons {
       display: flex;
       justify-content: space-around;
+
       margin: 20px auto;
     }
   }
   .spinnerWrapper {
     @include spinnerWrapper;
+  }
+  @media screen and (orientation: landscape) {
+    width: 30vw;
+  }
+  @media screen and (min-width: map-get($breakpoints, lm)) {
+    width: 20vw;
   }
 }

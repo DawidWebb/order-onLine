@@ -2,6 +2,7 @@
 
 .wrapper {
   position: relative;
+  width: 70vw;
   h3 {
     margin-bottom: 20px;
     text-align: center;
@@ -17,13 +18,7 @@
         }
         input,
         textarea {
-          height: 35px;
-          width: 90%;
-          margin-top: 10px;
-          background-color: $basic-color;
-          border: none;
-          border-bottom: 2px solid $fifth-color;
-          color: $fourth-color;
+          @include inputViev;
         }
         span {
           flex-basis: 90%;
@@ -41,5 +36,11 @@
   }
   .spinnerWrapper {
     @include spinnerWrapper;
+  }
+  @media screen and (orientation: landscape) {
+    width: 60vw;
+  }
+  @media screen and (min-width: map-get($breakpoints, lm)) {
+    width: 40vw;
   }
 }

@@ -8,7 +8,7 @@ import styles from "./MainSection.module.scss";
 
 function MainSection() {
   const { user, cookie } = useContext(StoreContext);
-  console.log(cookie);
+
   const mainViev = user || cookie ? <LoggedMenu /> : <WelcomeSite />;
   return <div className={styles.wrapper}>{mainViev}</div>;
 }

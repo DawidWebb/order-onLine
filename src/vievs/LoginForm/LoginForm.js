@@ -72,20 +72,22 @@ const LoginForm = (props) => {
         <div className={styles.infromation}>{validateMessageComponent}</div>
         <form className={styles.form} method="post" onSubmit={handleOnSubmit}>
           <div className={styles.login}>
-            <label>
-              Login:
-              <input onChange={handleOnChangeLogin} type="text" value={login} />
-            </label>
+            <input
+              className={styles.input}
+              onChange={handleOnChangeLogin}
+              type="text"
+              value={login}
+              placeholder="Login"
+            />
           </div>
           <div className={styles.password}>
-            <label>
-              Hasło:
-              <input
-                onChange={handleOnChangePassword}
-                type="password"
-                value={password}
-              />
-            </label>
+            <input
+              className={styles.input}
+              onChange={handleOnChangePassword}
+              type="password"
+              value={password}
+              placeholder="Hasło"
+            />
           </div>
           <div className={styles.buttons}>
             <MainButton type="submit" name="zaloguj" />

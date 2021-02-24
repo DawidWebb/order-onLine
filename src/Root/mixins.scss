@@ -27,5 +27,9 @@
   background-color: $basic-color;
   border: none;
   border-bottom: 2px solid $fifth-color;
+  font-size: $m-font-size;
   color: $fourth-color;
+  @media screen and (min-width: map-get($breakpoints, lm)) {
+    font-size: $l-font-size/1.2;
+  }
 }
