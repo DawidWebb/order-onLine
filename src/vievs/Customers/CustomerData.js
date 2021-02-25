@@ -7,7 +7,12 @@ import { StoreContext } from "../../Store/StoreProvider";
 
 import styles from "./CustomerData.module.scss";
 
-const CustomerData = ({ client, setClientRemoved, setClientEdited }) => {
+const CustomerData = ({
+  client,
+  setClientRemoved,
+  setClientEdited,
+  setSerchedClient,
+}) => {
   const { setClientsData } = useContext(StoreContext);
   const [editModalOpen, setEditModalOpen] = useState(false);
 
@@ -26,7 +31,7 @@ const CustomerData = ({ client, setClientRemoved, setClientEdited }) => {
         setClientsData((prev) =>
           prev.filter((item) => item._id !== client._id)
         );
-
+        setSerchedClient(false);
         setClientRemoved(true);
       }
     } catch (error) {
@@ -59,6 +64,7 @@ const CustomerData = ({ client, setClientRemoved, setClientEdited }) => {
           isModalOpen={editModalOpen}
           handleOnClose={handleCloseModal}
           setClientEdited={setClientEdited}
+          setSerchedClient={setSerchedClient}
           clientData={client}
         />
         <MainButton name="usuń" onClick={handleDeleteClient} />

@@ -43,6 +43,7 @@ const AddClientForm = (props) => {
       );
       const newClientData = clientsData.splice(elementIndex, 1, data.data);
       setClientsData((prev) => [...prev]);
+      props.setSerchedClient((prev) => [data.data]);
       setShowSpinner(false);
     } else {
       setShowSpinner(false);

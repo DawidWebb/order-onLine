@@ -49,6 +49,7 @@ const Customers = () => {
     <CustomerData
       key={serchedClient[0]._id}
       client={serchedClient[0]}
+      setSerchedClient={setSerchedClient}
       setClientRemoved={setClientRemoved}
       setClientEdited={setClientEdited}
     />
@@ -124,7 +125,9 @@ const Customers = () => {
       </div>
       <div className={styles.spinnerWrapper}> {spinner}</div>
       <div className={styles.clientItem}>{serchClientInfo}</div>
-      <div className={styles.clientsList}>{clientsInfo}</div>
+      <div className={styles.clientsList}>
+        {!serchClientInfo ? clientsInfo : ""}
+      </div>
       <div className={styles.backButton}>
         <BackButton />
       </div>
