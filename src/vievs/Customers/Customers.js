@@ -38,6 +38,7 @@ const Customers = () => {
       key={client._id}
       client={client}
       setClientRemoved={setClientRemoved}
+      setClientEdited={setClientEdited}
     />
   ));
 
@@ -49,6 +50,7 @@ const Customers = () => {
       key={serchedClient[0]._id}
       client={serchedClient[0]}
       setClientRemoved={setClientRemoved}
+      setClientEdited={setClientEdited}
     />
   );
 
@@ -56,10 +58,10 @@ const Customers = () => {
     const timeout = setTimeout(() => {
       setClientAdded(false);
       setClientRemoved(false);
-    }, 3500);
-
+      setClientEdited(false);
+    });
     return () => clearInterval(timeout);
-  }, [clientAdded, clientRemoved]);
+  }, [clientAdded, clientRemoved, clientEdited]);
 
   const handleModalOpen = () => {
     setAddClientModalOpen(true);

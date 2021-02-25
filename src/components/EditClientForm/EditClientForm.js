@@ -7,7 +7,7 @@ import MainButton from "../../components/Buttons/MainButton/MainButton";
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
 
-import styles from "./AddClientForm.module.scss";
+import styles from "./EditClientForm.module.scss";
 
 const required = (value) => (value ? undefined : "Pole wymagane");
 
@@ -21,22 +21,32 @@ const AddClientForm = (props) => {
   const onSubmit = async (values) => {
     setShowSpinner(true);
     const clientObject = {
-      companyName: values.companyName,
-      companyAdress: values.companyAdress,
-      vatNo: values.vatNo,
-      eMail: values.eMail,
-      info: values.info,
+      clientId: props.clientData._id,
+      companyName: !values.companyName
+        ? props.clientData.companyName
+        : values.companyName,
+      companyAdress: !values.companyAdress
+        ? props.clientData.companyAdress
+        : values.companyAdress,
+      vatNo: !values.vatNo ? props.clientData.vatNo : values.vatNo,
+      eMail: !values.eMail ? props.clientData.eMail : values.eMail,
+      info: !values.info ? props.clientData.info : values.info,
     };
-    const { data, status } = await request.post("/clients", clientObject);
 
-    if (status === 201) {
-      setShowSpinner(false);
+    const { data, status } = await request.put("/clients", clientObject);
+
+    if (status === 202) {
       props.handleOnClose();
-      props.setClientAdded(true);
-      setClientsData((prev) => [...prev, data.data]);
+      props.setClientEdited(true);
+      const elementIndex = clientsData.findIndex(
+        (item) => item._id === data.data._id
+      );
+      const newClientData = clientsData.splice(elementIndex, 1, data.data);
+      setClientsData((prev) => [...prev]);
+      setShowSpinner(false);
     } else {
       setShowSpinner(false);
-      console.log(data.message);
+      console.log(data.message, status);
     }
   };
   return (
@@ -45,56 +55,56 @@ const AddClientForm = (props) => {
       isModalOpen={props.isModalOpen}
     >
       <div className={styles.wrapper}>
-        <h3>Dodawanie nowego kontrahenta</h3>
+        <h3>Edycja kontrahenta</h3>
 
         <Form
           onSubmit={onSubmit}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.inputs}>
-                <Field name="companyName" validate={required}>
+                <Field name="companyName">
                   {({ input, meta }) => (
                     <div>
                       <input
                         {...input}
                         type="text"
-                        placeholder="Nazwa Firmy..."
+                        placeholder={`${props.clientData.companyName}`}
                       />
                       {meta.error && meta.touched && <span>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
-                <Field name="companyAdress" validate={required}>
+                <Field name="companyAdress">
                   {({ input, meta }) => (
                     <div>
                       <input
                         {...input}
                         type="text"
-                        placeholder="Adres Firmy..."
+                        placeholder={`${props.clientData.companyAdress}`}
                       />
                       {meta.error && meta.touched && <span>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
-                <Field name="vatNo" validate={required}>
+                <Field name="vatNo">
                   {({ input, meta }) => (
                     <div>
                       <input
                         {...input}
                         type="text"
-                        placeholder="Nip: PL0000000000"
+                        placeholder={`${props.clientData.vatNo}`}
                       />
                       {meta.error && meta.touched && <span>{meta.error}</span>}
                     </div>
                   )}
                 </Field>
-                <Field name="eMail" validate={required}>
+                <Field name="eMail">
                   {({ input, meta }) => (
                     <div className={styles.name}>
                       <input
                         {...input}
                         type="text"
-                        placeholder="eMail: example@example.pl"
+                        placeholder={`${props.clientData.eMail}`}
                       />
                       {meta.error && meta.touched && <span>{meta.error}</span>}
                     </div>
@@ -104,25 +114,19 @@ const AddClientForm = (props) => {
                   <Field
                     name="info"
                     component="textarea"
-                    placeholder="Info..."
+                    placeholder={`${
+                      !props.clientData.info ? "" : props.clientData.info
+                    }`}
                   />
                 </div>
               </div>
               <div className={styles.buttons}>
                 <MainButton type="submit" disabled={submitting} name="zapisz" />
-                <button
-                  type="button"
-                  onClick={form.reset}
-                  disabled={submitting || pristine}
-                  className={styles.resetButton}
-                >
-                  reset
-                </button>
 
                 <MainButton
                   type="button"
                   onClick={props.handleOnClose}
-                  name="wyjdź"
+                  name="anuluj"
                 />
               </div>
             </form>

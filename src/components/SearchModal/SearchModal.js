@@ -32,10 +32,10 @@ const SearchModal = (props) => {
     const { data, status } = await request.get(`/clients/${vatNo}`);
 
     if (status === 200) {
-      setShowSpinner(false);
       props.setSerchedClient(data.client);
       resetStateOfInput();
       props.handleCloseModal();
+      setShowSpinner(false);
     } else {
       setValidateMessage(data.message);
       setShowSpinner(false);

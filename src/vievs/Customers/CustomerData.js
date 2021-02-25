@@ -1,23 +1,32 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
+import EditClientForm from "../../components/EditClientForm/EditClientForm";
 
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
 
 import styles from "./CustomerData.module.scss";
 
-const CustomerData = ({ client, setClientRemoved }) => {
+const CustomerData = ({ client, setClientRemoved, setClientEdited }) => {
   const { setClientsData } = useContext(StoreContext);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+
+  const handleModalOpen = (e) => {
+    setEditModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setEditModalOpen(false);
+  };
 
   const handleDeleteClient = async () => {
     try {
-      console.log(client._id);
       const { status } = await request.delete(`/clients/${client._id}`);
 
       if (status === 200) {
         setClientsData((prev) =>
           prev.filter((item) => item._id !== client._id)
         );
+
         setClientRemoved(true);
       }
     } catch (error) {
@@ -45,7 +54,13 @@ const CustomerData = ({ client, setClientRemoved }) => {
       </div>
 
       <div className={styles.clientButtons}>
-        <MainButton name="edytuj" />
+        <MainButton name="edytuj" onClick={handleModalOpen} />
+        <EditClientForm
+          isModalOpen={editModalOpen}
+          handleOnClose={handleCloseModal}
+          setClientEdited={setClientEdited}
+          clientData={client}
+        />
         <MainButton name="usuń" onClick={handleDeleteClient} />
       </div>
     </div>
