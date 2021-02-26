@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { Form, Field } from "react-final-form";
-import Modal from "../Modal/Modal";
-import Spinner from "../../components/Spinner/Spinner";
-import MainButton from "../../components/Buttons/MainButton/MainButton";
+import Modal from "../../Modal/Modal";
+import Spinner from "../../Spinner/Spinner";
+import MainButton from "../../Buttons/MainButton/MainButton";
 
-import request from "../../helpers/request";
-import { StoreContext } from "../../Store/StoreProvider";
+import request from "../../../helpers/request";
+import { StoreContext } from "../../../Store/StoreProvider";
 
 import styles from "./EditClientForm.module.scss";
 
@@ -37,13 +37,15 @@ const AddClientForm = (props) => {
 
     if (status === 202) {
       props.handleOnClose();
-      props.setClientEdited(true);
       const elementIndex = clientsData.findIndex(
         (item) => item._id === data.data._id
       );
       const newClientData = clientsData.splice(elementIndex, 1, data.data);
       setClientsData((prev) => [...prev]);
-      props.setSerchedClient((prev) => [data.data]);
+      if (props.serchedClient) {
+        props.setSerchedClient((prev) => [data.data]);
+      }
+      props.setTaskInformation("Dane klienta zmodyfikowane");
       setShowSpinner(false);
     } else {
       setShowSpinner(false);

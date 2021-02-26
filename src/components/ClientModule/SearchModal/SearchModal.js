@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Modal from "../../components/Modal/Modal";
-import MainButton from "../../components/Buttons/MainButton/MainButton";
-import Spinner from "../../components/Spinner/Spinner";
+import Modal from "../../Modal/Modal";
+import MainButton from "../../Buttons/MainButton/MainButton";
+import Spinner from "../../Spinner/Spinner";
 
-import request from "../../helpers/request";
+import request from "../../../helpers/request";
 
 import styles from "./SearchModal.module.scss";
 

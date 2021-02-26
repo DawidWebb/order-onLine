@@ -1,4 +1,4 @@
-@import "../../Root/common.scss";
+@import "../../../Root/common.scss";
 
 .wrapper {
   position: relative;
@@ -6,6 +6,10 @@
   h3 {
     margin-bottom: 20px;
     text-align: center;
+  }
+  .validateMessage {
+    text-align: center;
+    color: $text-warring-color;
   }
   .form {
     .inputs {
