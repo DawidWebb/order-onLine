@@ -1,0 +1,12 @@
+@import "../../Root/common.scss";
+.wrapper {
+  width: 240px;
+  height: 120px;
+  border-radius: 5px;
+  border: 1px solid $text-warring-color;
+  background-color: $fifth-color;
+  text-align: center;
+  p {
+    line-height: 120px;
+  }
+}

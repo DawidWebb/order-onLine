@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 
-import AddClientForm from "../../components/AddClientForm/AddClientForm";
-import SearchModal from "../../components/SearchModal/SearchModal";
+import AddClientForm from "../../components/ClientModule/AddClientForm/AddClientForm";
+import SearchModal from "../../components/ClientModule/SearchModal/SearchModal";
 import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 import BackButton from "../../components/Buttons/BackButton/BackButton";
 import Spinner from "../../components/Spinner/Spinner";
 import CustomerData from "./CustomerData";
+import InformationPopup from "../../components/InformationPopup/InforationPopup";
 
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
@@ -20,15 +21,10 @@ const Customers = () => {
     setAddClientModalOpen,
   } = useContext(StoreContext);
 
-  const [clientAdded, setClientAdded] = useState(false);
-  const [clientEdited, setClientEdited] = useState(false);
-  const [clientRemoved, setClientRemoved] = useState(false);
+  const [taskInformation, setTaskInformation] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [serchedClient, setSerchedClient] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
-
-  const showInformationAdded = clientAdded ? "Dodano nowego klienta" : "";
-  const showInformationRemoved = clientRemoved ? "Usunieto klienta" : "";
 
   const spinner = showSpinner ? <Spinner /> : "";
 
@@ -37,8 +33,7 @@ const Customers = () => {
     <CustomerData
       key={client._id}
       client={client}
-      setClientRemoved={setClientRemoved}
-      setClientEdited={setClientEdited}
+      setTaskInformation={setTaskInformation}
     />
   ));
 
@@ -49,20 +44,20 @@ const Customers = () => {
     <CustomerData
       key={serchedClient[0]._id}
       client={serchedClient[0]}
+      serchedClient={serchedClient}
       setSerchedClient={setSerchedClient}
-      setClientRemoved={setClientRemoved}
-      setClientEdited={setClientEdited}
+      setTaskInformation={setTaskInformation}
     />
   );
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setClientAdded(false);
-      setClientRemoved(false);
-      setClientEdited(false);
-    });
+      if (taskInformation) {
+        setTaskInformation(false);
+      }
+    }, 2000);
     return () => clearInterval(timeout);
-  }, [clientAdded, clientRemoved, clientEdited]);
+  }, [taskInformation]);
 
   const handleModalOpen = () => {
     setAddClientModalOpen(true);
@@ -101,16 +96,13 @@ const Customers = () => {
   return (
     <div className={styles.wrapper}>
       <h1>Moduł klienta</h1>
-      <div className={styles.information}>
-        <p>{showInformationAdded}</p>
-        <p>{showInformationRemoved}</p>
-      </div>
+      <div className={styles.information}></div>
       <div className={styles.selectButttons}>
         <SelectButton name="dodaj kontrahenta" onClick={handleModalOpen} />
         <AddClientForm
           isModalOpen={addClientModalOpen}
           handleOnClose={handleCloseModal}
-          setClientAdded={setClientAdded}
+          setTaskInformation={setTaskInformation}
         />
         <SelectButton
           name="wyszukaj kontrahenta"
@@ -124,6 +116,9 @@ const Customers = () => {
         {getAllClientsButton}
       </div>
       <div className={styles.spinnerWrapper}> {spinner}</div>
+      <div className={styles.informationPopup}>
+        <InformationPopup taskInformation={taskInformation} />
+      </div>
       <div className={styles.clientItem}>{serchClientInfo}</div>
       <div className={styles.clientsList}>
         {!serchClientInfo ? clientsInfo : ""}

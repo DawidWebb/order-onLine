@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
-import EditClientForm from "../../components/EditClientForm/EditClientForm";
+import EditClientForm from "../../components/ClientModule/EditClientForm/EditClientForm";
 
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
@@ -9,8 +9,8 @@ import styles from "./CustomerData.module.scss";
 
 const CustomerData = ({
   client,
-  setClientRemoved,
-  setClientEdited,
+  setTaskInformation,
+  serchedClient,
   setSerchedClient,
 }) => {
   const { setClientsData } = useContext(StoreContext);
@@ -31,8 +31,10 @@ const CustomerData = ({
         setClientsData((prev) =>
           prev.filter((item) => item._id !== client._id)
         );
-        setSerchedClient(false);
-        setClientRemoved(true);
+        if (serchedClient) {
+          setSerchedClient(false);
+        }
+        setTaskInformation("Usunięto klienta");
       }
     } catch (error) {
       console.warn("cos nie taK");
@@ -63,7 +65,8 @@ const CustomerData = ({
         <EditClientForm
           isModalOpen={editModalOpen}
           handleOnClose={handleCloseModal}
-          setClientEdited={setClientEdited}
+          setTaskInformation={setTaskInformation}
+          serchedClient={serchedClient}
           setSerchedClient={setSerchedClient}
           clientData={client}
         />
