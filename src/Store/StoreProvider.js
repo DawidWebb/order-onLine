@@ -29,6 +29,9 @@ const StoreProvider = ({ children }) => {
   // Get all clients - method implement on Customers.js
   const [clientsData, setClientsData] = useState([]);
 
+  // Serched client data
+  const [serchedClient, setSerchedClient] = useState(null);
+
   return (
     <StoreContext.Provider
       value={{
@@ -44,6 +47,8 @@ const StoreProvider = ({ children }) => {
         settSearchModalOpen,
         clientsData,
         setClientsData,
+        serchedClient,
+        setSerchedClient,
       }}
     >
       {children}

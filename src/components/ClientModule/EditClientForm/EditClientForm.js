@@ -12,7 +12,12 @@ import styles from "./EditClientForm.module.scss";
 const required = (value) => (value ? undefined : "Pole wymagane");
 
 const AddClientForm = (props) => {
-  const { clientsData, setClientsData } = useContext(StoreContext);
+  const {
+    clientsData,
+    setClientsData,
+    serchedClient,
+    setSerchedClient,
+  } = useContext(StoreContext);
 
   const [showSpinner, setShowSpinner] = useState(false);
 
@@ -42,8 +47,8 @@ const AddClientForm = (props) => {
       );
       const newClientData = clientsData.splice(elementIndex, 1, data.data);
       setClientsData((prev) => [...prev]);
-      if (props.serchedClient) {
-        props.setSerchedClient((prev) => [data.data]);
+      if (serchedClient) {
+        setSerchedClient((prev) => [data.data]);
       }
       props.setTaskInformation("Dane klienta zmodyfikowane");
       setShowSpinner(false);

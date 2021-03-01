@@ -37,7 +37,6 @@ const AddClientForm = (props) => {
     if (status === 201) {
       props.handleOnClose();
       resetStateOfInput();
-
       setClientsData((prev) => [...prev, data.data]);
       setShowSpinner(false);
       props.setTaskInformation("Dodano klienta");

@@ -1,1 +1,24 @@
 @import "../../Root/common.scss";
+
+.wrapper {
+  @include sectionWrapper;
+  border: 1px solid transparent;
+  h1 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .selectButttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 200px;
+  }
+  .backButton {
+    @include backButtonPosition;
+    margin-top: 40px;
+  }
+}

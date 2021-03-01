@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Modal from "../../Modal/Modal";
 import MainButton from "../../Buttons/MainButton/MainButton";
 import Spinner from "../../Spinner/Spinner";
 
 import request from "../../../helpers/request";
+import { StoreContext } from "../../../Store/StoreProvider";
 
 import styles from "./SearchModal.module.scss";
 
 const SearchModal = (props) => {
+  const { setSerchedClient } = useContext(StoreContext);
+
   const [vatNo, setVatNo] = useState("");
   const [validateMessage, setValidateMessage] = useState("");
   const [showSpinner, setShowSpinner] = useState(false);
@@ -32,7 +35,7 @@ const SearchModal = (props) => {
     const { data, status } = await request.get(`/clients/${vatNo}`);
 
     if (status === 200) {
-      props.setSerchedClient(data.client);
+      setSerchedClient(data.client);
       resetStateOfInput();
       props.handleCloseModal();
       setShowSpinner(false);

@@ -17,13 +17,15 @@ const Customers = () => {
   const {
     clientsData,
     setClientsData,
+    serchedClient,
+    setSerchedClient,
     addClientModalOpen,
     setAddClientModalOpen,
   } = useContext(StoreContext);
 
   const [taskInformation, setTaskInformation] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
-  const [serchedClient, setSerchedClient] = useState(false);
+
   const [showSpinner, setShowSpinner] = useState(false);
 
   const spinner = showSpinner ? <Spinner /> : "";
@@ -44,8 +46,6 @@ const Customers = () => {
     <CustomerData
       key={serchedClient[0]._id}
       client={serchedClient[0]}
-      serchedClient={serchedClient}
-      setSerchedClient={setSerchedClient}
       setTaskInformation={setTaskInformation}
     />
   );
@@ -96,7 +96,6 @@ const Customers = () => {
   return (
     <div className={styles.wrapper}>
       <h1>Moduł klienta</h1>
-      <div className={styles.information}></div>
       <div className={styles.selectButttons}>
         <SelectButton name="dodaj kontrahenta" onClick={handleModalOpen} />
         <AddClientForm
