@@ -2,32 +2,43 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { Form, Field } from "react-final-form";
 
 import Spinner from "../../components/Spinner/Spinner";
-import BackButton from "../../components/Buttons/BackButton/BackButton";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
+import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
+import BackButton from "../../components/Buttons/BackButton/BackButton";
 import AddClientForm from "../../components/ClientModule/AddClientForm/AddClientForm";
 import SerchModal from "../../components/ClientModule/SearchModal/SearchModal";
 import InformationPopup from "../../components/InformationPopup/InforationPopup";
+import AddOrderForm from "../../components/AppFormModule/AddOrderForm/AddOrderForm";
 
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
 
 import styles from "./AddOrder.module.scss";
+import OrderViev from "./OrderViev";
 
 const AddOrder = () => {
+  // global state
   const { serchedClient } = useContext(StoreContext);
 
+  // state for Modals
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [addOrderModalOpen, setAddOrderModalOpen] = useState(false);
+  const [vievModalOpen, setVievModalOpen] = useState(false);
   const [taskInformation, setTaskInformation] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
-  // const [addClient, setAddClient] = useState(false);
-
+  // state for client or carrier viev
   const [selectedClient, setSelectedClient] = useState(false);
   const [selectedCarrier, setSelectedCarrier] = useState(false);
 
+  // state for client, carrier and order data
   const [vievClient, setVievClient] = useState(false);
   const [vievCarrier, setVievCarrier] = useState(false);
+  const [orderObject, setOrderObject] = useState(false);
+  const [orderNumber, setOrderNumber] = useState(false);
 
+  // effect for viev client or carrier
   useEffect(() => {
     if (selectedClient) {
       setVievClient(serchedClient);
@@ -39,6 +50,7 @@ const AddOrder = () => {
     }
   }, [serchedClient]);
 
+  // // effect for viev task information
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (taskInformation) {
@@ -48,20 +60,7 @@ const AddOrder = () => {
     return () => clearInterval(timeout);
   }, [taskInformation]);
 
-  // useEffect(() => {
-  //   if (clientsData.length === 0) {
-  //     return;
-  //   } else {
-  //     setAddClient(clientsData[clientsData.length - 1].companyName);
-  //   }
-  // }, [clientsData]);
-
-  // useEffect(() => {
-  //   setAddClient(false);
-  // }, [serchedClient]);
-
-  //client select
-
+  // handlers for open/close modals
   const handleSearchClientModalOpen = () => {
     setSearchModalOpen(true);
     setSelectedClient(true);
@@ -72,7 +71,6 @@ const AddOrder = () => {
     setSelectedClient(true);
   };
 
-  // carrier select
   const handleSearchCarrierModalOpen = () => {
     setSearchModalOpen(true);
     setSelectedCarrier(true);
@@ -83,55 +81,124 @@ const AddOrder = () => {
     setSelectedCarrier(true);
   };
 
+  const handleAddOrderModalOpen = () => {
+    setAddOrderModalOpen(true);
+  };
+
   const handleCloseModal = () => {
     setAddModalOpen(false);
     setSearchModalOpen(false);
+    setAddOrderModalOpen(false);
+    setVievModalOpen(false);
   };
 
-  // const onSubmit = async (values) => {
-  //   const orderObject = {};
-  //   const { data, status } = await request.post("/orders", orderObject);
+  //handlers and helpers for viev clear and save order data
+  const createOrderNumber = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
 
-  //   if (status === 201) {
-  //     console.log("add");
-  //   } else if (status === 409) {
-  //   } else {
-  //     console.log(data.message);
-  //   }
-  // };
+    return `${month}/${year}`;
+  };
+
+  const orderFullObject = () => {
+    return {
+      orderNumber: orderNumber,
+      clientName: vievClient[0].companyName,
+      clientAdress: vievClient[0].companyAdress,
+      clientVatNo: vievClient[0].vatNo,
+      carrierName: vievCarrier[0].companyName,
+      carrierAdress: vievCarrier[0].companyAdress,
+      carrierVatNo: vievCarrier[0].vatNo,
+      orderLoadDate: orderObject.loadDate,
+      orderLoadHrs: orderObject.loadHrs,
+      orderLoadAdress: orderObject.loadAdress,
+      orderUnloadDate: orderObject.unloadDate,
+      orderUnloadHrs: orderObject.unloadHrs,
+      orderUnloadAdress: orderObject.unloadAdress,
+      orderGoodsSpecyfications: orderObject.goodsSpecification,
+      orderDriver: orderObject.driver,
+      orderTruck: orderObject.truck,
+      orderAdr: orderObject.adr[0],
+      orderFix: orderObject.fix[0],
+      orderInfo: orderObject.info,
+    };
+  };
+
+  const handleVievOrder = () => {
+    setOrderNumber(createOrderNumber());
+    setVievModalOpen(true);
+    console.log(vievClient);
+    console.log(vievCarrier);
+    console.log(orderObject);
+  };
+  const handleClearOrder = () => {
+    setVievClient(false);
+    setVievCarrier(false);
+    setOrderObject(false);
+  };
+  const handleSaveOrder = async () => {
+    setShowSpinner(true);
+    const orderObject = orderFullObject();
+    const { data, status } = await request.post("/orders", orderObject);
+
+    if (status === 201) {
+      console.log("add");
+      setShowSpinner(false);
+    } else if (status === 409) {
+    } else {
+      console.log(data.message);
+    }
+  };
+
+  // constans for data and button viev
+  const loadData = `${orderObject.loadAdress} - ${orderObject.unloadAdress}`;
+
+  const operationButtons =
+    !vievClient || !vievCarrier || !orderObject ? (
+      ""
+    ) : (
+      <>
+        <SelectButton name="Podgląd" onClick={handleVievOrder} />
+        <MainButton name="Wyczyść" onClick={handleClearOrder} />
+        <SelectButton name="Zapisz" onClick={handleSaveOrder} />
+      </>
+    );
+
+  const spinner = showSpinner ? <Spinner /> : "";
 
   return (
     <div className={styles.wrapper}>
+      <h2>Dodawanie zlecenia</h2>
       <div className={styles.client}>
+        <div className={styles.dataInfo}>
+          <p>Klient:</p>
+          <div>{!vievClient ? "" : vievClient[0].companyName}</div>
+        </div>
         <div className={styles.buttons}>
-          <h3>Klient</h3>
           <MainButton name="pobierz" onClick={handleSearchClientModalOpen} />
           <MainButton name="dodaj" onClick={handleAddClientModalOpen} />
         </div>
-        <div className={styles.clientData}>
-          {!vievClient ? "" : vievClient[0].companyName}
-        </div>
       </div>
       <div className={styles.carrier}>
+        <div className={styles.dataInfo}>
+          <p>Przewoźnik:</p>
+          <div> {!vievCarrier ? "" : vievCarrier[0].companyName}</div>
+        </div>
         <div className={styles.buttons}>
-          <h3>Przewoźnik</h3>
           <MainButton name="pobierz" onClick={handleSearchCarrierModalOpen} />
           <MainButton name="dodaj" onClick={handleAddCarrierModalOpen} />
         </div>
-        <div className={styles.carrierData}>
-          {!vievCarrier ? "" : vievCarrier[0].companyName}
-        </div>
       </div>
       <div className={styles.order}>
+        <div className={styles.dataInfo}>
+          <p>Zlecenie:</p>
+          <div> {!orderObject ? "" : loadData}</div>
+        </div>
         <div className={styles.buttons}>
-          <h3>Zlecenie</h3>
-          <MainButton name="dodaj" />
+          <MainButton name="dodaj" onClick={handleAddOrderModalOpen} />
           <MainButton name="model" />
         </div>
-        <div className={styles.orderData}></div>
-      </div>
-      <div className={styles.backButton}>
-        <BackButton />
       </div>
       <AddClientForm
         isModalOpen={addModalOpen}
@@ -145,6 +212,24 @@ const AddOrder = () => {
       <div className={styles.informationPopup}>
         <InformationPopup taskInformation={taskInformation} />
       </div>
+      <AddOrderForm
+        isModalOpen={addOrderModalOpen}
+        handleOnClose={handleCloseModal}
+        setOrderObject={setOrderObject}
+      />
+      <OrderViev
+        isModalOpen={vievModalOpen}
+        handleOnClose={handleCloseModal}
+        orderNumber={orderNumber}
+        vievClient={vievClient}
+        vievCarrier={vievCarrier}
+        orderObject={orderObject}
+      />
+      <div className={styles.operationButtons}>{operationButtons}</div>
+      <div className={styles.backButton}>
+        <BackButton />
+      </div>
+      <div className={styles.spinnerWrapper}>{spinner}</div>
     </div>
   );
 };
