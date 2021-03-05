@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
 import EditClientForm from "../../components/ClientModule/EditClientForm/EditClientForm";
+import DeleteConfirmation from "../../components/DeleteConfirmation/DeleteConfirrmation";
 
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
@@ -12,15 +13,21 @@ const CustomerData = ({ client, setTaskInformation }) => {
     StoreContext
   );
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
   const handleModalOpen = (e) => {
     setEditModalOpen(true);
   };
   const handleCloseModal = () => {
     setEditModalOpen(false);
+    setConfirmationModalOpen(false);
   };
 
-  const handleDeleteClient = async () => {
+  const handleDeleteClient = () => {
+    setConfirmationModalOpen(true);
+  };
+
+  const deleteConfirm = async () => {
     try {
       const { status } = await request.delete(`/clients/${client._id}`);
 
@@ -66,6 +73,13 @@ const CustomerData = ({ client, setTaskInformation }) => {
           clientData={client}
         />
         <MainButton name="usuń" onClick={handleDeleteClient} />
+      </div>
+      <div className={styles.deleteConfirmationPopup}>
+        <DeleteConfirmation
+          confirmationModalOpen={confirmationModalOpen}
+          deleteConfirm={deleteConfirm}
+          handleCloseModal={handleCloseModal}
+        />
       </div>
     </div>
   );

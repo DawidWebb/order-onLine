@@ -122,6 +122,7 @@ const Customers = () => {
       <div className={styles.clientsList}>
         {!serchClientInfo ? clientsInfo : ""}
       </div>
+
       <div className={styles.backButton}>
         <BackButton />
       </div>
