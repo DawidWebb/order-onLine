@@ -6,7 +6,7 @@ import BackButton from "../../components/Buttons/BackButton/BackButton";
 
 import { StoreContext } from "../../Store/StoreProvider";
 
-import styles from "./Orders.js.module.scss";
+import styles from "./Orders.module.scss";
 
 const Orders = () => {
   return (
@@ -17,7 +17,9 @@ const Orders = () => {
           <SelectButton name="dodaj zlecenie" />
         </Link>
 
-        <SelectButton name="pokaż zlecenia" />
+        <Link to="showorders">
+          <SelectButton name="pokaż zlecenia" />
+        </Link>
       </div>
 
       <div className={styles.backButton}>

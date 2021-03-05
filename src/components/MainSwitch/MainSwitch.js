@@ -4,7 +4,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import MainSection from "../../vievs/MainSection/MainSection";
 import TestFormSection from "../../vievs/FormSection/TestFormSection";
 import Orders from "../../vievs/Orders/Orders";
-import AddOrder from "../../vievs/Orders/AddOrder";
+import AddOrder from "../../vievs/Orders/AddOrder/AddOrder";
+import ShowOrders from "../../vievs/Orders/ShowOrders/ShowOrders";
 import Customers from "../../vievs/Customers/Customers";
 
 import { StoreContext } from "../../Store/StoreProvider";
@@ -30,6 +31,11 @@ const MainSwitch = () => {
         )}
         {user || cookie ? (
           <Route exact path="/addorder" render={() => <AddOrder />} />
+        ) : (
+          ""
+        )}
+        {user || cookie ? (
+          <Route exact path="/showorders" render={() => <ShowOrders />} />
         ) : (
           ""
         )}

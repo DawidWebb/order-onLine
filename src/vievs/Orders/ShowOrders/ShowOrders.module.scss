@@ -1,0 +1,16 @@
+@import "../../../Root/common.scss";
+.wrapper {
+  @include sectionWrapper;
+
+  .selectButtons {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    margin: 20px auto;
+  }
+  .ordersInfo {
+  }
+  .backButton {
+    @include backButtonPosition;
+  }
+}

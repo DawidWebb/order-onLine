@@ -1,5 +1,5 @@
-import Modal from "../../components/Modal/Modal";
-import MainButton from "../../components/Buttons/MainButton/MainButton";
+import Modal from "../../../components/Modal/Modal";
+import MainButton from "../../../components/Buttons/MainButton/MainButton";
 
 import styles from "./OrderViev.module.scss";
 
@@ -9,7 +9,7 @@ const OrderViev = (props) => {
       ""
     ) : (
       <div className={styles.wrapper}>
-        <h2>Zlecenie transportowe nr {props.orderNumber}</h2>
+        <h2>Zlecenie transportowe nr:</h2>
         <div className={styles.clientData}>
           <h3>dane klienta</h3>
           <p>{props.vievClient[0].companyName}</p>

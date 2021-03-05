@@ -1,20 +1,20 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import { Form, Field } from "react-final-form";
 
-import Spinner from "../../components/Spinner/Spinner";
-import MainButton from "../../components/Buttons/MainButton/MainButton";
-import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
-import BackButton from "../../components/Buttons/BackButton/BackButton";
-import AddClientForm from "../../components/ClientModule/AddClientForm/AddClientForm";
-import SerchModal from "../../components/ClientModule/SearchModal/SearchModal";
-import InformationPopup from "../../components/InformationPopup/InforationPopup";
-import AddOrderForm from "../../components/AppFormModule/AddOrderForm/AddOrderForm";
+import Spinner from "../../../components/Spinner/Spinner";
+import MainButton from "../../../components/Buttons/MainButton/MainButton";
+import SelectButton from "../../../components/Buttons/SelectButton/SelectButton";
+import BackButton from "../../../components/Buttons/BackButton/BackButton";
+import AddClientForm from "../../../components/ClientModule/AddClientForm/AddClientForm";
+import SerchModal from "../../../components/ClientModule/SearchModal/SearchModal";
+import InformationPopup from "../../../components/InformationPopup/InforationPopup";
+import AddOrderForm from "../../../components/AppFormModule/AddOrderForm/AddOrderForm";
+import OrderViev from "./OrderViev";
 
-import request from "../../helpers/request";
-import { StoreContext } from "../../Store/StoreProvider";
+import request from "../../../helpers/request";
+import { StoreContext } from "../../../Store/StoreProvider";
 
 import styles from "./AddOrder.module.scss";
-import OrderViev from "./OrderViev";
 
 const AddOrder = () => {
   // global state
@@ -36,7 +36,6 @@ const AddOrder = () => {
   const [vievClient, setVievClient] = useState(false);
   const [vievCarrier, setVievCarrier] = useState(false);
   const [orderObject, setOrderObject] = useState(false);
-  const [orderNumber, setOrderNumber] = useState(false);
 
   // effect for viev client or carrier
   useEffect(() => {
@@ -102,6 +101,7 @@ const AddOrder = () => {
   };
 
   const orderFullObject = () => {
+    const orderNumber = createOrderNumber();
     return {
       orderNumber: orderNumber,
       clientName: vievClient[0].companyName,
@@ -119,14 +119,13 @@ const AddOrder = () => {
       orderGoodsSpecyfications: orderObject.goodsSpecification,
       orderDriver: orderObject.driver,
       orderTruck: orderObject.truck,
-      orderAdr: orderObject.adr[0],
-      orderFix: orderObject.fix[0],
+      orderAdr: !orderObject.adr ? "" : orderObject.adr[0],
+      orderFix: !orderObject.fix ? "" : orderObject.fix[0],
       orderInfo: orderObject.info,
     };
   };
 
   const handleVievOrder = () => {
-    setOrderNumber(createOrderNumber());
     setVievModalOpen(true);
     console.log(vievClient);
     console.log(vievCarrier);
@@ -143,7 +142,7 @@ const AddOrder = () => {
     const { data, status } = await request.post("/orders", orderObject);
 
     if (status === 201) {
-      console.log("add");
+      console.log(orderObject);
       setShowSpinner(false);
     } else if (status === 409) {
     } else {
@@ -220,7 +219,6 @@ const AddOrder = () => {
       <OrderViev
         isModalOpen={vievModalOpen}
         handleOnClose={handleCloseModal}
-        orderNumber={orderNumber}
         vievClient={vievClient}
         vievCarrier={vievCarrier}
         orderObject={orderObject}
