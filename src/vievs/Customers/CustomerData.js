@@ -28,6 +28,7 @@ const CustomerData = ({ client, setTaskInformation }) => {
   };
 
   const deleteConfirm = async () => {
+    console.log(client._id);
     try {
       const { status } = await request.delete(`/clients/${client._id}`);
 

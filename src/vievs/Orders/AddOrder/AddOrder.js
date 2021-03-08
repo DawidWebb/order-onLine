@@ -112,9 +112,15 @@ const AddOrder = () => {
       carrierVatNo: vievCarrier[0].vatNo,
       orderLoadDate: orderObject.loadDate,
       orderLoadHrs: orderObject.loadHrs,
+      orderLoadCountry: orderObject.loadCountry,
+      orderLoadZip: orderObject.loadZip,
+      orderLoadCity: orderObject.loadCity,
       orderLoadAdress: orderObject.loadAdress,
       orderUnloadDate: orderObject.unloadDate,
       orderUnloadHrs: orderObject.unloadHrs,
+      orderUnloadCountry: orderObject.unloadCountry,
+      orderUnloadZip: orderObject.unloadZip,
+      orderUnloadCity: orderObject.unloadCity,
       orderUnloadAdress: orderObject.unloadAdress,
       orderGoodsSpecyfications: orderObject.goodsSpecification,
       orderDriver: orderObject.driver,
@@ -151,7 +157,7 @@ const AddOrder = () => {
   };
 
   // constans for data and button viev
-  const loadData = `${orderObject.loadAdress} - ${orderObject.unloadAdress}`;
+  const loadData = `${orderObject.loadCity} - ${orderObject.unloadCity}`;
 
   const operationButtons =
     !vievClient || !vievCarrier || !orderObject ? (

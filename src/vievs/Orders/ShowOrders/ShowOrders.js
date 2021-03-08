@@ -1,9 +1,10 @@
-import { useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import SelectButton from "../../../components/Buttons/SelectButton/SelectButton";
 import BackButton from "../../../components/Buttons/BackButton/BackButton";
 import OrderObject from "./OrderObject";
 import Spinner from "../../../components/Spinner/Spinner";
+import InformationPopup from "../../../components/InformationPopup/InforationPopup";
 
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
@@ -18,11 +19,21 @@ const ShowOrders = () => {
 
   const spinner = showSpinner ? <Spinner /> : "";
 
+  useEffect(() => {
+    console.log(taskInformation);
+    const timeout = setTimeout(() => {
+      if (taskInformation) {
+        setTaskInformation(false);
+      }
+    }, 2000);
+    return () => clearInterval(timeout);
+  }, [taskInformation]);
+
   //all clients from handleGetClients
   const ordersInfo = ordersData.map((order) => (
     <OrderObject
       key={order._id}
-      client={order}
+      order={order}
       setTaskInformation={setTaskInformation}
     />
   ));
@@ -58,6 +69,9 @@ const ShowOrders = () => {
         <BackButton />
       </div>
       <div className={styles.spinner}>{spinner}</div>
+      <div className={styles.informationPopup}>
+        <InformationPopup taskInformation={taskInformation} />
+      </div>
     </div>
   );
 };
