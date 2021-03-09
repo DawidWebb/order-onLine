@@ -1,0 +1,11 @@
+@import "../../../Root/common.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+
+  .header {
+    display: flex;
+  }
+}

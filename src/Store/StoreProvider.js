@@ -1,8 +1,24 @@
 import React, { createContext, useEffect, useState } from "react";
+import request from "../helpers/request";
 
 export const StoreContext = createContext(null);
 
 const StoreProvider = ({ children }) => {
+  // order Number
+  const [orderNumber, setOrderNumber] = useState();
+  const OrderNo = async () => {
+    const { data, status } = await request.get("/orders");
+
+    if (status === 200) {
+      setOrderNumber(data.data.length);
+    } else {
+      console.log(data.message);
+    }
+  };
+  useEffect(() => {
+    OrderNo();
+  }, []);
+
   // login Modal viev
   const [loginModalOpen, setLoginModalOpen] = useState(false);
 
@@ -54,6 +70,8 @@ const StoreProvider = ({ children }) => {
         setSerchedClient,
         ordersData,
         setOrdersData,
+        orderNumber,
+        setOrderNumber,
       }}
     >
       {children}

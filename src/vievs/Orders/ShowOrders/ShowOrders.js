@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import SelectButton from "../../../components/Buttons/SelectButton/SelectButton";
-import BackButton from "../../../components/Buttons/BackButton/BackButton";
 import OrderObject from "./OrderObject";
 import Spinner from "../../../components/Spinner/Spinner";
 import InformationPopup from "../../../components/InformationPopup/InforationPopup";
@@ -12,6 +12,8 @@ import { StoreContext } from "../../../Store/StoreProvider";
 import styles from "./ShowOrders.module.scss";
 
 const ShowOrders = () => {
+  let history = useHistory();
+
   const { ordersData, setOrdersData } = useContext(StoreContext);
 
   const [taskInformation, setTaskInformation] = useState(false);
@@ -20,7 +22,6 @@ const ShowOrders = () => {
   const spinner = showSpinner ? <Spinner /> : "";
 
   useEffect(() => {
-    console.log(taskInformation);
     const timeout = setTimeout(() => {
       if (taskInformation) {
         setTaskInformation(false);
@@ -54,20 +55,31 @@ const ShowOrders = () => {
 
   const getAllOrdersButton =
     ordersData.length === 0 ? (
-      <SelectButton name="pokaż zlecenia" onClick={handleGetOrders} />
+      <SelectButton name="Lista zleceń" onClick={handleGetOrders} />
     ) : (
       <SelectButton name="odśwież listę" onClick={handleGetOrders} />
     );
+
+  const handleGoToStart = () => {
+    history.push("./");
+  };
+  const handleGoToAddOrder = () => {
+    history.push("./addorder");
+  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.selectButtons}>
         {getAllOrdersButton}
-        <SelectButton name="wyszukaj zlecenie" />
+        <SelectButton name="Wyszukaj zlecenie" />
+      </div>
+      <div className={styles.operationButtons}>
+        <SelectButton name="dodaj nowe zlecenie" onClick={handleGoToAddOrder} />
+        <SelectButton
+          name="powrót do stony głównej"
+          onClick={handleGoToStart}
+        />
       </div>
       <div className={styles.ordersList}>{ordersInfo}</div>
-      <div className={styles.backButton}>
-        <BackButton />
-      </div>
       <div className={styles.spinner}>{spinner}</div>
       <div className={styles.informationPopup}>
         <InformationPopup taskInformation={taskInformation} />

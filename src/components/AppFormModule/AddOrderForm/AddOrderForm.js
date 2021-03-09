@@ -12,6 +12,7 @@ const AddOrderForm = (props) => {
     props.setOrderObject(values);
     props.handleOnClose();
   };
+
   return (
     <Modal
       handleOnCloseModal={props.handleOnClose}
@@ -21,18 +22,7 @@ const AddOrderForm = (props) => {
         <Form
           onSubmit={onSubmit}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
-            <form
-              onSubmit={handleSubmit}
-              className={styles.form}
-              // onSubmit={(event) => {
-              //   const promise = handleSubmit(event);
-              //   promise &&
-              //     promise.then(() => {
-              //       form.reset();
-              //     });
-              //   return promise;
-              // }}
-            >
+            <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.load}>
                 <h4>załadunek</h4>
                 <div>
@@ -195,7 +185,10 @@ const AddOrderForm = (props) => {
                 <MainButton type="submit" disabled={submitting} name="zapisz" />
                 <button
                   type="button"
-                  onClick={form.reset}
+                  onClick={() => {
+                    form.reset();
+                    props.setOrderObject(false);
+                  }}
                   disabled={submitting || pristine}
                   className={styles.resetButton}
                 >

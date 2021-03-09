@@ -74,6 +74,7 @@ const OrderObject = ({ order, setTaskInformation }) => {
       </div>
     </>
   );
+
   const handleCloseModal = () => {
     // setEditModalOpen(false);
     setConfirmationModalOpen(false);
@@ -100,6 +101,11 @@ const OrderObject = ({ order, setTaskInformation }) => {
       console.warn("cos nie taK");
     }
   };
+  const deleteButton = !_id ? (
+    ""
+  ) : (
+    <MainButton name="usuń" onClick={handleDeleteOrder} />
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -135,7 +141,7 @@ const OrderObject = ({ order, setTaskInformation }) => {
       <div className={styles.buttons}>
         {showDetailsButton}
         <MainButton name="drukuj" />
-        <MainButton name="usuń" onClick={handleDeleteOrder} />
+        {deleteButton}
       </div>
       <DeleteConfirmation
         confirmationModalOpen={confirmationModalOpen}
