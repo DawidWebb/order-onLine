@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
+import OrderPrintViev from "../../components/AppFormModule/OrderPrintViev/OrderPrintViev";
 import MainSection from "../../vievs/MainSection/MainSection";
 import TestFormSection from "../../vievs/FormSection/TestFormSection";
 import Orders from "../../vievs/Orders/Orders";
@@ -20,6 +21,8 @@ const MainSwitch = () => {
       <Switch>
         <Route exact path="/" render={() => <MainSection />} />
         <Route exact path="/test-form" render={() => <TestFormSection />} />
+        <Route exact path="/order-print" render={() => <OrderPrintViev />} />
+
         {user || cookie ? (
           <Route exact path="/orders" render={() => <Orders />} />
         ) : (
