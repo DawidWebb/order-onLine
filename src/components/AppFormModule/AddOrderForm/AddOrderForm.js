@@ -37,6 +37,7 @@ const AddOrderForm = (props) => {
                 <div>
                   <label>kraj</label>
                   <Field name="loadCountry" component="select">
+                    <option value=""> </option>
                     <option value="AT">AT</option>
                     <option value="BE">BE</option>
                     <option value="CH">CH</option>
@@ -91,6 +92,7 @@ const AddOrderForm = (props) => {
                 <div>
                   <label>kraj</label>
                   <Field name="unloadCountry" component="select">
+                    <option value=""> </option>
                     <option value="AT">AT</option>
                     <option value="BE">BE</option>
                     <option value="CH">CH</option>

@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import MainButton from "../../../components/Buttons/MainButton/MainButton";
 import DeleteConfirmation from "../../../components/DeleteConfirmation/DeleteConfirrmation";
@@ -9,7 +10,11 @@ import { StoreContext } from "../../../Store/StoreProvider";
 import styles from "./OrderObject.module.scss";
 
 const OrderObject = ({ order, setTaskInformation }) => {
-  const { ordersData, setOrdersData } = useContext(StoreContext);
+  let history = useHistory();
+
+  const { ordersData, setOrdersData, setPrintOrderData } = useContext(
+    StoreContext
+  );
 
   const [showDetails, setShowDetails] = useState(false);
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
@@ -40,6 +45,13 @@ const OrderObject = ({ order, setTaskInformation }) => {
     orderUnloadCity,
     orderUnloadDate,
     orderUnloadHrs,
+    orderInfo,
+    orderClientPrice,
+    orderClientCurr,
+    orderClientTerms,
+    orderCarrierPrice,
+    orderCarrierCurr,
+    orderCarrierTerms,
   } = order;
 
   // managment of show/hide details of order
@@ -59,6 +71,24 @@ const OrderObject = ({ order, setTaskInformation }) => {
   ) : (
     <>
       <div className={styles.item}>
+        <p>załadunek: </p>
+        <p>{orderLoadDate}</p>
+        <p>{orderLoadHrs}</p>
+        <p>{orderLoadCountry}</p>
+        <p>{orderLoadZip}</p>
+        <p>{orderLoadCity}</p>
+        <p>{orderLoadAdress}</p>
+      </div>
+      <div className={styles.item}>
+        <p>rozładunek: </p>
+        <p>{orderUnloadDate}</p>
+        <p>{orderUnloadHrs}</p>
+        <p>{orderUnloadCountry}</p>
+        <p>{orderUnloadZip}</p>
+        <p>{orderUnloadCity}</p>
+        <p>{orderUnloadAdress}</p>
+      </div>
+      <div className={styles.item}>
         <p>ładunek: </p>
         <p>{orderGoodsSpecyfications}</p>
       </div>
@@ -71,6 +101,21 @@ const OrderObject = ({ order, setTaskInformation }) => {
       <div className={styles.item}>
         <p>{orderFix}</p>
         <p>{orderAdr}</p>
+      </div>
+      <div className={styles.item}>
+        <p>info:</p>
+        <span>{orderInfo}</span>
+      </div>
+      <div className={styles.item}>
+        <p>Warunki i terminy:</p>
+        <p>fracht klienta:</p>
+        <span>{`${orderClientPrice} ${orderClientCurr}`}</span>
+        <p>termin klienta:</p>
+        <span>{orderClientTerms}</span>
+        <p>fracht przewoźnika:</p>
+        <span>{`${orderCarrierPrice} ${orderCarrierCurr}`}</span>
+        <p>termin przewoźnika:</p>
+        <span>{orderCarrierTerms}</span>
       </div>
     </>
   );
@@ -107,6 +152,12 @@ const OrderObject = ({ order, setTaskInformation }) => {
     <MainButton name="usuń" onClick={handleDeleteOrder} />
   );
 
+  //Print order
+  const handleOnPrint = () => {
+    history.push("/order-print");
+    setPrintOrderData(order);
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.item}>
@@ -127,20 +178,19 @@ const OrderObject = ({ order, setTaskInformation }) => {
         <h3>dane zlecenia</h3>
         <MainButton name="edytuj" />
         <div className={styles.item}>
-          <p>załadunek:</p>
-          <p>{orderLoadDate}</p>
-          <p>{orderLoadCity}</p>
+          <h3>Trasa:</h3>
+          <h3>{orderLoadCity}</h3>
+          <h3>{orderUnloadCity}</h3>
         </div>
-        <div className={styles.item}>
-          <p>rozładunek:</p>
-          <p>{orderUnloadDate}</p>
-          <p>{orderUnloadCity}</p>
-        </div>
+
         {showDetailsOrder}
       </div>
       <div className={styles.buttons}>
         {showDetailsButton}
-        <MainButton name="drukuj" />
+        <MainButton
+          name="drukuj zlecenie dla przewoźnika"
+          onClick={handleOnPrint}
+        />
         {deleteButton}
       </div>
       <DeleteConfirmation

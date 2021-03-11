@@ -51,6 +51,9 @@ const StoreProvider = ({ children }) => {
   // Get all orders method implement on ShowOrders.js
   const [ordersData, setOrdersData] = useState([]);
 
+  // data for OrderPrintViev
+  const [printOrderData, setPrintOrderData] = useState(false);
+
   return (
     <StoreContext.Provider
       value={{
@@ -72,6 +75,8 @@ const StoreProvider = ({ children }) => {
         setOrdersData,
         orderNumber,
         setOrderNumber,
+        printOrderData,
+        setPrintOrderData,
       }}
     >
       {children}

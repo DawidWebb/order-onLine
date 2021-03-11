@@ -9,6 +9,7 @@ import AddClientForm from "../../../components/ClientModule/AddClientForm/AddCli
 import SerchModal from "../../../components/ClientModule/SearchModal/SearchModal";
 import InformationPopup from "../../../components/InformationPopup/InforationPopup";
 import AddOrderForm from "../../../components/AppFormModule/AddOrderForm/AddOrderForm";
+import AddConditionsForm from "../../../components/AppFormModule/AddConditionsForm/AddConditionsForm";
 
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
@@ -29,6 +30,7 @@ const AddOrder = () => {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [addOrderModalOpen, setAddOrderModalOpen] = useState(false);
+  const [addConditionsModalOpen, setAddConditionsModalOpen] = useState(false);
   const [taskInformation, setTaskInformation] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
 
@@ -40,6 +42,7 @@ const AddOrder = () => {
   const [vievClient, setVievClient] = useState(false);
   const [vievCarrier, setVievCarrier] = useState(false);
   const [orderObject, setOrderObject] = useState(false);
+  const [conditions, setConditions] = useState(false);
 
   // effect for viev client or carrier
   useEffect(() => {
@@ -92,6 +95,7 @@ const AddOrder = () => {
     setAddModalOpen(false);
     setSearchModalOpen(false);
     setAddOrderModalOpen(false);
+    setAddConditionsModalOpen(false);
   };
 
   //handlers and helpers for viev clear and save order data
@@ -122,12 +126,15 @@ const AddOrder = () => {
     const orderNo = createOrderNumber();
     return {
       orderNumber: orderNo,
+      //client data
       clientName: vievClient[0].companyName,
       clientAdress: vievClient[0].companyAdress,
       clientVatNo: vievClient[0].vatNo,
+      // carrier data
       carrierName: vievCarrier[0].companyName,
       carrierAdress: vievCarrier[0].companyAdress,
       carrierVatNo: vievCarrier[0].vatNo,
+      //order data
       orderLoadDate: orderObject.loadDate,
       orderLoadHrs: orderObject.loadHrs,
       orderLoadCountry: orderObject.loadCountry,
@@ -146,6 +153,13 @@ const AddOrder = () => {
       orderAdr: !orderObject.adr ? "" : orderObject.adr[0],
       orderFix: !orderObject.fix ? "" : orderObject.fix[0],
       orderInfo: orderObject.info,
+      //conditions data
+      orderClientPrice: conditions.clientPrice,
+      orderClientCurr: conditions.clientCurr,
+      orderClientTerms: conditions.clientTerms,
+      orderCarrierPrice: conditions.carrierPrice,
+      orderCarrierCurr: conditions.carrierCurr,
+      orderCarrierTerms: conditions.carrierTerms,
     };
   };
 
@@ -195,7 +209,7 @@ const AddOrder = () => {
   const loadData = `${orderObject.loadCity} - ${orderObject.unloadCity}`;
 
   const operationButtons =
-    !vievClient || !vievCarrier || !orderObject ? (
+    !vievClient || !vievCarrier || !orderObject || !conditions ? (
       ""
     ) : (
       <>
@@ -208,6 +222,11 @@ const AddOrder = () => {
 
   const spinner = showSpinner ? <Spinner /> : "";
 
+  // set Conditions
+  const handleAddConditionsModalOpen = () => {
+    setAddConditionsModalOpen(true);
+  };
+
   return (
     <div className={styles.wrapper}>
       <h2>Dodawanie zlecenia</h2>
@@ -217,7 +236,10 @@ const AddOrder = () => {
           {clientInformationViev}
         </div>
         <div className={styles.buttons}>
-          <MainButton name="pobierz" onClick={handleSearchClientModalOpen} />
+          <MainButton
+            name={!vievClient ? "pobierz" : "zmień"}
+            onClick={handleSearchClientModalOpen}
+          />
           <MainButton name="dodaj" onClick={handleAddClientModalOpen} />
         </div>
       </div>
@@ -227,7 +249,10 @@ const AddOrder = () => {
           {carriertInformationViev}
         </div>
         <div className={styles.buttons}>
-          <MainButton name="pobierz" onClick={handleSearchCarrierModalOpen} />
+          <MainButton
+            name={!vievCarrier ? "pobierz" : "zmień"}
+            onClick={handleSearchCarrierModalOpen}
+          />
           <MainButton name="dodaj" onClick={handleAddCarrierModalOpen} />
         </div>
       </div>
@@ -242,6 +267,33 @@ const AddOrder = () => {
             onClick={handleAddOrderModalOpen}
           />
           <MainButton name="model" />
+        </div>
+      </div>
+      <div className={styles.conditions}>
+        <div className={styles.dataInfo}>
+          <p>Fracht i termin:</p>
+          <div>
+            <p>klient:</p>
+            <p>
+              {conditions.clientPrice}
+              <span>{conditions.clientCurr}</span>
+            </p>
+            <p>{conditions.clientTerms}dni</p>
+          </div>
+          <div>
+            <p>przewoźnik:</p>
+            <p>
+              {conditions.carrierPrice}
+              <span>{conditions.carrierCurr}</span>
+            </p>
+            <p>{conditions.carrierTerms}dni</p>
+          </div>
+        </div>
+        <div className={styles.buttons}>
+          <MainButton
+            name={!conditions ? "dodaj" : "zmień"}
+            onClick={handleAddConditionsModalOpen}
+          />
         </div>
       </div>
       <AddClientForm
@@ -260,6 +312,11 @@ const AddOrder = () => {
         isModalOpen={addOrderModalOpen}
         handleOnClose={handleCloseModal}
         setOrderObject={setOrderObject}
+      />
+      <AddConditionsForm
+        isModalOpen={addConditionsModalOpen}
+        handleOnClose={handleCloseModal}
+        setConditions={setConditions}
       />
       <div className={styles.operationButtons}>{operationButtons}</div>
       <div className={styles.backButton}>
