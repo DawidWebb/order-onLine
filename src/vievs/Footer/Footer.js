@@ -3,7 +3,7 @@ import styles from "./Footer.module.scss";
 function Footer() {
   return (
     <div className={styles.container}>
-      <h3>Footer</h3>
+      <h3> </h3>
     </div>
   );
 }

@@ -10,7 +10,7 @@
   }
   .form {
     ::placeholder {
-      color: $fifth-color;
+      color: $first-color;
       font-weight: 700;
     }
     .login,
@@ -35,7 +35,7 @@
   @media screen and (orientation: landscape) {
     width: 30vw;
   }
-  @media screen and (min-width: map-get($breakpoints, lm)) {
+  @media screen and (min-width: map-get($breakpoints, medium)) {
     width: 20vw;
   }
 }

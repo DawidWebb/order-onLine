@@ -3,7 +3,7 @@
 @mixin sectionWrapper {
   position: relative;
   width: 90vw;
-  min-height: calc(100vh - 270px);
+  min-height: calc(100vh - 170px);
   margin: 0 auto;
 }
 @mixin backButtonPosition {
@@ -12,13 +12,14 @@
   bottom: 20px;
 }
 @mixin spinnerWrapper {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100px;
   height: 100px;
   padding: 10px;
+  z-index: 100;
 }
 @mixin inputViev {
   height: 35px;

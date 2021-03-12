@@ -20,5 +20,8 @@
     background-color: $basic-color;
     color: white;
     border-radius: 5px;
+    @media screen and (orientation: landscape) {
+      padding: 35px 30px;
+    }
   }
 }

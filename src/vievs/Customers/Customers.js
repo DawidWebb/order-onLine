@@ -104,7 +104,7 @@ const Customers = () => {
           setTaskInformation={setTaskInformation}
         />
         <SelectButton
-          name="wyszukaj kontrahenta"
+          name="szukaj kontrahenta"
           onClick={handleSerchModalOpen}
         />
         <SearchModal
@@ -113,6 +113,7 @@ const Customers = () => {
           setSerchedClient={setSerchedClient}
         />
         {getAllClientsButton}
+        <BackButton />
       </div>
       <div className={styles.spinnerWrapper}> {spinner}</div>
       <div className={styles.informationPopup}>
@@ -121,10 +122,6 @@ const Customers = () => {
       <div className={styles.clientItem}>{serchClientInfo}</div>
       <div className={styles.clientsList}>
         {!serchClientInfo ? clientsInfo : ""}
-      </div>
-
-      <div className={styles.backButton}>
-        <BackButton />
       </div>
     </div>
   );

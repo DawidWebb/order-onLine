@@ -1,21 +1,25 @@
 @import "../../Root/common.scss";
 
 .wrapper {
-  @include sectionWrapper;
-  border: 1px solid transparent;
+  height: 180px;
+
   h1 {
     padding-top: 20px;
     padding-bottom: 20px;
     margin: 0 auto;
     text-align: center;
+    font-size: $l-font-size;
   }
 
   .selectButttons {
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
+    flex-wrap: wrap;
     align-items: center;
-    height: 200px;
+    button {
+      width: 160px;
+      margin-bottom: 10px;
+    }
   }
 
   .clientItem {
@@ -35,13 +39,25 @@
     width: 95%;
     margin: 0 auto 140px auto;
   }
-  .backButton {
-    @include backButtonPosition;
-    margin-top: 40px;
+  .spinnerWrapper {
+    @include spinnerWrapper;
   }
-  // @media screen and (orientation: landscape) {
-  // }
-  @media screen and (min-width: map-get($breakpoints, lm)) {
+  @media screen and (orientation: landscape) {
+    .selectButttons {
+      button {
+        width: 140px;
+      }
+    }
+  }
+  @media screen and (min-width: map-get($breakpoints, medium)) {
+    h1 {
+      font-size: $xl-font-size;
+    }
+    .selectButttons {
+      button {
+        width: 160px;
+      }
+    }
     .clientItem {
       width: 70%;
     }
@@ -50,9 +66,14 @@
       flex-wrap: wrap;
     }
   }
-  @media screen and (min-width: map-get($breakpoints, lm)) {
+  @media screen and (min-width: map-get($breakpoints, large)) {
+    .selectButttons {
+      button {
+        width: 180px;
+      }
+    }
     .clientItem {
-      width: 50%;
+      width: 90%;
     }
   }
 }

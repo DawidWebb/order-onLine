@@ -1,19 +1,16 @@
 @import "../../../Root/common.scss";
 
 .mainButton {
-  min-width: 100px;
+  min-width: 80px;
   padding: 5px 10px;
   background-color: $first-color;
   color: $fourth-color;
-  font-size: $s-font-size;
+  font-size: $xs-font-size;
   border: 2px solid $third-color;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.4s;
   &:hover {
     background-color: $third-color;
-  }
-  @media screen and (min-width: map-get($breakpoints, sl)) {
-    font-size: $l-font-size/1.1;
   }
 }
