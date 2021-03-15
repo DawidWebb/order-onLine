@@ -35,6 +35,18 @@
         font-weight: 700;
       }
     }
+    .dataInfoTable {
+      margin-bottom: 10px;
+      border-bottom: 2px solid $fifth-color;
+      tr {
+        color: white;
+      }
+      th,
+      td {
+        width: 100px;
+        text-align: center;
+      }
+    }
     .buttons {
       flex-basis: 90%;
       display: flex;
@@ -48,9 +60,41 @@
   }
   .backButton {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    margin-bottom: 20px;
   }
   .spinnerWrapper {
     @include spinnerWrapper;
+  }
+  @media screen and (min-width: map-get($breakpoints, medium)) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    h2 {
+      flex-basis: 100%;
+    }
+    .client,
+    .carrier,
+    .order,
+    .conditions {
+      flex-basis: 48%;
+      height: 70px;
+    }
+    .operationButtons {
+      flex-basis: 60%;
+      height: 40px;
+      align-items: flex-start;
+    }
+    .backButton {
+      height: 40px;
+      align-items: flex-start;
+    }
+  }
+  @media screen and (min-width: map-get($breakpoints, large)) {
+    .client,
+    .carrier,
+    .order,
+    .conditions {
+      flex-basis: 35%;
+    }
   }
 }

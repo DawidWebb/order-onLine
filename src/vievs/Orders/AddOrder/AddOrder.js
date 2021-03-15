@@ -167,6 +167,7 @@ const AddOrder = () => {
     setVievClient(false);
     setVievCarrier(false);
     setOrderObject(false);
+    setConditions(false);
   };
   const handleSaveOrder = async () => {
     setShowSpinner(true);
@@ -176,7 +177,7 @@ const AddOrder = () => {
     if (status === 201) {
       setTaskInformation("Dodano zlecenie");
       setShowSpinner(false);
-      setOrdersData((prev) => [...prev, data.data]);
+      setOrdersData((prev) => [data.data, ...prev]);
 
       if (taskInformation === false) {
         history.push("./showorders");
@@ -271,25 +272,28 @@ const AddOrder = () => {
         </div>
       </div>
       <div className={styles.conditions}>
-        <div className={styles.dataInfo}>
-          <p>Fracht i termin:</p>
-          <div>
-            <p>klient:</p>
-            <p>
-              {conditions.clientPrice}
-              <span>{conditions.clientCurr}</span>
-            </p>
-            <p>{conditions.clientTerms}dni</p>
-          </div>
-          <div>
-            <p>przewoźnik:</p>
-            <p>
-              {conditions.carrierPrice}
-              <span>{conditions.carrierCurr}</span>
-            </p>
-            <p>{conditions.carrierTerms}dni</p>
-          </div>
-        </div>
+        <table className={styles.dataInfoTable}>
+          <tr>
+            <th></th>
+            <th>Klient</th>
+            <th>Przewoźnik</th>
+          </tr>
+          <tr>
+            <th>Fracht</th>
+            <td>
+              {conditions.clientPrice} <span>{conditions.clientCurr}</span>
+            </td>
+            <td>
+              {conditions.carrierPrice} <span>{conditions.carrierCurr}</span>
+            </td>
+          </tr>
+          <tr>
+            <th>Termin</th>
+            <td>{conditions.clientTerms} dni</td>
+            <td>{conditions.carrierTerms} dni</td>
+          </tr>
+        </table>
+
         <div className={styles.buttons}>
           <MainButton
             name={!conditions ? "dodaj" : "zmień"}
@@ -319,10 +323,11 @@ const AddOrder = () => {
         handleOnClose={handleCloseModal}
         setConditions={setConditions}
       />
-      <div className={styles.operationButtons}>{operationButtons}</div>
-      <div className={styles.backButton}>
+      <div className={styles.operationButtons}>
+        {operationButtons}
         <BackButton />
       </div>
+
       <div className={styles.spinnerWrapper}>{spinner}</div>
     </div>
   );
