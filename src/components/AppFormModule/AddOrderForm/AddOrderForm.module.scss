@@ -1,45 +1,90 @@
 @import "../../../Root/common.scss";
 .wrapper {
   position: relative;
-  width: 75vw;
-  .load,
-  .unload,
-  .informations {
-    border: 1px solid $fifth-color;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 10px;
-    h4 {
-      text-align: center;
+  width: 80vw;
+  .form {
+    .load,
+    .unload,
+    .informations {
+      border: 1px solid $fifth-color;
+      border-radius: 5px;
       margin-bottom: 10px;
-      text-transform: uppercase;
+      padding: 10px;
+      h4 {
+        text-align: center;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+      div {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 15px;
+        ::placeholder {
+          color: $first-color;
+        }
+        input,
+        select,
+        textarea {
+          max-width: 48%;
+          height: 15px;
+          border: none;
+          background-color: $basic-color;
+          border-bottom: 1px solid $fifth-color;
+        }
+        textarea {
+          width: 90%;
+          max-width: 90%;
+        }
+      }
     }
-    div {
+    .buttons {
       display: flex;
-      justify-content: space-around;
-      margin-bottom: 15px;
-      ::placeholder {
-        color: $first-color;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  }
+  @media screen and (orientation: landscape) {
+    width: 85vw;
+    .form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .load,
+      .unload,
+      .informations,
+      .buttons {
+        width: 270px;
+        margin-bottom: 5px;
+        padding: 0px;
+        div {
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: no-wrap;
+          input {
+            max-width: 48%;
+          }
+        }
       }
-      input,
-      select,
-      textarea {
+      .buttons {
         height: 30px;
-        border: none;
-        background-color: $basic-color;
-        border-bottom: 1px solid $fifth-color;
-      }
-      textarea {
-        width: 100%;
       }
     }
   }
-  .prices {
-    display: flex;
+  @media screen and (min-width: map-get($breakpoints, medium)) {
+    width: 70vw;
+    .form {
+      flex-direction: column;
+      align-items: center;
+      .load,
+      .unload,
+      .informations,
+      .buttons {
+        width: 90%;
+        margin-bottom: 10px;
+      }
+    }
   }
-  .buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  @media screen and (min-width: map-get($breakpoints, large)) {
+    width: 50vw;
   }
 }

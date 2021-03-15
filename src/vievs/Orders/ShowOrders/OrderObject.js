@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import MainButton from "../../../components/Buttons/MainButton/MainButton";
+import SmallButton from "../../../components/Buttons/SmallButton/SmallButton";
 import DeleteConfirmation from "../../../components/DeleteConfirmation/DeleteConfirrmation";
 
 import request from "../../../helpers/request";
@@ -71,25 +72,30 @@ const OrderObject = ({ order, setTaskInformation }) => {
   ) : (
     <>
       <div className={styles.item}>
-        <p>załadunek: </p>
+        <h3>załadunek: </h3>
         <p>{orderLoadDate}</p>
         <p>{orderLoadHrs}</p>
+      </div>
+      <div className={styles.item}>
         <p>{orderLoadCountry}</p>
         <p>{orderLoadZip}</p>
         <p>{orderLoadCity}</p>
         <p>{orderLoadAdress}</p>
       </div>
+      <div className={styles.item}></div>
       <div className={styles.item}>
-        <p>rozładunek: </p>
+        <h3>rozładunek: </h3>
         <p>{orderUnloadDate}</p>
         <p>{orderUnloadHrs}</p>
+      </div>
+      <div className={styles.item}>
         <p>{orderUnloadCountry}</p>
         <p>{orderUnloadZip}</p>
         <p>{orderUnloadCity}</p>
         <p>{orderUnloadAdress}</p>
       </div>
+      <div className={styles.item}></div>
       <div className={styles.item}>
-        <p>ładunek: </p>
         <p>{orderGoodsSpecyfications}</p>
       </div>
       <div className={styles.item}>
@@ -98,6 +104,7 @@ const OrderObject = ({ order, setTaskInformation }) => {
         <p>pojazd: </p>
         <p>{orderTruck}</p>
       </div>
+      <div className={styles.item}></div>
       <div className={styles.item}>
         <p>{orderFix}</p>
         <p>{orderAdr}</p>
@@ -106,16 +113,17 @@ const OrderObject = ({ order, setTaskInformation }) => {
         <p>info:</p>
         <span>{orderInfo}</span>
       </div>
+      <h3>Warunki i terminy:</h3>
       <div className={styles.item}>
-        <p>Warunki i terminy:</p>
         <p>fracht klienta:</p>
         <span>{`${orderClientPrice} ${orderClientCurr}`}</span>
-        <p>termin klienta:</p>
-        <span>{orderClientTerms}</span>
+        <span>{orderClientTerms} dni</span>
+      </div>
+
+      <div className={styles.item}>
         <p>fracht przewoźnika:</p>
         <span>{`${orderCarrierPrice} ${orderCarrierCurr}`}</span>
-        <p>termin przewoźnika:</p>
-        <span>{orderCarrierTerms}</span>
+        <span>{orderCarrierTerms} dni</span>
       </div>
     </>
   );
@@ -133,7 +141,7 @@ const OrderObject = ({ order, setTaskInformation }) => {
   const deleteConfirm = async () => {
     try {
       const { status } = await request.delete(`/orders/${_id}`);
-      console.log(status);
+
       if (status === 200) {
         setOrdersData((prev) => prev.filter((item) => item._id !== _id));
 
@@ -164,19 +172,29 @@ const OrderObject = ({ order, setTaskInformation }) => {
         <p>Nr zlecenia:</p>
         <p>{orderNumber}</p>
       </div>
-      <div className={styles.item}>
-        <p>Klient:</p>
-        <p>{clientName}</p>
-        <MainButton name="edytuj" />
-      </div>
-      <div className={styles.item}>
-        <p>Przewoźnik:</p>
-        <p>{carrierName}</p>
-        <MainButton name="edytuj" />
+      <div className={styles.originData}>
+        <div className={styles.item}>
+          <p>Klient:</p>
+          <SmallButton name="edytuj" />
+        </div>
+
+        <div className={styles.item}>
+          <h3>{clientName}</h3>
+        </div>
+        <div className={styles.item}>
+          <p>Przewoźnik:</p>
+          <SmallButton name="edytuj" />
+        </div>
+
+        <div className={styles.item}>
+          <h3>{carrierName}</h3>
+        </div>
       </div>
       <div className={styles.orderData}>
-        <h3>dane zlecenia</h3>
-        <MainButton name="edytuj" />
+        <div className={styles.item}>
+          <h3>dane zlecenia</h3>
+          <SmallButton name="edytuj" />
+        </div>
         <div className={styles.item}>
           <h3>Trasa:</h3>
           <h3>{orderLoadCity}</h3>

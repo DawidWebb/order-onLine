@@ -53,7 +53,7 @@ const AddConditionsForm = (props) => {
                   type="button"
                   onClick={() => {
                     form.reset();
-                    props.setOrderObject(false);
+                    props.setConditions(false);
                   }}
                   disabled={submitting || pristine}
                   className={styles.resetButton}

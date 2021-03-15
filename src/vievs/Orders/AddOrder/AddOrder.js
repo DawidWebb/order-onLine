@@ -176,9 +176,10 @@ const AddOrder = () => {
     if (status === 201) {
       setTaskInformation("Dodano zlecenie");
       setShowSpinner(false);
-      setOrdersData((prev) => [...prev, orderObject]);
+      setOrdersData((prev) => [...prev, data.data]);
+
       if (taskInformation === false) {
-        history.push("./orderadded");
+        history.push("./showorders");
       }
     } else if (status === 409) {
     } else {

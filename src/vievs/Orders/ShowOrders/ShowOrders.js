@@ -5,6 +5,7 @@ import SelectButton from "../../../components/Buttons/SelectButton/SelectButton"
 import OrderObject from "./OrderObject";
 import Spinner from "../../../components/Spinner/Spinner";
 import InformationPopup from "../../../components/InformationPopup/InforationPopup";
+import BackButton from "../../../components/Buttons/BackButton/BackButton";
 
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
@@ -60,9 +61,6 @@ const ShowOrders = () => {
       <SelectButton name="odśwież listę" onClick={handleGetOrders} />
     );
 
-  const handleGoToStart = () => {
-    history.push("./");
-  };
   const handleGoToAddOrder = () => {
     history.push("./addorder");
   };
@@ -71,14 +69,10 @@ const ShowOrders = () => {
       <div className={styles.selectButtons}>
         {getAllOrdersButton}
         <SelectButton name="Wyszukaj zlecenie" />
-      </div>
-      <div className={styles.operationButtons}>
         <SelectButton name="dodaj nowe zlecenie" onClick={handleGoToAddOrder} />
-        <SelectButton
-          name="powrót do stony głównej"
-          onClick={handleGoToStart}
-        />
+        <BackButton />
       </div>
+      <div className={styles.addedOrder}></div>
       <div className={styles.ordersList}>{ordersInfo}</div>
       <div className={styles.spinner}>{spinner}</div>
       <div className={styles.informationPopup}>

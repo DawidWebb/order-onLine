@@ -1,6 +1,7 @@
 @import "../../../Root/common.scss";
 
 .wrapper {
+  width: 90%;
   margin: 10px auto;
   padding: 10px;
   border: 1px solid $fifth-color;
@@ -8,11 +9,21 @@
   color: $fourth-color;
   .item {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin: 5px;
   }
   .orderData {
-    .item {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid $fifth-color;
+    .item:nth-child(2),
+    .item:nth-child(5),
+    .item:nth-child(8),
+    .item:nth-child(13) {
+      border-bottom: 1px solid $fourth-color;
+      padding-bottom: 10px;
+      padding: 5px 10px;
     }
   }
   .buttons {
@@ -21,5 +32,11 @@
     margin-top: 15px;
     padding-top: 10px;
     border-top: 1px solid $fifth-color;
+  }
+  @media screen and (min-width: map-get($breakpoints, medium)) {
+    width: 48%;
+  }
+  @media screen and (min-width: map-get($breakpoints, large)) {
+    width: 33%;
   }
 }

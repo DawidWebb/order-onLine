@@ -1,1 +1,29 @@
 @import "../../../Root/common.scss";
+
+.wrapper {
+  width: 200px;
+  height: 280px;
+  .form {
+    .clientPrice,
+    .carrierPrice,
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      select,
+      input {
+        border: none;
+        background-color: $basic-color;
+        border-bottom: 1px solid $fifth-color;
+        margin-bottom: 10px;
+      }
+      select {
+        flex-basis: 30%;
+      }
+      input {
+        width: 60%;
+      }
+    }
+  }
+}

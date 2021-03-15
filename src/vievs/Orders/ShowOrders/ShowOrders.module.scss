@@ -1,16 +1,52 @@
 @import "../../../Root/common.scss";
 .wrapper {
-  @include sectionWrapper;
+  height: 180px;
+  h1 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: $l-font-size;
+  }
 
   .selectButtons {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
-    width: 90%;
-    margin: 20px auto;
+    align-items: center;
+    height: 200px;
+    button {
+      width: 160px;
+      margin-bottom: 10px;
+    }
   }
-  .ordersInfo {
+  @media screen and (orientation: landscape) {
+    .selectButtons {
+      button {
+        width: 140px;
+      }
+    }
   }
-  .backButton {
-    @include backButtonPosition;
+  @media screen and (min-width: map-get($breakpoints, medium)) {
+    h1 {
+      font-size: $xl-font-size;
+    }
+    .selectButtons {
+      button {
+        width: 180px;
+      }
+    }
+    .ordersList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+  }
+  @media screen and (min-width: map-get($breakpoints, large)) {
+    .selectButtons {
+      button {
+        width: 190px;
+      }
+    }
   }
 }

@@ -25,7 +25,7 @@ const AddOrderForm = (props) => {
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.load}>
                 <h4>załadunek</h4>
-                <div>
+                <div className={styles.hrsdate}>
                   <Field name="loadDate" type="date" component="input" />
                   <Field
                     name="loadHrs"
@@ -79,7 +79,7 @@ const AddOrderForm = (props) => {
               </div>
               <div className={styles.unload}>
                 <h4>rozładunek</h4>
-                <div>
+                <div className={styles.hrsdate}>
                   <Field name="unloadDate" type="date" component="input" />
 
                   <Field
@@ -139,7 +139,7 @@ const AddOrderForm = (props) => {
                     name="goodsSpecification"
                     type="text"
                     placeholder="Specyfikacja ładunku"
-                    component="input"
+                    component="textarea"
                   />
                 </div>
                 <div>

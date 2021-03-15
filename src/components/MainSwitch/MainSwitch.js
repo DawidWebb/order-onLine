@@ -6,7 +6,6 @@ import MainSection from "../../vievs/MainSection/MainSection";
 import TestFormSection from "../../vievs/FormSection/TestFormSection";
 import Orders from "../../vievs/Orders/Orders";
 import AddOrder from "../../vievs/Orders/AddOrder/AddOrder";
-import OrderAdded from "../../vievs/Orders/OrderAdded/OrderAdded";
 import ShowOrders from "../../vievs/Orders/ShowOrders/ShowOrders";
 import Customers from "../../vievs/Customers/Customers";
 
@@ -38,11 +37,7 @@ const MainSwitch = () => {
         ) : (
           ""
         )}
-        {user || cookie ? (
-          <Route exact path="/orderadded" render={() => <OrderAdded />} />
-        ) : (
-          ""
-        )}
+
         {user || cookie ? (
           <Route exact path="/showorders" render={() => <ShowOrders />} />
         ) : (

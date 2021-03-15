@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 import BackButton from "../../components/Buttons/BackButton/BackButton";
 
-import { StoreContext } from "../../Store/StoreProvider";
-
 import styles from "./Orders.module.scss";
 
 const Orders = () => {
@@ -20,9 +18,6 @@ const Orders = () => {
         <Link to="showorders">
           <SelectButton name="pokaż zlecenia" />
         </Link>
-      </div>
-
-      <div className={styles.backButton}>
         <BackButton />
       </div>
     </div>
