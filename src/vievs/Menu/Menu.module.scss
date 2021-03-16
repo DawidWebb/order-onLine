@@ -1,0 +1,45 @@
+@import "../../Root/common.scss";
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+
+  div {
+    flex-basis: 10%;
+    width: 40px;
+    background-color: white;
+  }
+}
+.items {
+  position: fixed;
+  top: -125px;
+  left: 0;
+  width: 100vw;
+  height: 120px;
+  background-color: $text-second-color;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 2px solid $fifth-color;
+  transition: 0.5s;
+  a,
+  button {
+    display: block;
+    width: 130px;
+    color: $text-first-color;
+    // padding: 5px 10px;
+    font-size: $xs-font-size;
+    text-decoration: none;
+    border: 1px solid $fifth-color;
+    border-radius: 5px;
+    &:hover {
+      background-color: $text-first-color;
+      color: $text-second-color;
+    }
+  }
+}

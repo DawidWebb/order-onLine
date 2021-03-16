@@ -76,7 +76,7 @@
     .carrier,
     .order,
     .conditions {
-      flex-basis: 48%;
+      flex-basis: 45%;
       height: 70px;
     }
     .operationButtons {
@@ -87,14 +87,6 @@
     .backButton {
       height: 40px;
       align-items: flex-start;
-    }
-  }
-  @media screen and (min-width: map-get($breakpoints, large)) {
-    .client,
-    .carrier,
-    .order,
-    .conditions {
-      flex-basis: 35%;
     }
   }
 }

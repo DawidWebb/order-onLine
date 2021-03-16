@@ -1,8 +1,8 @@
 @import "../../Root/common.scss";
 
-.container {
+.wrapper {
   display: flex;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   width: 95vw;
@@ -12,19 +12,21 @@
   text-align: center;
 
   h1 {
-    flex-basis: 45%;
+    flex-basis: 40%;
     color: $fourth-color;
   }
+
   .buttons {
-    flex-basis: 45%;
-    height: 100%;
+    flex-basis: 40%;
+    height: 90px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     .loginAppBtn,
-    .testAppBtn {
-      flex-basis: 40%;
+    .testAppBtn,
+    .menuItem {
+      flex-basis: 10%;
     }
   }
 }

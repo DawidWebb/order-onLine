@@ -4,6 +4,7 @@ import { deleteCoockie } from "../../helpers/session";
 
 import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 import LoginForm from "../LoginForm/LoginForm";
+import Menu from "../../vievs/Menu/Menu";
 
 import { StoreContext } from "../../Store/StoreProvider";
 
@@ -21,6 +22,8 @@ function Header() {
 
   const buttonName = !user && !cookie ? "logowanie" : "wyloguj";
 
+  const menuItem = !user && !cookie ? "" : <Menu />;
+
   const handleLoginLogout = () => {
     if (!user && !cookie) {
       setLoginModalOpen(true);
@@ -35,7 +38,7 @@ function Header() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.wrapper}>
       <h1>Zlecenia on-line</h1>
       <div className={styles.buttons}>
         <div className={styles.loginAppBtn}>
@@ -45,6 +48,7 @@ function Header() {
             handleCloseModal={handleCloseModal}
           />
         </div>
+        <div className={styles.menuItems}>{menuItem}</div>
         <div className={styles.testAppBtn}>
           {!cookie ? (
             <Link to={"/test-form"}>
