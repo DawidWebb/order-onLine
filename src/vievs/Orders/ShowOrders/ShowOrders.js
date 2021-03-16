@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 
 import SelectButton from "../../../components/Buttons/SelectButton/SelectButton";
 import OrderObject from "./OrderObject";
@@ -13,8 +12,6 @@ import { StoreContext } from "../../../Store/StoreProvider";
 import styles from "./ShowOrders.module.scss";
 
 const ShowOrders = () => {
-  let history = useHistory();
-
   const { ordersData, setOrdersData } = useContext(StoreContext);
 
   const [taskInformation, setTaskInformation] = useState(false);
@@ -61,15 +58,12 @@ const ShowOrders = () => {
       <SelectButton name="odśwież listę" onClick={handleGetOrders} />
     );
 
-  const handleGoToAddOrder = () => {
-    history.push("./addorder");
-  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.selectButtons}>
         {getAllOrdersButton}
         <SelectButton name="Wyszukaj zlecenie" />
-        <SelectButton name="dodaj nowe zlecenie" onClick={handleGoToAddOrder} />
+
         <BackButton />
       </div>
       <div className={styles.addedOrder}></div>

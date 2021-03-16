@@ -1,15 +1,20 @@
 @import "../../Root/common.scss";
 
 .wrapper {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
   display: flex;
   // flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  width: 95vw;
   height: $header-height;
-  margin: 10px auto;
+  background-color: $border-first-color;
   border-bottom: 2px solid $fifth-color;
   text-align: center;
+  z-index: 10;
 
   h1 {
     flex-basis: 40%;
@@ -27,6 +32,12 @@
     .testAppBtn,
     .menuItem {
       flex-basis: 10%;
+    }
+  }
+  @media screen and (min-width: map-get($breakpoints, medium)) {
+    height: 70px;
+    .buttons {
+      flex-direction: row;
     }
   }
 }
