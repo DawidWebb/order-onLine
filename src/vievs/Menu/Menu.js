@@ -24,7 +24,7 @@ const Menu = () => {
   };
 
   const linkItem = links.map((item) => (
-    <Link to={`${item.path}`} onClick={handleCloseMenu}>
+    <Link key={item.path} to={`${item.path}`} onClick={handleCloseMenu}>
       {item.name}
     </Link>
   ));

@@ -15,16 +15,19 @@
   .order,
   .conditions {
     flex-basis: 30%;
+    padding: 20px 0px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     margin-bottom: 50px;
+    border: 2px solid $fifth-color;
+    border-radius: 5px;
     .dataInfo {
       display: flex;
+
       flex-basis: 100%;
       justify-content: space-evenly;
       margin-bottom: 10px;
-      border-bottom: 2px solid $fifth-color;
       p {
         flex-basis: 30%;
         color: $fourth-color;
@@ -37,7 +40,7 @@
     }
     .dataInfoTable {
       margin-bottom: 10px;
-      border-bottom: 2px solid $fifth-color;
+
       tr {
         color: white;
       }
@@ -69,6 +72,8 @@
   @media screen and (min-width: map-get($breakpoints, medium)) {
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     h2 {
       flex-basis: 100%;
     }
@@ -77,11 +82,10 @@
     .order,
     .conditions {
       flex-basis: 45%;
-      height: 70px;
+      margin-left: 20px;
     }
     .operationButtons {
       flex-basis: 60%;
-      height: 40px;
       align-items: flex-start;
     }
     .backButton {

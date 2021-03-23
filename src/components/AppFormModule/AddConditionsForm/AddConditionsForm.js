@@ -23,8 +23,13 @@ const AddConditionsForm = (props) => {
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.clientPrice}>
-                <label>Fracht klienta:</label>
-                <Field name="clientPrice" type="text" component="input" />
+                <label>Klient:</label>
+                <Field
+                  name="clientPrice"
+                  type="text"
+                  component="input"
+                  placeholder="fracht"
+                />
 
                 <Field name="clientCurr" component="select">
                   <option value=""> </option>
@@ -32,20 +37,34 @@ const AddConditionsForm = (props) => {
                   <option value="Pln">Pln</option>
                 </Field>
 
-                <label>Termin klienta:</label>
-                <Field name="clientTerms" type="text" component="input" />
+                <Field
+                  name="clientTerms"
+                  type="text"
+                  component="input"
+                  placeholder="termin płatności"
+                />
               </div>
 
               <div className={styles.carrierPrice}>
-                <label>Fracht ptrzewoźnika:</label>
-                <Field name="carrierPrice" type="text" component="input" />
+                <label>Przewoźnik</label>
+                <Field
+                  name="carrierPrice"
+                  type="text"
+                  component="input"
+                  placeholder="fracht"
+                />
                 <Field name="carrierCurr" component="select">
                   <option value=""> </option>
                   <option value="Eur">Eur</option>
                   <option value="Pln">Pln</option>
                 </Field>
-                <label>Termin przewoźnika:</label>
-                <Field name="carrierTerms" type="text" component="input" />
+
+                <Field
+                  name="carrierTerms"
+                  type="text"
+                  component="input"
+                  placeholder="termin płatności"
+                />
               </div>
               <div className={styles.buttons}>
                 <MainButton type="submit" disabled={submitting} name="zapisz" />

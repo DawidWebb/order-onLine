@@ -30,6 +30,7 @@
           border: none;
           background-color: $basic-color;
           border-bottom: 1px solid $fifth-color;
+          color: white;
         }
         textarea {
           width: 90%;
@@ -81,6 +82,11 @@
       .buttons {
         width: 90%;
         margin-bottom: 10px;
+        div {
+          input {
+            height: 25px;
+          }
+        }
       }
     }
   }
