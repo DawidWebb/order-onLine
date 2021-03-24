@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { Form, Field } from "react-final-form";
 
 import SelectButton from "../../../components/Buttons/SelectButton/SelectButton";
 import OrderObject from "./OrderObject";
@@ -37,8 +38,9 @@ const ShowOrders = () => {
     />
   ));
 
-  const handleGetOrders = async () => {
+  const handleGetOrders = async (values) => {
     // setSerchedClient(false);
+
     setShowSpinner(true);
     const { data, status } = await request.get("/orders");
 
@@ -51,6 +53,14 @@ const ShowOrders = () => {
     }
   };
 
+  // const handleOnSubmit = async () => {
+  //   const { data, status } = await request.get("/orders/search");
+  //   if (status === 200) {
+  //     console.log(data);
+  //   } else {
+  //     console.log(data.message);
+  //   }
+  // };
   const getAllOrdersButton =
     ordersData.length === 0 ? (
       <SelectButton name="Lista zleceń" onClick={handleGetOrders} />
@@ -62,7 +72,20 @@ const ShowOrders = () => {
     <div className={styles.wrapper}>
       <div className={styles.selectButtons}>
         {getAllOrdersButton}
-        <SelectButton name="Wyszukaj zlecenie" />
+        <Form
+          onSubmit={handleGetOrders}
+          render={({ handleSubmit, form, submitting, pristine, values }) => (
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <Field name="search">
+                {({ input, meta }) => (
+                  <div>
+                    <input {...input} type="text" />
+                  </div>
+                )}
+              </Field>
+            </form>
+          )}
+        />
 
         <BackButton />
       </div>

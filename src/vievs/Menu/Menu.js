@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 
 import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
+
+import { StoreContext } from "../../Store/StoreProvider";
 
 import styles from "./Menu.module.scss";
 
@@ -14,6 +16,8 @@ const links = [
 ];
 
 const Menu = () => {
+  const { setCopiedOrderData } = useContext(StoreContext);
+
   const openCloseMenuRef = useRef(null);
   const handleOpenMenu = () => {
     openCloseMenuRef.current.style.top = 0;
@@ -21,6 +25,7 @@ const Menu = () => {
 
   const handleCloseMenu = () => {
     openCloseMenuRef.current.style.top = "-125px";
+    setCopiedOrderData();
   };
 
   const linkItem = links.map((item) => (

@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Form, Field } from "react-final-form";
 
 import Modal from "../../Modal/Modal";
-
 import MainButton from "../../Buttons/MainButton/MainButton";
+
+import { StoreContext } from "../../../Store/StoreProvider";
 
 import styles from "./AddOrderForm.module.scss";
 
 const AddOrderForm = (props) => {
+  const { copiedOrderData } = useContext(StoreContext);
+
   const onSubmit = async (values) => {
     props.setOrderObject(values);
     props.handleOnClose();
   };
+
+  console.log(props.orderObject);
 
   return (
     <Modal
@@ -27,6 +32,7 @@ const AddOrderForm = (props) => {
                 <h4>załadunek</h4>
                 <div className={styles.hrsdate}>
                   <Field name="loadDate" type="date" component="input" />
+
                   <Field
                     name="loadHrs"
                     type="text"
@@ -37,7 +43,13 @@ const AddOrderForm = (props) => {
                 <div>
                   <label>kraj</label>
                   <Field name="loadCountry" component="select">
-                    <option value=""> </option>
+                    <option
+                      value={
+                        !copiedOrderData ? "" : props.orderObject.loadCountry
+                      }
+                    >
+                      {!copiedOrderData ? "" : props.orderObject.loadCountry}
+                    </option>
                     <option value="AT">AT</option>
                     <option value="BE">BE</option>
                     <option value="CH">CH</option>
@@ -51,6 +63,7 @@ const AddOrderForm = (props) => {
                     <option value="LU">LU</option>
                     <option value="PL">PL</option>
                     <option value="PT">PT</option>
+                    <option value="RO">RO</option>
                     <option value="SE">SE</option>
                     <option value="SK">SK</option>
                     <option value="TR">TR</option>
@@ -58,22 +71,33 @@ const AddOrderForm = (props) => {
                   <Field
                     name="loadZip"
                     type="text"
-                    placeholder="kod-pocztowy"
+                    placeholder={
+                      !copiedOrderData
+                        ? "kod pocztowy"
+                        : props.orderObject.loadZip
+                    }
                     component="input"
+                    value={!copiedOrderData ? "" : props.orderObject.loadZip}
                   />
                 </div>
                 <div>
                   <Field
                     name="loadCity"
                     type="text"
-                    placeholder="miasto"
+                    placeholder={
+                      !copiedOrderData ? "miasto" : props.orderObject.loadCity
+                    }
                     component="input"
+                    value={!copiedOrderData ? "" : props.orderObject.loadCity}
                   />
                   <Field
                     name="loadAdress"
                     type="text"
-                    placeholder="adres"
+                    placeholder={
+                      !copiedOrderData ? "adres" : props.orderObject.loadAdress
+                    }
                     component="input"
+                    value={!copiedOrderData ? "" : props.orderObject.loadAdress}
                   />
                 </div>
               </div>
@@ -92,7 +116,13 @@ const AddOrderForm = (props) => {
                 <div>
                   <label>kraj</label>
                   <Field name="unloadCountry" component="select">
-                    <option value=""> </option>
+                    <option
+                      value={
+                        !copiedOrderData ? "" : props.orderObject.unloadCountry
+                      }
+                    >
+                      {!copiedOrderData ? "" : props.orderObject.unloadCountry}
+                    </option>
                     <option value="AT">AT</option>
                     <option value="BE">BE</option>
                     <option value="CH">CH</option>
@@ -106,6 +136,7 @@ const AddOrderForm = (props) => {
                     <option value="LU">LU</option>
                     <option value="PL">PL</option>
                     <option value="PT">PT</option>
+                    <option value="RO">RO</option>
                     <option value="SE">SE</option>
                     <option value="SK">SK</option>
                     <option value="TR">TR</option>
@@ -113,22 +144,37 @@ const AddOrderForm = (props) => {
                   <Field
                     name="unloadZip"
                     type="text"
-                    placeholder="kod-pocztowy"
+                    placeholder={
+                      !copiedOrderData
+                        ? "kod pocztowy"
+                        : props.orderObject.unloadZip
+                    }
                     component="input"
+                    value={!copiedOrderData ? "" : props.orderObject.unloadZip}
                   />
                 </div>
                 <div>
                   <Field
                     name="unloadCity"
                     type="text"
-                    placeholder="miasto"
+                    placeholder={
+                      !copiedOrderData ? "miasto" : props.orderObject.unloadCity
+                    }
                     component="input"
+                    value={!copiedOrderData ? "" : props.orderObject.unloadCity}
                   />
                   <Field
                     name="unloadAdress"
                     type="text"
-                    placeholder="adres"
+                    placeholder={
+                      !copiedOrderData
+                        ? "adres"
+                        : props.orderObject.unloadAdress
+                    }
                     component="input"
+                    value={
+                      !copiedOrderData ? "" : props.orderObject.unloadAdress
+                    }
                   />
                 </div>
               </div>
@@ -138,23 +184,38 @@ const AddOrderForm = (props) => {
                   <Field
                     name="goodsSpecification"
                     type="text"
-                    placeholder="Specyfikacja ładunku"
+                    placeholder={
+                      !copiedOrderData
+                        ? "Spacyfikacja ładunku"
+                        : props.orderObject.goodsSpecification
+                    }
                     component="textarea"
+                    value={
+                      !copiedOrderData
+                        ? ""
+                        : props.orderObject.goodsSpecification
+                    }
                   />
                 </div>
                 <div>
                   <Field
                     name="driver"
                     type="text"
-                    placeholder="Dane kierowcy"
+                    placeholder={
+                      !copiedOrderData ? "kierowca" : props.orderObject.driver
+                    }
                     component="input"
+                    value={!copiedOrderData ? "" : props.orderObject.driver}
                   />
 
                   <Field
                     name="truck"
                     type="text"
-                    placeholder="Dane pojazdu"
+                    placeholder={
+                      !copiedOrderData ? "pojazd" : props.orderObject.truck
+                    }
                     component="input"
+                    value={!copiedOrderData ? "" : props.orderObject.truck}
                   />
                 </div>
                 <div>
@@ -178,7 +239,10 @@ const AddOrderForm = (props) => {
                   <Field
                     name="notes"
                     component="textarea"
-                    placeholder="uwagi..."
+                    placeholder={
+                      !copiedOrderData ? "uwagi..." : props.orderObject.truck
+                    }
+                    value={!copiedOrderData ? "" : props.orderObject.truck}
                   />
                 </div>
               </div>

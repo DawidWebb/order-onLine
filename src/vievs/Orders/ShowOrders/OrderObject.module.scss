@@ -7,6 +7,7 @@
   border: 1px solid $fifth-color;
   border-radius: 5px;
   color: $fourth-color;
+  background-color: transparent;
   .item {
     display: flex;
     flex-wrap: wrap;
@@ -28,10 +29,14 @@
   }
   .buttons {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 15px;
     padding-top: 10px;
     border-top: 1px solid $fifth-color;
+    button {
+      margin-bottom: 15px;
+    }
   }
   @media screen and (min-width: map-get($breakpoints, medium)) {
     width: 48%;

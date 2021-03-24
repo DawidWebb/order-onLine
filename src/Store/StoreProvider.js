@@ -51,6 +51,9 @@ const StoreProvider = ({ children }) => {
   // Get all orders method implement on ShowOrders.js
   const [ordersData, setOrdersData] = useState([]);
 
+  // Data for copied order
+  const [copiedOrderData, setCopiedOrderData] = useState(false);
+
   // data for OrderPrintViev
   const [printOrderData, setPrintOrderData] = useState(false);
 
@@ -77,6 +80,8 @@ const StoreProvider = ({ children }) => {
         setOrderNumber,
         printOrderData,
         setPrintOrderData,
+        copiedOrderData,
+        setCopiedOrderData,
       }}
     >
       {children}

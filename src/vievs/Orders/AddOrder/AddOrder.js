@@ -24,6 +24,7 @@ const AddOrder = () => {
     setOrdersData,
     orderNumber,
     setOrderNumber,
+    copiedOrderData,
   } = useContext(StoreContext);
 
   // state for Modals
@@ -43,6 +44,59 @@ const AddOrder = () => {
   const [vievCarrier, setVievCarrier] = useState(false);
   const [orderObject, setOrderObject] = useState(false);
   const [conditions, setConditions] = useState(false);
+
+  const setUpCopiedOrderData = () => {
+    if (!copiedOrderData) {
+      return;
+    }
+    setVievClient([
+      {
+        companyName: copiedOrderData.clientName,
+        companyAdress: copiedOrderData.clientAdress,
+        vatNo: copiedOrderData.clientVatNo,
+      },
+    ]);
+    setVievCarrier([
+      {
+        companyName: copiedOrderData.carrierName,
+        companyAdress: copiedOrderData.carrierAdress,
+        vatNo: copiedOrderData.carrierVatNo,
+      },
+    ]);
+    setOrderObject({
+      loadDate: copiedOrderData.orderLoadDate,
+      loadHrs: copiedOrderData.orderLoadHrs,
+      loadCountry: copiedOrderData.orderLoadCountry,
+      loadZip: copiedOrderData.orderLoadZip,
+      loadCity: copiedOrderData.orderLoadCity,
+      loadAdress: copiedOrderData.orderLoadAdress,
+      unloadDate: copiedOrderData.orderUnloadDate,
+      unloadHrs: copiedOrderData.orderUnloadHrs,
+      unloadCountry: copiedOrderData.orderUnloadCountry,
+      unloadZip: copiedOrderData.orderUnloadZip,
+      unloadCity: copiedOrderData.orderUnloadCity,
+      unloadAdress: copiedOrderData.orderUnloadAdress,
+      goodsSpecification: copiedOrderData.orderGoodsSpecyfications,
+      driver: copiedOrderData.orderDriver,
+      truck: copiedOrderData.orderTruck,
+      fix: [`${copiedOrderData.orderFix}`],
+      adr: [`${copiedOrderData.orderAdr}`],
+      info: copiedOrderData.orderInfo,
+    });
+
+    setConditions({
+      clientPrice: copiedOrderData.orderClientPrice,
+      clientCurr: copiedOrderData.orderClientCurr,
+      clientTerms: copiedOrderData.orderClientTerms,
+      carrierPrice: copiedOrderData.orderCarrierPrice,
+      carrierCurr: copiedOrderData.orderCarrierCurr,
+      carrierTerms: copiedOrderData.orderCarrierTerms,
+    });
+  };
+  // effect for set copied data
+  useEffect(() => {
+    setUpCopiedOrderData();
+  }, [copiedOrderData]);
 
   // effect for viev client or carrier
   useEffect(() => {
@@ -169,10 +223,12 @@ const AddOrder = () => {
     setOrderObject(false);
     setConditions(false);
   };
+
+  // post all data order to backand
   const handleSaveOrder = async () => {
     setShowSpinner(true);
-    const orderObject = orderFullObject();
-    const { data, status } = await request.post("/orders", orderObject);
+    const postOrderObject = orderFullObject();
+    const { data, status } = await request.post("/orders", postOrderObject);
 
     if (status === 201) {
       setTaskInformation("Dodano zlecenie");
@@ -198,6 +254,7 @@ const AddOrder = () => {
       <p>{vievClient[0].vatNo}</p>
     </div>
   );
+
   const carriertInformationViev = !vievCarrier ? (
     ""
   ) : (
@@ -231,7 +288,7 @@ const AddOrder = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h2>Dodawanie zlecenia</h2>
+      <h2>{!copiedOrderData ? "Dodawanie zlecenia" : "Kopiowanie zlecenia"}</h2>
       <div className={styles.client}>
         <div className={styles.dataInfo}>
           <p>Klient:</p>
@@ -281,14 +338,19 @@ const AddOrder = () => {
           <tr>
             <th>Fracht</th>
             <td>
-              {conditions.clientPrice} <span>{conditions.clientCurr}</span>
+              {conditions.clientPrice}
+
+              <span>{conditions.clientCurr}</span>
             </td>
+
             <td>
-              {conditions.carrierPrice} <span>{conditions.carrierCurr}</span>
+              {conditions.carrierPrice}
+              <span>{conditions.carrierCurr}</span>
             </td>
           </tr>
           <tr>
             <th>Termin</th>
+
             <td>{conditions.clientTerms} dni</td>
             <td>{conditions.carrierTerms} dni</td>
           </tr>
@@ -317,6 +379,7 @@ const AddOrder = () => {
         isModalOpen={addOrderModalOpen}
         handleOnClose={handleCloseModal}
         setOrderObject={setOrderObject}
+        orderObject={orderObject}
       />
       <AddConditionsForm
         isModalOpen={addConditionsModalOpen}

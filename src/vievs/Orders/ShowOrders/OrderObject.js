@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import MainButton from "../../../components/Buttons/MainButton/MainButton";
-import SmallButton from "../../../components/Buttons/SmallButton/SmallButton";
 import DeleteConfirmation from "../../../components/DeleteConfirmation/DeleteConfirrmation";
 
 import request from "../../../helpers/request";
@@ -13,9 +12,12 @@ import styles from "./OrderObject.module.scss";
 const OrderObject = ({ order, setTaskInformation }) => {
   let history = useHistory();
 
-  const { ordersData, setOrdersData, setPrintOrderData } = useContext(
-    StoreContext
-  );
+  const {
+    ordersData,
+    setOrdersData,
+    setPrintOrderData,
+    setCopiedOrderData,
+  } = useContext(StoreContext);
 
   const [showDetails, setShowDetails] = useState(false);
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
@@ -28,24 +30,24 @@ const OrderObject = ({ order, setTaskInformation }) => {
     clientName,
     clientVatNo,
     _id,
-    orderDriver,
-    orderFix,
-    orderAdr,
-    orderGoodsSpecyfications,
+    orderNumber,
     orderLoadDate,
     orderLoadHrs,
     orderLoadCountry,
     orderLoadZip,
     orderLoadCity,
     orderLoadAdress,
-    orderNumber,
-    orderTruck,
-    orderUnloadAdress,
+    orderUnloadDate,
+    orderUnloadHrs,
     orderUnloadCountry,
     orderUnloadZip,
     orderUnloadCity,
-    orderUnloadDate,
-    orderUnloadHrs,
+    orderUnloadAdress,
+    orderGoodsSpecyfications,
+    orderDriver,
+    orderTruck,
+    orderFix,
+    orderAdr,
     orderInfo,
     orderClientPrice,
     orderClientCurr,
@@ -166,6 +168,12 @@ const OrderObject = ({ order, setTaskInformation }) => {
     setPrintOrderData(order);
   };
 
+  // Copy order
+  const handleOnCopy = () => {
+    setCopiedOrderData(order);
+    history.push("/addorder");
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.item}>
@@ -175,7 +183,6 @@ const OrderObject = ({ order, setTaskInformation }) => {
       <div className={styles.originData}>
         <div className={styles.item}>
           <p>Klient:</p>
-          <SmallButton name="edytuj" />
         </div>
 
         <div className={styles.item}>
@@ -183,7 +190,6 @@ const OrderObject = ({ order, setTaskInformation }) => {
         </div>
         <div className={styles.item}>
           <p>Przewoźnik:</p>
-          <SmallButton name="edytuj" />
         </div>
 
         <div className={styles.item}>
@@ -193,7 +199,6 @@ const OrderObject = ({ order, setTaskInformation }) => {
       <div className={styles.orderData}>
         <div className={styles.item}>
           <h3>dane zlecenia</h3>
-          <SmallButton name="edytuj" />
         </div>
         <div className={styles.item}>
           <h3>Trasa:</h3>
@@ -205,10 +210,10 @@ const OrderObject = ({ order, setTaskInformation }) => {
       </div>
       <div className={styles.buttons}>
         {showDetailsButton}
-        <MainButton
-          name="drukuj zlecenie dla przewoźnika"
-          onClick={handleOnPrint}
-        />
+        <MainButton name="drukuj" onClick={handleOnPrint} />
+        <MainButton name="edytuj" />
+        <MainButton name="kopiuj" onClick={handleOnCopy} />
+
         {deleteButton}
       </div>
       <DeleteConfirmation
