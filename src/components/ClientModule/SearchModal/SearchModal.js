@@ -12,10 +12,12 @@ const SearchModal = (props) => {
   const { setSerchedClient } = useContext(StoreContext);
 
   const [vatNo, setVatNo] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [validateMessage, setValidateMessage] = useState("");
   const [showSpinner, setShowSpinner] = useState(false);
 
   const handleOnChangeVat = (event) => setVatNo(event.target.value);
+  const handleOnChangeName = (event) => setCompanyName(event.target.value);
 
   const handleOnCloseModal = (event) => {
     event.preventDefault();
@@ -24,19 +26,20 @@ const SearchModal = (props) => {
 
   const resetStateOfInput = () => {
     setVatNo("");
+    setCompanyName("");
     setValidateMessage("");
   };
 
   const spinner = showSpinner ? <Spinner /> : "";
 
-  const handleOnSubmit = async (event) => {
+  // get client by vat
+  const handleOnSubmitByVat = async (event) => {
     event.preventDefault();
     setShowSpinner(true);
     const { data, status } = await request.get(`/clients/${vatNo}`);
 
     if (status === 200) {
       setSerchedClient(data.client);
-      console.log(data.client);
       resetStateOfInput();
       props.handleCloseModal();
       setShowSpinner(false);
@@ -45,7 +48,22 @@ const SearchModal = (props) => {
       setShowSpinner(false);
     }
   };
+  // get client by name
+  const handleOnSubmitByName = async (event) => {
+    event.preventDefault();
+    setShowSpinner(true);
+    const { data, status } = await request.get(`/clients/name/${companyName}`);
 
+    if (status === 200) {
+      setSerchedClient(data.client);
+      resetStateOfInput();
+      props.handleCloseModal();
+      setShowSpinner(false);
+    } else {
+      setValidateMessage(data.message);
+      setShowSpinner(false);
+    }
+  };
   useEffect(() => {
     if (props.isModalOpen) {
       resetStateOfInput();
@@ -63,14 +81,35 @@ const SearchModal = (props) => {
     >
       <div className={styles.wrapper}>
         <div className={styles.infromation}>{validateMessageComponent}</div>
-        <form className={styles.form} method="get" onSubmit={handleOnSubmit}>
+        <form
+          className={styles.form}
+          method="get"
+          onSubmit={handleOnSubmitByVat}
+        >
           <div className={styles.search}>
             <input
               onChange={handleOnChangeVat}
               type="text"
               value={vatNo}
               placeholder="podaj nip klienta"
-              required={true}
+            />
+          </div>
+
+          <div className={styles.buttons}>
+            <MainButton type="submit" name="wyszukaj" />
+          </div>
+        </form>
+        <form
+          className={styles.form}
+          method="get"
+          onSubmit={handleOnSubmitByName}
+        >
+          <div className={styles.search}>
+            <input
+              onChange={handleOnChangeName}
+              type="text"
+              value={companyName}
+              placeholder="podaj nazwę klienta"
             />
           </div>
 
