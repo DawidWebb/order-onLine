@@ -13,7 +13,7 @@ const OrderObject = ({ order, setTaskInformation }) => {
   let history = useHistory();
 
   const {
-    ordersData,
+    setKindOfTask,
     setOrdersData,
     setPrintOrderData,
     setCopiedOrderData,
@@ -171,6 +171,14 @@ const OrderObject = ({ order, setTaskInformation }) => {
   // Copy order
   const handleOnCopy = () => {
     setCopiedOrderData(order);
+    setKindOfTask("copy");
+    history.push("/addorder");
+  };
+
+  // Edit order
+  const handleOnEdit = () => {
+    setCopiedOrderData(order);
+    setKindOfTask("edit");
     history.push("/addorder");
   };
 
@@ -211,7 +219,7 @@ const OrderObject = ({ order, setTaskInformation }) => {
       <div className={styles.buttons}>
         {showDetailsButton}
         <MainButton name="drukuj" onClick={handleOnPrint} />
-        <MainButton name="edytuj" />
+        <MainButton name="edytuj" onClick={handleOnEdit} />
         <MainButton name="kopiuj" onClick={handleOnCopy} />
 
         {deleteButton}

@@ -3,7 +3,7 @@
 @mixin sectionWrapper {
   position: relative;
   width: 90vw;
-  margin: 100px auto 0;
+  margin: $header-height auto 0;
   @media screen and (min-width: map-get($breakpoints, medium)) {
     margin: 100px auto 0;
   }

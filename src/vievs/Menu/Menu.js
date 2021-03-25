@@ -16,7 +16,7 @@ const links = [
 ];
 
 const Menu = () => {
-  const { setCopiedOrderData } = useContext(StoreContext);
+  const { setCopiedOrderData, setKindOfTask } = useContext(StoreContext);
 
   const openCloseMenuRef = useRef(null);
   const handleOpenMenu = () => {
@@ -26,6 +26,7 @@ const Menu = () => {
   const handleCloseMenu = () => {
     openCloseMenuRef.current.style.top = "-125px";
     setCopiedOrderData();
+    setKindOfTask(false);
   };
 
   const linkItem = links.map((item) => (

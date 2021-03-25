@@ -57,6 +57,9 @@ const StoreProvider = ({ children }) => {
   // data for OrderPrintViev
   const [printOrderData, setPrintOrderData] = useState(false);
 
+  // swich betwwen copy and edit tasks
+  const [kindOfTask, setKindOfTask] = useState(false);
+
   return (
     <StoreContext.Provider
       value={{
@@ -82,6 +85,8 @@ const StoreProvider = ({ children }) => {
         setPrintOrderData,
         copiedOrderData,
         setCopiedOrderData,
+        kindOfTask,
+        setKindOfTask,
       }}
     >
       {children}

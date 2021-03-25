@@ -16,8 +16,6 @@ const AddOrderForm = (props) => {
     props.handleOnClose();
   };
 
-  console.log(props.orderObject);
-
   return (
     <Modal
       handleOnCloseModal={props.handleOnClose}

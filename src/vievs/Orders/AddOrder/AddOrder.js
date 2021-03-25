@@ -25,6 +25,8 @@ const AddOrder = () => {
     orderNumber,
     setOrderNumber,
     copiedOrderData,
+    kindOfTask,
+    setKindOfTask,
   } = useContext(StoreContext);
 
   // state for Modals
@@ -115,6 +117,7 @@ const AddOrder = () => {
     const timeout = setTimeout(() => {
       if (taskInformation) {
         setTaskInformation(false);
+        history.push("./showorders");
       }
     }, 2000);
     return () => clearInterval(timeout);
@@ -178,8 +181,18 @@ const AddOrder = () => {
 
   const orderFullObject = () => {
     const orderNo = createOrderNumber();
+    let thisOrderNumber;
+    const switchOrderNumber = () => {
+      if (!kindOfTask || kindOfTask === "copy") {
+        thisOrderNumber = orderNo;
+      } else if (kindOfTask === "edit") {
+        thisOrderNumber = copiedOrderData._id;
+      }
+    };
+    switchOrderNumber();
+
     return {
-      orderNumber: orderNo,
+      orderNumber: thisOrderNumber,
       //client data
       clientName: vievClient[0].companyName,
       clientAdress: vievClient[0].companyAdress,
@@ -226,6 +239,7 @@ const AddOrder = () => {
 
   // post all data order to backand
   const handleSaveOrder = async () => {
+    setKindOfTask(false);
     setShowSpinner(true);
     const postOrderObject = orderFullObject();
     const { data, status } = await request.post("/orders", postOrderObject);
@@ -233,14 +247,25 @@ const AddOrder = () => {
     if (status === 201) {
       setTaskInformation("Dodano zlecenie");
       setShowSpinner(false);
-      setOrdersData((prev) => [data.data, ...prev]);
-
-      if (taskInformation === false) {
-        history.push("./showorders");
-      }
+      setOrdersData([data.data]);
     } else if (status === 409) {
-    } else {
       console.log(data.message);
+    }
+  };
+
+  //edit selected order
+  const handleOnEditOrder = async () => {
+    setShowSpinner(true);
+    const editOrderObject = orderFullObject();
+    const { data, status } = await request.put("/orders", editOrderObject);
+
+    if (status === 202) {
+      setTaskInformation("Dane zlecenia zmodyfikowane");
+      setShowSpinner(false);
+      setOrdersData([data.data]);
+    } else {
+      setShowSpinner(false);
+      console.log(data.message, status);
     }
   };
 
@@ -267,15 +292,22 @@ const AddOrder = () => {
 
   const loadData = `${orderObject.loadCity} - ${orderObject.unloadCity}`;
 
-  const operationButtons =
-    !vievClient || !vievCarrier || !orderObject || !conditions ? (
-      ""
-    ) : (
-      <>
-        <SelectButton name="Wyczyść" onClick={handleClearOrder} />
-        <SelectButton name="Zapisz" onClick={handleSaveOrder} />
-      </>
-    );
+  const operationButtons = () => {
+    if (!vievClient || !vievCarrier || !orderObject || !conditions) {
+      return "";
+    } else if (kindOfTask === "edit") {
+      return (
+        <SelectButton name="Zmien dane zlecenia" onClick={handleOnEditOrder} />
+      );
+    } else if (!vievClient || vievCarrier || orderObject || conditions) {
+      return (
+        <>
+          <SelectButton name="Wyczyść" onClick={handleClearOrder} />
+          <SelectButton name="Zapisz" onClick={handleSaveOrder} />
+        </>
+      );
+    }
+  };
 
   const addOrChangeNameButton = !orderObject ? "dodaj" : "zmień";
 
@@ -286,9 +318,19 @@ const AddOrder = () => {
     setAddConditionsModalOpen(true);
   };
 
+  const titleOfPage = () => {
+    if (!kindOfTask) {
+      return "Dodawanie zlecenia";
+    } else if (kindOfTask === "edit") {
+      return "Edycja zlecenia ";
+    } else if (kindOfTask === "copy") {
+      return "Kopiowanie zlecenia";
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
-      <h2>{!copiedOrderData ? "Dodawanie zlecenia" : "Kopiowanie zlecenia"}</h2>
+      <h2>{titleOfPage()}</h2>
       <div className={styles.client}>
         <div className={styles.dataInfo}>
           <p>Klient:</p>
@@ -387,7 +429,7 @@ const AddOrder = () => {
         setConditions={setConditions}
       />
       <div className={styles.operationButtons}>
-        {operationButtons}
+        {operationButtons()}
         <BackButton />
       </div>
 

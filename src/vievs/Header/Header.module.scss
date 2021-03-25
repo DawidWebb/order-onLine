@@ -23,21 +23,28 @@
 
   .buttons {
     flex-basis: 40%;
-    height: 90px;
+    height: 100px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     .loginAppBtn,
     .testAppBtn,
     .menuItem {
       flex-basis: 10%;
     }
+    .loginAppBtn {
+      margin-bottom: 10px;
+    }
   }
   @media screen and (min-width: map-get($breakpoints, medium)) {
     height: 70px;
     .buttons {
       flex-direction: row;
+      justify-content: space-between;
+      .loginAppBtn {
+        margin-bottom: 0;
+      }
     }
   }
 }

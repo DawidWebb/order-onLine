@@ -20,6 +20,28 @@
       width: 160px;
       margin-bottom: 10px;
     }
+    form {
+      display: flex;
+      ::placeholder {
+        color: lighten($text-second-color, 50);
+        text-align: center;
+      }
+      input {
+        height: 30px;
+        border: 1px solid $fifth-color;
+        border-radius: 5px;
+        background-color: $second-color;
+        color: $text-second-color;
+        font-weight: 700;
+      }
+      button {
+        width: 30px;
+        height: 30px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+    }
   }
   .ordersList {
     // background-color: blanchedalmond;
