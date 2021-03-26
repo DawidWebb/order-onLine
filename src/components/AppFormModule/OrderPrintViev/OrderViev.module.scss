@@ -1,12 +1,12 @@
 @import "../../../Root/common.scss";
-div {
+.mainWrapper {
   position: relative;
-
+  margin-bottom: 40px;
   .wrapper {
     display: flex;
     flex-direction: column;
     width: 90vw;
-    margin: 110px auto 20px auto;
+    margin: 120px auto 40px auto;
     padding: 20px;
     background-color: white;
 

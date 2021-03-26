@@ -12,10 +12,43 @@ const AddOrderForm = (props) => {
   const { copiedOrderData } = useContext(StoreContext);
 
   const onSubmit = async (values) => {
-    props.setOrderObject(values);
+    const newOrderObject = {
+      loadDate: values.loadDate,
+      loadHrs: values.loadHrs,
+      loadCountry: !values.loadCountry
+        ? props.orderObject.loadCountry
+        : values.loadCountry,
+      loadZip: !values.loadZip ? props.orderObject.loadZip : values.loadZip,
+      loadCity: !values.loadCity ? props.orderObject.loadCity : values.loadCity,
+      loadAdress: !values.loadAdress
+        ? props.orderObject.loadAdress
+        : values.loadAdress,
+      unloadDate: values.unloadDate,
+      unloadHrs: values.unloadHrs,
+      unloadCountry: !values.unloadCountry
+        ? props.orderObject.unloadCountry
+        : values.unloadCountry,
+      unloadZip: !values.unloadZip
+        ? props.orderObject.unloadZip
+        : values.unloadZip,
+      unloadCity: !values.unloadCity
+        ? props.orderObject.unloadCity
+        : values.unloadCity,
+      unloadAdress: !values.unloadAdress
+        ? props.orderObject.unloadAdress
+        : values.unloadAdress,
+      goodsSpecyfications: !values.goodsSpecification
+        ? props.orderObject.goodsSpecification
+        : values.goodsSpecification,
+      driver: !values.driver ? props.orderObject.driver : values.driver,
+      truck: !values.truck ? props.orderObject.truck : values.truck,
+      adr: !values.adr ? "" : values.adr[0],
+      fix: !values.fix ? "" : values.fix[0],
+      info: values.info,
+    };
+    props.setOrderObject(newOrderObject);
     props.handleOnClose();
   };
-
   return (
     <Modal
       handleOnCloseModal={props.handleOnClose}
@@ -41,13 +74,7 @@ const AddOrderForm = (props) => {
                 <div>
                   <label>kraj</label>
                   <Field name="loadCountry" component="select">
-                    <option
-                      value={
-                        !copiedOrderData ? "" : props.orderObject.loadCountry
-                      }
-                    >
-                      {!copiedOrderData ? "" : props.orderObject.loadCountry}
-                    </option>
+                    <option>{props.orderObject.loadCountry}</option>
                     <option value="AT">AT</option>
                     <option value="BE">BE</option>
                     <option value="CH">CH</option>
@@ -70,12 +97,11 @@ const AddOrderForm = (props) => {
                     name="loadZip"
                     type="text"
                     placeholder={
-                      !copiedOrderData
+                      !props.orderObject.loadZip
                         ? "kod pocztowy"
                         : props.orderObject.loadZip
                     }
                     component="input"
-                    value={!copiedOrderData ? "" : props.orderObject.loadZip}
                   />
                 </div>
                 <div>
@@ -83,19 +109,21 @@ const AddOrderForm = (props) => {
                     name="loadCity"
                     type="text"
                     placeholder={
-                      !copiedOrderData ? "miasto" : props.orderObject.loadCity
+                      !props.orderObject.loadCity
+                        ? "miasto"
+                        : props.orderObject.loadCity
                     }
                     component="input"
-                    value={!copiedOrderData ? "" : props.orderObject.loadCity}
                   />
                   <Field
                     name="loadAdress"
                     type="text"
                     placeholder={
-                      !copiedOrderData ? "adres" : props.orderObject.loadAdress
+                      !props.orderObject.loadAdress
+                        ? "adres"
+                        : props.orderObject.loadAdress
                     }
                     component="input"
-                    value={!copiedOrderData ? "" : props.orderObject.loadAdress}
                   />
                 </div>
               </div>
@@ -114,13 +142,7 @@ const AddOrderForm = (props) => {
                 <div>
                   <label>kraj</label>
                   <Field name="unloadCountry" component="select">
-                    <option
-                      value={
-                        !copiedOrderData ? "" : props.orderObject.unloadCountry
-                      }
-                    >
-                      {!copiedOrderData ? "" : props.orderObject.unloadCountry}
-                    </option>
+                    <option>{props.orderObject.unloadCountry}</option>
                     <option value="AT">AT</option>
                     <option value="BE">BE</option>
                     <option value="CH">CH</option>
@@ -143,12 +165,11 @@ const AddOrderForm = (props) => {
                     name="unloadZip"
                     type="text"
                     placeholder={
-                      !copiedOrderData
+                      !props.orderObject.unloadZip
                         ? "kod pocztowy"
                         : props.orderObject.unloadZip
                     }
                     component="input"
-                    value={!copiedOrderData ? "" : props.orderObject.unloadZip}
                   />
                 </div>
                 <div>
@@ -156,23 +177,21 @@ const AddOrderForm = (props) => {
                     name="unloadCity"
                     type="text"
                     placeholder={
-                      !copiedOrderData ? "miasto" : props.orderObject.unloadCity
+                      !props.orderObject.unloadCity
+                        ? "miasto"
+                        : props.orderObject.unloadCity
                     }
                     component="input"
-                    value={!copiedOrderData ? "" : props.orderObject.unloadCity}
                   />
                   <Field
                     name="unloadAdress"
                     type="text"
                     placeholder={
-                      !copiedOrderData
+                      !props.orderObject.unloadAdress
                         ? "adres"
                         : props.orderObject.unloadAdress
                     }
                     component="input"
-                    value={
-                      !copiedOrderData ? "" : props.orderObject.unloadAdress
-                    }
                   />
                 </div>
               </div>
@@ -183,16 +202,11 @@ const AddOrderForm = (props) => {
                     name="goodsSpecification"
                     type="text"
                     placeholder={
-                      !copiedOrderData
+                      !props.orderObject.goodsSpecification
                         ? "Spacyfikacja ładunku"
                         : props.orderObject.goodsSpecification
                     }
                     component="textarea"
-                    value={
-                      !copiedOrderData
-                        ? ""
-                        : props.orderObject.goodsSpecification
-                    }
                   />
                 </div>
                 <div>
@@ -200,20 +214,22 @@ const AddOrderForm = (props) => {
                     name="driver"
                     type="text"
                     placeholder={
-                      !copiedOrderData ? "kierowca" : props.orderObject.driver
+                      !props.orderObject.driver
+                        ? "kierowca"
+                        : props.orderObject.driver
                     }
                     component="input"
-                    value={!copiedOrderData ? "" : props.orderObject.driver}
                   />
 
                   <Field
                     name="truck"
                     type="text"
                     placeholder={
-                      !copiedOrderData ? "pojazd" : props.orderObject.truck
+                      !props.orderObject.truck
+                        ? "pojazd"
+                        : props.orderObject.truck
                     }
                     component="input"
-                    value={!copiedOrderData ? "" : props.orderObject.truck}
                   />
                 </div>
                 <div>
@@ -237,10 +253,7 @@ const AddOrderForm = (props) => {
                   <Field
                     name="notes"
                     component="textarea"
-                    placeholder={
-                      !copiedOrderData ? "uwagi..." : props.orderObject.truck
-                    }
-                    value={!copiedOrderData ? "" : props.orderObject.truck}
+                    placeholder={"uwagi..."}
                   />
                 </div>
               </div>

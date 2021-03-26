@@ -163,7 +163,7 @@ const OrderPrintViev = () => {
     </div>
   );
   return (
-    <div>
+    <div className={styles.mainWrapper}>
       {OrderInformation}
       <div className={styles.buttons}>
         <ReactToPrint
