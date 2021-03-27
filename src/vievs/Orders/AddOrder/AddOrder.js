@@ -22,11 +22,11 @@ const AddOrder = () => {
   const {
     serchedClient,
     setOrdersData,
-    orderNumber,
-    setOrderNumber,
     copiedOrderData,
     kindOfTask,
     setKindOfTask,
+    currentOrderNumber,
+    setNewOdredNumber,
   } = useContext(StoreContext);
 
   // state for Modals
@@ -156,8 +156,26 @@ const AddOrder = () => {
   };
 
   //handlers and helpers for viev clear and save order data
+
+  const putNewOrderNumber = async (number) => {
+    const objectNumber = {
+      orderNo: number,
+      id: currentOrderNumber._id,
+    };
+
+    const { data, status } = await request.put("/ordernumber", objectNumber);
+    if (status === 202) {
+      setNewOdredNumber(number);
+      console.log(data);
+    } else {
+      console.log(status, data.messages);
+    }
+  };
+
   const createOrderNumber = () => {
-    setOrderNumber(orderNumber + 1);
+    const number = currentOrderNumber.orderNo + 1;
+    putNewOrderNumber(number);
+
     const months = [
       "styczeń",
       "luty",
@@ -176,23 +194,23 @@ const AddOrder = () => {
     const year = date.getFullYear();
     const monthNo = date.getMonth();
     const month = months[monthNo];
-    return `${orderNumber}/${month}/${year}`;
+    const orderNumber = `${number}/${month}/${year}`;
+    return orderNumber;
   };
 
   const orderFullObject = () => {
-    const orderNo = createOrderNumber();
-    let thisOrderNumber;
+    let newOrderNumber;
     const switchOrderNumber = () => {
       if (!kindOfTask || kindOfTask === "copy") {
-        thisOrderNumber = orderNo;
+        newOrderNumber = createOrderNumber();
       } else if (kindOfTask === "edit") {
-        thisOrderNumber = copiedOrderData._id;
+        newOrderNumber = copiedOrderData._id;
       }
+      return newOrderNumber;
     };
-    switchOrderNumber();
 
     return {
-      orderNumber: thisOrderNumber,
+      orderNumber: switchOrderNumber(),
       //client data
       clientName: vievClient[0].companyName,
       clientAdress: vievClient[0].companyAdress,
@@ -239,6 +257,7 @@ const AddOrder = () => {
 
   // post all data order to backand
   const handleSaveOrder = async () => {
+    console.log(orderFullObject());
     setKindOfTask(false);
     setShowSpinner(true);
     const postOrderObject = orderFullObject();

@@ -4,21 +4,6 @@ import request from "../helpers/request";
 export const StoreContext = createContext(null);
 
 const StoreProvider = ({ children }) => {
-  // order Number
-  const [orderNumber, setOrderNumber] = useState();
-  const OrderNo = async () => {
-    const { data, status } = await request.get("/orders");
-
-    if (status === 200) {
-      setOrderNumber(data.data.length);
-    } else {
-      console.log(data.message);
-    }
-  };
-  useEffect(() => {
-    OrderNo();
-  }, []);
-
   // login Modal viev
   const [loginModalOpen, setLoginModalOpen] = useState(false);
 
@@ -35,6 +20,23 @@ const StoreProvider = ({ children }) => {
   useEffect(() => {
     checkCookie();
   }, []);
+
+  // manage order number
+  const [currentOrderNumber, setCurentOrderNumber] = useState();
+  const [newOrderNumber, setNewOdredNumber] = useState();
+
+  const getCurrentOrderNumber = async () => {
+    const { data, status } = await request.get("/ordernumber");
+    if (status === 200) {
+      setCurentOrderNumber(data.data[0]);
+    } else {
+      console.log(status, data.message);
+    }
+  };
+
+  useEffect(() => {
+    getCurrentOrderNumber();
+  }, [newOrderNumber]);
 
   // AddClientModal viev
   const [addClientModalOpen, setAddClientModalOpen] = useState(null);
@@ -79,14 +81,16 @@ const StoreProvider = ({ children }) => {
         setSerchedClient,
         ordersData,
         setOrdersData,
-        orderNumber,
-        setOrderNumber,
         printOrderData,
         setPrintOrderData,
         copiedOrderData,
         setCopiedOrderData,
         kindOfTask,
         setKindOfTask,
+        currentOrderNumber,
+        setCurentOrderNumber,
+        newOrderNumber,
+        setNewOdredNumber,
       }}
     >
       {children}
