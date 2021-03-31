@@ -6,6 +6,7 @@ import MainSection from "../../vievs/MainSection/MainSection";
 import TestFormSection from "../../vievs/FormSection/TestFormSection";
 import Orders from "../../vievs/Orders/Orders";
 import AddOrder from "../../vievs/Orders/AddOrder/AddOrder";
+import AddTestOrder from "../../vievs/FormSection/AddTestOrder/AddTestOrder";
 import ShowOrders from "../../vievs/Orders/ShowOrders/ShowOrders";
 import Customers from "../../vievs/Customers/Customers";
 
@@ -22,11 +23,8 @@ const MainSwitch = () => {
         <Route exact path="/test-form" render={() => <TestFormSection />} />
         <Route exact path="/order-print" render={() => <OrderPrintViev />} />
 
-        {user || cookie ? (
-          <Route exact path="/orders" render={() => <Orders />} />
-        ) : (
-          ""
-        )}
+        <Route exact path="/orders" render={() => <Orders />} />
+
         {user || cookie ? (
           <Route exact path="/customers" render={() => <Customers />} />
         ) : (
@@ -35,14 +33,11 @@ const MainSwitch = () => {
         {user || cookie ? (
           <Route exact path="/addorder" render={() => <AddOrder />} />
         ) : (
-          ""
+          <Route exact path="/addorder" render={() => <AddTestOrder />} />
         )}
 
-        {user || cookie ? (
-          <Route exact path="/showorders" render={() => <ShowOrders />} />
-        ) : (
-          ""
-        )}
+        <Route exact path="/showorders" render={() => <ShowOrders />} />
+
         {/* <Route component={ErrorPage} /> */}
         <Redirect to="/" />
       </Switch>

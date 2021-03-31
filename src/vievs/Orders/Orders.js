@@ -9,7 +9,7 @@ import { StoreContext } from "../../Store/StoreProvider";
 import styles from "./Orders.module.scss";
 
 const Orders = () => {
-  const { setCopiedOrderData } = useContext(StoreContext);
+  const { setCopiedOrderData, user, cookie } = useContext(StoreContext);
 
   const handleResetOrder = () => {
     setCopiedOrderData();
@@ -21,10 +21,16 @@ const Orders = () => {
         <Link to="addorder">
           <SelectButton name="dodaj zlecenie" onClick={handleResetOrder} />
         </Link>
+        {user || cookie ? (
+          <Link to="showorders">
+            <SelectButton name="pokaż zlecenia" />
+          </Link>
+        ) : (
+          <SelectButton name="pokaż zlecenia" disabled />
+        )}
 
-        <Link to="showorders">
-          <SelectButton name="pokaż zlecenia" />
-        </Link>
+        <SelectButton name="parametry firmy" />
+
         <BackButton />
       </div>
     </div>

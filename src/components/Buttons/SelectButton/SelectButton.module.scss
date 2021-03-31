@@ -17,3 +17,10 @@
     font-size: $s-font-size;
   }
 }
+.buttonDisabled {
+  min-width: 100px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: $s-font-size/1.2;
+  @include buttonDisabled;
+}

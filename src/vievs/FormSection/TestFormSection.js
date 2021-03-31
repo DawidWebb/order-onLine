@@ -1,12 +1,18 @@
+import { Link } from "react-router-dom";
+
 import BackButton from "../../components/Buttons/BackButton/BackButton";
+import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 
 import styles from "./TestFormSection.module.scss";
 
 function TestFormSection() {
   return (
     <div className={styles.wrapper}>
-      <h2>In this place will be form</h2>
-      <div className={styles.backButton}>
+      <div className={styles.buttons}>
+        <Link to="/orders">
+          <SelectButton name="zlecenia" />
+        </Link>
+        <SelectButton name="klienci" disabled />
         <BackButton />
       </div>
     </div>

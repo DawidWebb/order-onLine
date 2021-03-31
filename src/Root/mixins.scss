@@ -23,6 +23,15 @@
   padding: 10px;
   z-index: 100;
 }
+
+@mixin buttonDisabled {
+  background-color: $basic-color;
+  color: $first-color;
+  &:hover {
+    background-color: $basic-color;
+    color: $first-color;
+  }
+}
 @mixin inputViev {
   height: 35px;
   width: 90%;

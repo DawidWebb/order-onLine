@@ -12,7 +12,13 @@ import styles from "./AddClientForm.module.scss";
 const required = (value) => (value ? undefined : "Pole wymagane");
 
 const AddClientForm = (props) => {
-  const { clientsData, setClientsData } = useContext(StoreContext);
+  const {
+    clientsData,
+    setClientsData,
+    user,
+    cookie,
+    setSerchedClient,
+  } = useContext(StoreContext);
 
   const [showSpinner, setShowSpinner] = useState(false);
   const [validateMessage, setValidateMessage] = useState("");
@@ -31,21 +37,31 @@ const AddClientForm = (props) => {
       vatNo: values.vatNo,
       eMail: values.eMail,
       info: values.info,
+      _id: 0,
     };
-    const { data, status } = await request.post("/clients", clientObject);
+    if (user || cookie) {
+      const { data, status } = await request.post("/clients", clientObject);
 
-    if (status === 201) {
+      if (status === 201) {
+        props.handleOnClose();
+        resetStateOfInput();
+        setClientsData((prev) => [...prev, data.data]);
+        setSerchedClient(data.data);
+        setShowSpinner(false);
+        props.setTaskInformation("Dodano klienta");
+      } else if (status === 409) {
+        setShowSpinner(false);
+        setValidateMessage(data.message);
+      } else {
+        setShowSpinner(false);
+        console.log(data.message);
+      }
+    } else {
+      // localStorage.setItem(`clientData`, JSON.stringify(clientObject));
+      setSerchedClient([clientObject]);
+      setShowSpinner(false);
       props.handleOnClose();
       resetStateOfInput();
-      setClientsData((prev) => [...prev, data.data]);
-      setShowSpinner(false);
-      props.setTaskInformation("Dodano klienta");
-    } else if (status === 409) {
-      setShowSpinner(false);
-      setValidateMessage(data.message);
-    } else {
-      setShowSpinner(false);
-      console.log(data.message);
     }
   };
 
@@ -53,7 +69,6 @@ const AddClientForm = (props) => {
     (values) => {
       if (props.isModalOpen) {
         resetStateOfInput();
-        console.log(values);
       }
     },
     [props.isModalOpen]

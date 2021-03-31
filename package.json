@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "bem-css-modules": "^1.4.2",
     "final-form": "^4.20.1",
+    "nip24client": "^1.2.6",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

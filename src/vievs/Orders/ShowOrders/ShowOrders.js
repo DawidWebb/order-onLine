@@ -13,7 +13,7 @@ import { StoreContext } from "../../../Store/StoreProvider";
 import styles from "./ShowOrders.module.scss";
 
 const ShowOrders = () => {
-  const { ordersData, setOrdersData } = useContext(StoreContext);
+  const { ordersData, setOrdersData, user, cookie } = useContext(StoreContext);
 
   const [taskInformation, setTaskInformation] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
@@ -66,16 +66,24 @@ const ShowOrders = () => {
   };
   const getAllOrdersButton =
     ordersData.length === 0 ? (
-      <SelectButton name="Lista zleceń" onClick={handleGetOrders} />
+      <SelectButton
+        name="Lista zleceń"
+        onClick={handleGetOrders}
+        disabled={!user || !cookie ? true : false}
+      />
     ) : (
-      <SelectButton name="odśwież listę" onClick={handleGetOrders} />
+      <SelectButton
+        name="odśwież listę"
+        onClick={handleGetOrders}
+        disabled={!user || !cookie ? true : false}
+      />
     );
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.selectButtons}>
         {getAllOrdersButton}
-        {}
+
         <Form
           onSubmit={handleSearchOrder}
           render={({ handleSubmit, form, submitting, pristine, values }) => (

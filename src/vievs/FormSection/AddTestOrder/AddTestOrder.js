@@ -14,19 +14,14 @@ import AddConditionsForm from "../../../components/AppFormModule/AddConditionsFo
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./AddOrder.module.scss";
+import styles from "./AddTestOrder.module.scss";
 
-const AddOrder = () => {
+const AddTestOrder = () => {
   let history = useHistory();
-  // global state
+  //global state
   const {
-    user,
-    cookie,
     serchedClient,
     setOrdersData,
-    copiedOrderData,
-    kindOfTask,
-    setKindOfTask,
     currentOrderNumber,
     setNewOdredNumber,
   } = useContext(StoreContext);
@@ -49,58 +44,60 @@ const AddOrder = () => {
   const [orderObject, setOrderObject] = useState(false);
   const [conditions, setConditions] = useState(false);
 
-  const setUpCopiedOrderData = () => {
-    if (!copiedOrderData) {
-      return;
-    }
-    setVievClient([
-      {
-        companyName: copiedOrderData.clientName,
-        companyAdress: copiedOrderData.clientAdress,
-        vatNo: copiedOrderData.clientVatNo,
-      },
-    ]);
-    setVievCarrier([
-      {
-        companyName: copiedOrderData.carrierName,
-        companyAdress: copiedOrderData.carrierAdress,
-        vatNo: copiedOrderData.carrierVatNo,
-      },
-    ]);
-    setOrderObject({
-      loadDate: copiedOrderData.orderLoadDate,
-      loadHrs: copiedOrderData.orderLoadHrs,
-      loadCountry: copiedOrderData.orderLoadCountry,
-      loadZip: copiedOrderData.orderLoadZip,
-      loadCity: copiedOrderData.orderLoadCity,
-      loadAdress: copiedOrderData.orderLoadAdress,
-      unloadDate: copiedOrderData.orderUnloadDate,
-      unloadHrs: copiedOrderData.orderUnloadHrs,
-      unloadCountry: copiedOrderData.orderUnloadCountry,
-      unloadZip: copiedOrderData.orderUnloadZip,
-      unloadCity: copiedOrderData.orderUnloadCity,
-      unloadAdress: copiedOrderData.orderUnloadAdress,
-      goodsSpecification: copiedOrderData.orderGoodsSpecyfications,
-      driver: copiedOrderData.orderDriver,
-      truck: copiedOrderData.orderTruck,
-      fix: [`${copiedOrderData.orderFix}`],
-      adr: [`${copiedOrderData.orderAdr}`],
-      info: copiedOrderData.orderInfo,
-    });
+  const spinner = showSpinner ? <Spinner /> : "";
 
-    setConditions({
-      clientPrice: copiedOrderData.orderClientPrice,
-      clientCurr: copiedOrderData.orderClientCurr,
-      clientTerms: copiedOrderData.orderClientTerms,
-      carrierPrice: copiedOrderData.orderCarrierPrice,
-      carrierCurr: copiedOrderData.orderCarrierCurr,
-      carrierTerms: copiedOrderData.orderCarrierTerms,
-    });
-  };
-  // effect for set copied data
-  useEffect(() => {
-    setUpCopiedOrderData();
-  }, [copiedOrderData]);
+  // const setUpCopiedOrderData = () => {
+  //   if (!copiedOrderData) {
+  //     return;
+  //   }
+  //   setVievClient([
+  //     {
+  //       companyName: copiedOrderData.clientName,
+  //       companyAdress: copiedOrderData.clientAdress,
+  //       vatNo: copiedOrderData.clientVatNo,
+  //     },
+  //   ]);
+  //   setVievCarrier([
+  //     {
+  //       companyName: copiedOrderData.carrierName,
+  //       companyAdress: copiedOrderData.carrierAdress,
+  //       vatNo: copiedOrderData.carrierVatNo,
+  //     },
+  //   ]);
+  //   setOrderObject({
+  //     loadDate: copiedOrderData.orderLoadDate,
+  //     loadHrs: copiedOrderData.orderLoadHrs,
+  //     loadCountry: copiedOrderData.orderLoadCountry,
+  //     loadZip: copiedOrderData.orderLoadZip,
+  //     loadCity: copiedOrderData.orderLoadCity,
+  //     loadAdress: copiedOrderData.orderLoadAdress,
+  //     unloadDate: copiedOrderData.orderUnloadDate,
+  //     unloadHrs: copiedOrderData.orderUnloadHrs,
+  //     unloadCountry: copiedOrderData.orderUnloadCountry,
+  //     unloadZip: copiedOrderData.orderUnloadZip,
+  //     unloadCity: copiedOrderData.orderUnloadCity,
+  //     unloadAdress: copiedOrderData.orderUnloadAdress,
+  //     goodsSpecification: copiedOrderData.orderGoodsSpecyfications,
+  //     driver: copiedOrderData.orderDriver,
+  //     truck: copiedOrderData.orderTruck,
+  //     fix: [`${copiedOrderData.orderFix}`],
+  //     adr: [`${copiedOrderData.orderAdr}`],
+  //     info: copiedOrderData.orderInfo,
+  //   });
+
+  //   setConditions({
+  //     clientPrice: copiedOrderData.orderClientPrice,
+  //     clientCurr: copiedOrderData.orderClientCurr,
+  //     clientTerms: copiedOrderData.orderClientTerms,
+  //     carrierPrice: copiedOrderData.orderCarrierPrice,
+  //     carrierCurr: copiedOrderData.orderCarrierCurr,
+  //     carrierTerms: copiedOrderData.orderCarrierTerms,
+  //   });
+  // };
+  // // effect for set copied data
+  // useEffect(() => {
+  //   setUpCopiedOrderData();
+  // }, [copiedOrderData]);
 
   // effect for viev client or carrier
   useEffect(() => {
@@ -114,7 +111,7 @@ const AddOrder = () => {
     }
   }, [serchedClient]);
 
-  // // effect for viev task information
+  // effect for viev task information
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (taskInformation) {
@@ -126,20 +123,21 @@ const AddOrder = () => {
   }, [taskInformation]);
 
   // handlers for open/close modals
-  const handleSearchClientModalOpen = () => {
-    setSearchModalOpen(true);
-    setSelectedClient(true);
-  };
+
+  // const handleSearchClientModalOpen = () => {
+  //   setSearchModalOpen(true);
+  //   setSelectedClient(true);
+  // };
 
   const handleAddClientModalOpen = () => {
     setAddModalOpen(true);
     setSelectedClient(true);
   };
 
-  const handleSearchCarrierModalOpen = () => {
-    setSearchModalOpen(true);
-    setSelectedCarrier(true);
-  };
+  // const handleSearchCarrierModalOpen = () => {
+  //   setSearchModalOpen(true);
+  //   setSelectedCarrier(true);
+  // };
 
   const handleAddCarrierModalOpen = () => {
     setAddModalOpen(true);
@@ -159,24 +157,8 @@ const AddOrder = () => {
 
   //handlers and helpers for viev clear and save order data
 
-  const putNewOrderNumber = async (number) => {
-    const objectNumber = {
-      orderNo: number,
-      id: currentOrderNumber._id,
-    };
-
-    const { data, status } = await request.put("/ordernumber", objectNumber);
-    if (status === 202) {
-      setNewOdredNumber(number);
-    } else {
-      console.log(status, data.messages);
-    }
-  };
-
   const createOrderNumber = () => {
-    const number = currentOrderNumber.orderNo + 1;
-    putNewOrderNumber(number);
-
+    const number = 1;
     const months = [
       "styczeń",
       "luty",
@@ -200,18 +182,9 @@ const AddOrder = () => {
   };
 
   const orderFullObject = () => {
-    let newOrderNumber;
-    const switchOrderNumber = () => {
-      if (!kindOfTask || kindOfTask === "copy") {
-        newOrderNumber = createOrderNumber();
-      } else if (kindOfTask === "edit") {
-        newOrderNumber = copiedOrderData._id;
-      }
-      return newOrderNumber;
-    };
-
     return {
-      orderNumber: switchOrderNumber(),
+      _id: createOrderNumber(),
+      orderNumber: createOrderNumber(),
       //client data
       clientName: vievClient[0].companyName,
       clientAdress: vievClient[0].companyAdress,
@@ -256,37 +229,31 @@ const AddOrder = () => {
     setConditions(false);
   };
 
-  // post all data order to backand
+  // post all data order to localStorage
   const handleSaveOrder = async () => {
-    setKindOfTask(false);
-    setShowSpinner(true);
-    const postOrderObject = orderFullObject();
-    const { data, status } = await request.post("/orders", postOrderObject);
+    setTaskInformation("Dodano zlecenie");
+    const orderData = orderFullObject();
 
-    if (status === 201) {
-      setTaskInformation("Dodano zlecenie");
-      setShowSpinner(false);
-      setOrdersData([data.data]);
-    } else if (status === 409) {
-      console.log(data.message);
-    }
+    setOrdersData([orderData]);
+    localStorage.setItem(`orderData`, JSON.stringify(orderData));
   };
 
   //edit selected order
-  const handleOnEditOrder = async () => {
-    setShowSpinner(true);
-    const editOrderObject = orderFullObject();
-    const { data, status } = await request.put("/orders", editOrderObject);
 
-    if (status === 202) {
-      setTaskInformation("Dane zlecenia zmodyfikowane");
-      setShowSpinner(false);
-      setOrdersData([data.data]);
-    } else {
-      setShowSpinner(false);
-      console.log(data.message, status);
-    }
-  };
+  // const handleOnEditOrder = async () => {
+  //   setShowSpinner(true);
+  //   const editOrderObject = orderFullObject();
+  //   const { data, status } = await request.put("/orders", editOrderObject);
+
+  //   if (status === 202) {
+  //     setTaskInformation("Dane zlecenia zmodyfikowane");
+  //     setShowSpinner(false);
+  //     setOrdersData([data.data]);
+  //   } else {
+  //     setShowSpinner(false);
+  //     console.log(data.message, status);
+  //   }
+  // };
 
   // constans for data and button viev
   const clientInformationViev = !vievClient ? (
@@ -314,10 +281,6 @@ const AddOrder = () => {
   const operationButtons = () => {
     if (!vievClient || !vievCarrier || !orderObject || !conditions) {
       return "";
-    } else if (kindOfTask === "edit") {
-      return (
-        <SelectButton name="Zmien dane zlecenia" onClick={handleOnEditOrder} />
-      );
     } else if (!vievClient || vievCarrier || orderObject || conditions) {
       return (
         <>
@@ -330,37 +293,25 @@ const AddOrder = () => {
 
   const addOrChangeNameButton = !orderObject ? "dodaj" : "zmień";
 
-  const spinner = showSpinner ? <Spinner /> : "";
-
   // set Conditions
   const handleAddConditionsModalOpen = () => {
     setAddConditionsModalOpen(true);
   };
 
-  const titleOfPage = () => {
-    if (!kindOfTask) {
-      return "Dodawanie zlecenia";
-    } else if (kindOfTask === "edit") {
-      return "Edycja zlecenia ";
-    } else if (kindOfTask === "copy") {
-      return "Kopiowanie zlecenia";
-    }
-  };
-
   return (
     <div className={styles.wrapper}>
-      <h2>{titleOfPage()}</h2>
+      <h2>Dodaj testowe zlecenie</h2>
       <div className={styles.client}>
         <div className={styles.dataInfo}>
           <p>Klient:</p>
           {clientInformationViev}
         </div>
         <div className={styles.buttons}>
+          <MainButton name={"pobierz"} disabled />
           <MainButton
-            name={!vievClient ? "pobierz" : "zmień"}
-            onClick={handleSearchClientModalOpen}
+            name={!vievClient ? "dodaj" : "zmień"}
+            onClick={handleAddClientModalOpen}
           />
-          <MainButton name="dodaj" onClick={handleAddClientModalOpen} />
         </div>
       </div>
       <div className={styles.carrier}>
@@ -369,11 +320,11 @@ const AddOrder = () => {
           {carriertInformationViev}
         </div>
         <div className={styles.buttons}>
+          <MainButton name={"pobierz"} disabled />
           <MainButton
-            name={!vievCarrier ? "pobierz" : "zmień"}
-            onClick={handleSearchCarrierModalOpen}
+            name={!vievCarrier ? "dodaj" : "zmień"}
+            onClick={handleAddCarrierModalOpen}
           />
-          <MainButton name="dodaj" onClick={handleAddCarrierModalOpen} />
         </div>
       </div>
       <div className={styles.order}>
@@ -386,7 +337,7 @@ const AddOrder = () => {
             name={`${addOrChangeNameButton}`}
             onClick={handleAddOrderModalOpen}
           />
-          <MainButton name="model" />
+          <MainButton name="model" disabled />
         </div>
       </div>
       <div className={styles.conditions}>
@@ -458,5 +409,4 @@ const AddOrder = () => {
     </div>
   );
 };
-
-export default AddOrder;
+export default AddTestOrder;

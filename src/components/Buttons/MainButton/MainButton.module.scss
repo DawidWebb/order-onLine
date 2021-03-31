@@ -14,3 +14,10 @@
     background-color: $third-color;
   }
 }
+.buttonDisabled {
+  min-width: 80px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: $s-font-size/1.2;
+  @include buttonDisabled;
+}

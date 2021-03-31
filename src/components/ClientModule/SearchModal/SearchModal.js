@@ -4,12 +4,14 @@ import MainButton from "../../Buttons/MainButton/MainButton";
 import Spinner from "../../Spinner/Spinner";
 
 import request from "../../../helpers/request";
+import { nip24, NIP24 } from "../../../helpers/nip24pl";
 import { StoreContext } from "../../../Store/StoreProvider";
 
 import styles from "./SearchModal.module.scss";
+import LoggedMenu from "../../../vievs/LoggedMenu/LoggedMenu";
 
 const SearchModal = (props) => {
-  const { setSerchedClient } = useContext(StoreContext);
+  const { setSerchedClient, user, cookie } = useContext(StoreContext);
 
   const [vatNo, setVatNo] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -36,15 +38,21 @@ const SearchModal = (props) => {
   const handleOnSubmitByVat = async (event) => {
     event.preventDefault();
     setShowSpinner(true);
-    const { data, status } = await request.get(`/clients/${vatNo}`);
+    if (user || cookie) {
+      const { data, status } = await request.get(`/clients/${vatNo}`);
 
-    if (status === 200) {
-      setSerchedClient(data.client);
-      resetStateOfInput();
-      props.handleCloseModal();
-      setShowSpinner(false);
+      if (status === 200) {
+        setSerchedClient(data.client);
+        console.log(data.client);
+        resetStateOfInput();
+        props.handleCloseModal();
+        setShowSpinner(false);
+      } else {
+        setValidateMessage(data.message);
+        setShowSpinner(false);
+      }
     } else {
-      setValidateMessage(data.message);
+      console.log("search by VAT");
       setShowSpinner(false);
     }
   };
@@ -52,15 +60,22 @@ const SearchModal = (props) => {
   const handleOnSubmitByName = async (event) => {
     event.preventDefault();
     setShowSpinner(true);
-    const { data, status } = await request.get(`/clients/name/${companyName}`);
+    if (user || cookie) {
+      const { data, status } = await request.get(
+        `/clients/name/${companyName}`
+      );
 
-    if (status === 200) {
-      setSerchedClient(data.client);
-      resetStateOfInput();
-      props.handleCloseModal();
-      setShowSpinner(false);
+      if (status === 200) {
+        setSerchedClient(data.client);
+        resetStateOfInput();
+        props.handleCloseModal();
+        setShowSpinner(false);
+      } else {
+        setValidateMessage(data.message);
+        setShowSpinner(false);
+      }
     } else {
-      setValidateMessage(data.message);
+      console.log("search by name");
       setShowSpinner(false);
     }
   };

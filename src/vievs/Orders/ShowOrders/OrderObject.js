@@ -17,6 +17,8 @@ const OrderObject = ({ order, setTaskInformation }) => {
     setOrdersData,
     setPrintOrderData,
     setCopiedOrderData,
+    user,
+    cookie,
   } = useContext(StoreContext);
 
   const [showDetails, setShowDetails] = useState(false);
@@ -219,8 +221,16 @@ const OrderObject = ({ order, setTaskInformation }) => {
       <div className={styles.buttons}>
         {showDetailsButton}
         <MainButton name="drukuj" onClick={handleOnPrint} />
-        <MainButton name="edytuj" onClick={handleOnEdit} />
-        <MainButton name="kopiuj" onClick={handleOnCopy} />
+        <MainButton
+          name="edytuj"
+          onClick={handleOnEdit}
+          disabled={!user || !cookie ? true : false}
+        />
+        <MainButton
+          name="kopiuj"
+          onClick={handleOnCopy}
+          disabled={!user || !cookie ? true : false}
+        />
 
         {deleteButton}
       </div>

@@ -4,7 +4,7 @@ function MainButton({ name, onClick, disabled, type }) {
   return (
     <button
       onClick={onClick}
-      className={styles.mainButton}
+      className={!disabled ? styles.mainButton : styles.buttonDisabled}
       disabled={disabled}
       type={type}
     >
