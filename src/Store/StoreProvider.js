@@ -29,6 +29,7 @@ const StoreProvider = ({ children }) => {
     const { data, status } = await request.get("/ordernumber");
     if (status === 200) {
       setCurentOrderNumber(data.data[0]);
+      console.log(data.data[0]);
     } else {
       console.log(status, data.message);
     }

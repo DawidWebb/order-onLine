@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteCoockie } from "../../helpers/session";
 
 import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 import LoginForm from "../LoginForm/LoginForm";
 import Menu from "../../vievs/Menu/Menu";
+import TestMenu from "../../vievs/TestMenu/TestMenu";
 
 import { StoreContext } from "../../Store/StoreProvider";
 
@@ -19,6 +20,30 @@ function Header() {
     cookie,
     setCookie,
   } = useContext(StoreContext);
+
+  const [testState, setTestState] = useState(false);
+
+  const handleChangeTestState = () => {
+    setTestState(true);
+  };
+
+  const testOrMenuButton = () => {
+    if (!cookie) {
+      if (!testState) {
+        return (
+          <Link to={"/test-form"}>
+            <SelectButton name={"testuj"} onClick={handleChangeTestState} />
+          </Link>
+        );
+      } else {
+        return <TestMenu />;
+      }
+    } else return "";
+  };
+
+  // useEffect(() => {
+  //   checkTestCookie();
+  // }, []);
 
   const buttonName = !user && !cookie ? "logowanie" : "wyloguj";
 
@@ -48,16 +73,9 @@ function Header() {
             handleCloseModal={handleCloseModal}
           />
         </div>
+        {testOrMenuButton()}
         <div className={styles.menuItems}>{menuItem}</div>
-        <div className={styles.testAppBtn}>
-          {!cookie ? (
-            <Link to={"/test-form"}>
-              <SelectButton name={"testuj"} />
-            </Link>
-          ) : (
-            ""
-          )}
-        </div>
+        <div className={styles.testAppBtn}></div>
       </div>
     </div>
   );

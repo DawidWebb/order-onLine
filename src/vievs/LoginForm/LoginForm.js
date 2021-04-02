@@ -50,6 +50,7 @@ const LoginForm = (props) => {
     } else {
       setValidateMessage(data.message);
       setShowSpinner(false);
+      console.log(data.message);
     }
   };
 
