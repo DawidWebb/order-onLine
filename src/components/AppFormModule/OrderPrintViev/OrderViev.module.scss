@@ -70,7 +70,9 @@
       justify-content: space-around;
 
       div {
+        flex-basis: 20%;
         display: flex;
+        justify-content: space-between;
       }
     }
     .companyData,
@@ -162,7 +164,9 @@
     padding-bottom: 10px;
     border-bottom: 1px solid black;
     div {
+      flex-basis: 40%;
       display: flex;
+      justify-content: space-between;
     }
   }
   .companyData {

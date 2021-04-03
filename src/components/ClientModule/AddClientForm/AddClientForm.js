@@ -18,6 +18,7 @@ const AddClientForm = (props) => {
     user,
     cookie,
     setSerchedClient,
+    setTaskInformation,
   } = useContext(StoreContext);
 
   const [showSpinner, setShowSpinner] = useState(false);
@@ -56,8 +57,12 @@ const AddClientForm = (props) => {
         setShowSpinner(false);
         console.log(data.message);
       }
+    } else if (props.thisIsCompanyProfile) {
+      localStorage.setItem(`companyData`, JSON.stringify(clientObject));
+      props.setTaskInformation("Dodano dane firmy");
+      setShowSpinner(false);
+      props.handleOnClose();
     } else {
-      // localStorage.setItem(`clientData`, JSON.stringify(clientObject));
       setSerchedClient([clientObject]);
       setShowSpinner(false);
       props.handleOnClose();

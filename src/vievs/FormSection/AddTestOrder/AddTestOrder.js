@@ -206,7 +206,7 @@ const AddTestOrder = () => {
       orderUnloadZip: orderObject.unloadZip,
       orderUnloadCity: orderObject.unloadCity,
       orderUnloadAdress: orderObject.unloadAdress,
-      orderGoodsSpecyfications: orderObject.goodsSpecification,
+      orderGoodsSpecyfications: orderObject.goodsSpecyfications,
       orderDriver: orderObject.driver,
       orderTruck: orderObject.truck,
       orderAdr: !orderObject.adr ? "" : orderObject.adr,
@@ -233,7 +233,6 @@ const AddTestOrder = () => {
   const handleSaveOrder = async () => {
     setTaskInformation("Dodano zlecenie");
     const orderData = orderFullObject();
-
     setOrdersData([orderData]);
     localStorage.setItem(`orderData`, JSON.stringify(orderData));
   };

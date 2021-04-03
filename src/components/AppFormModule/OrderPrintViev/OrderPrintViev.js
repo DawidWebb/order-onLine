@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useEffect, useState } from "react";
 import ReactToPrint from "react-to-print";
 
 import MainButton from "../../Buttons/MainButton/MainButton";
@@ -15,6 +15,19 @@ const OrderPrintViev = () => {
 
   const { printOrderData } = useContext(StoreContext);
 
+  const [companyDataFromLocal, setCompanyDataFromLocal] = useState(false);
+
+  const checkCompanyData = () => {
+    if (!localStorage.length) {
+      return;
+    } else if (localStorage.length) {
+      setCompanyDataFromLocal(JSON.parse(localStorage.getItem("companyData")));
+    }
+  };
+  useEffect(() => {
+    checkCompanyData();
+  }, []);
+
   const handlePrint = () => {
     var content = document.getElementById("wrapper");
     var pri = document.getElementById("ifmcontentstoprint").contentWindow;
@@ -25,9 +38,7 @@ const OrderPrintViev = () => {
     pri.print();
   };
 
-  const companyData = COMPANY_DATA.map((item) => (
-    <li key={item.index}>{item}</li>
-  ));
+  const companyData = COMPANY_DATA.map((item) => <li key={item.id}>{item}</li>);
 
   const { name, adress, vatNo } = OWNED_COMPANY;
 
@@ -55,9 +66,6 @@ const OrderPrintViev = () => {
     orderUnloadCity,
     orderUnloadDate,
     orderUnloadHrs,
-    orderClientPrice,
-    orderClientCurr,
-    orderClientTerms,
     orderCarrierPrice,
     orderCarrierCurr,
     orderCarrierTerms,
@@ -69,9 +77,15 @@ const OrderPrintViev = () => {
         <h2>Zlecenie transportowe nr: {orderNumber}</h2>
         <div className={styles.client}>
           <p>Zleceniodawca:</p>
-          <h3>{name}</h3>
-          <p>{adress}</p>
-          <p>{vatNo}</p>
+          <h3>
+            {!companyDataFromLocal ? name : companyDataFromLocal.companyName}
+          </h3>
+          <p>
+            {!companyDataFromLocal
+              ? adress
+              : companyDataFromLocal.companyAdress}
+          </p>
+          <p>{!companyDataFromLocal ? vatNo : companyDataFromLocal.vatNo}</p>
         </div>
         <div className={styles.carrier}>
           <p>Zleceniobiorca:</p>

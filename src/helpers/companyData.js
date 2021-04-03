@@ -6,12 +6,14 @@ export const COMPANY_DATA = [
   "Transport międzynarodowy wykonywany w opaciu o:: konwencja CMR.",
 ];
 export const OWNED_COMPANY = {
+  id: 1,
   name: "Wiesław Dulowski Przedsiębiorstwo Handlowe 'Omega'",
   adress: "Bolesława Prusa 22, 58-310 Szczawno-Zdrój",
   vatNo: "PL8861111165",
 };
 
 export const CONATCT_DATA = {
+  id: 1,
   name: "Tomasz Matras",
   mail: "tomasz.matras@gmail.com",
   phone: "+48 795 727 977",

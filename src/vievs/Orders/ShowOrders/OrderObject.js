@@ -161,7 +161,11 @@ const OrderObject = ({ order, setTaskInformation }) => {
   const deleteButton = !_id ? (
     ""
   ) : (
-    <MainButton name="usuń" onClick={handleDeleteOrder} />
+    <MainButton
+      name="usuń"
+      onClick={handleDeleteOrder}
+      disabled={!user || !cookie ? true : false}
+    />
   );
 
   //Print order

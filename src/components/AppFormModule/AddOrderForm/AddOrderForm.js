@@ -1,16 +1,11 @@
-import { useContext } from "react";
 import { Form, Field } from "react-final-form";
 
 import Modal from "../../Modal/Modal";
 import MainButton from "../../Buttons/MainButton/MainButton";
 
-import { StoreContext } from "../../../Store/StoreProvider";
-
 import styles from "./AddOrderForm.module.scss";
 
 const AddOrderForm = (props) => {
-  const { copiedOrderData } = useContext(StoreContext);
-
   const onSubmit = async (values) => {
     const newOrderObject = {
       loadDate: values.loadDate,
@@ -49,6 +44,7 @@ const AddOrderForm = (props) => {
     props.setOrderObject(newOrderObject);
     props.handleOnClose();
   };
+
   return (
     <Modal
       handleOnCloseModal={props.handleOnClose}
