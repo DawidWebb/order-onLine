@@ -1,7 +1,6 @@
 @import "../../../Root/common.scss";
 .wrapper {
-  height: 180px;
-  margin-top: 100px;
+  @include sectionWrapper;
   h1 {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -22,6 +21,7 @@
     }
     form {
       display: flex;
+      justify-content: center;
       ::placeholder {
         color: lighten($text-second-color, 50);
         text-align: center;
@@ -43,10 +43,7 @@
       }
     }
   }
-  .ordersList {
-    // background-color: blanchedalmond;
-    // border: 1px solid white;
-  }
+
   @media screen and (orientation: landscape) {
     .selectButtons {
       button {
@@ -72,7 +69,7 @@
   @media screen and (min-width: map-get($breakpoints, large)) {
     .selectButtons {
       button {
-        width: 190px;
+        width: 180px;
       }
     }
   }

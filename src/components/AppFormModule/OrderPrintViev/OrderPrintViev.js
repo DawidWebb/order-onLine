@@ -38,7 +38,9 @@ const OrderPrintViev = () => {
     pri.print();
   };
 
-  const companyData = COMPANY_DATA.map((item) => <li key={item.id}>{item}</li>);
+  const companyData = COMPANY_DATA.map((item) => (
+    <li key={item._id}>{item}</li>
+  ));
 
   const { name, adress, vatNo } = OWNED_COMPANY;
 

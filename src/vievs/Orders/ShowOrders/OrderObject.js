@@ -164,7 +164,7 @@ const OrderObject = ({ order, setTaskInformation }) => {
     <MainButton
       name="usuń"
       onClick={handleDeleteOrder}
-      disabled={!user || !cookie ? true : false}
+      disabled={!cookie ? true : false}
     />
   );
 
@@ -228,12 +228,12 @@ const OrderObject = ({ order, setTaskInformation }) => {
         <MainButton
           name="edytuj"
           onClick={handleOnEdit}
-          disabled={!user || !cookie ? true : false}
+          disabled={!cookie ? true : false}
         />
         <MainButton
           name="kopiuj"
           onClick={handleOnCopy}
-          disabled={!user || !cookie ? true : false}
+          disabled={!cookie ? true : false}
         />
 
         {deleteButton}

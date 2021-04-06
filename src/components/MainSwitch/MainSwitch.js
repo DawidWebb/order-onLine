@@ -17,7 +17,7 @@ const MainSwitch = () => {
   const { user, cookie } = useContext(StoreContext);
 
   return (
-    <main>
+    <>
       <Switch>
         <Route exact path="/" render={() => <MainSection />} />
         <Route exact path="/test-form" render={() => <TestFormSection />} />
@@ -41,7 +41,7 @@ const MainSwitch = () => {
         {/* <Route component={ErrorPage} /> */}
         <Redirect to="/" />
       </Switch>
-    </main>
+    </>
   );
 };
 export default MainSwitch;

@@ -1,5 +1,7 @@
 @import "../../Root/common.scss";
 
-h1 {
-  color: white;
+.wrapper {
+  @include sectionWrapper;
+
+  color: $text-second-color;
 }

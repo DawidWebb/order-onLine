@@ -3,9 +3,9 @@
 @mixin sectionWrapper {
   position: relative;
   width: 90vw;
-  margin: $header-height auto 0;
+  margin: 20px auto;
   @media screen and (min-width: map-get($breakpoints, medium)) {
-    margin: 100px auto 0;
+    // margin: 100px auto 0;
   }
 }
 @mixin backButtonPosition {

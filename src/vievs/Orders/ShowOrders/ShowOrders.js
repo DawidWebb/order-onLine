@@ -69,13 +69,13 @@ const ShowOrders = () => {
       <SelectButton
         name="Lista zleceń"
         onClick={handleGetOrders}
-        disabled={!user || !cookie ? true : false}
+        disabled={!cookie ? true : false}
       />
     ) : (
       <SelectButton
         name="odśwież listę"
         onClick={handleGetOrders}
-        disabled={!user || !cookie ? true : false}
+        disabled={!cookie ? true : false}
       />
     );
 
@@ -102,7 +102,7 @@ const ShowOrders = () => {
               <button type="submit">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="white"
+                  fill="black"
                   height="24"
                   viewBox="0 0 24 24"
                   width="24"

@@ -4,11 +4,9 @@ import MainButton from "../../Buttons/MainButton/MainButton";
 import Spinner from "../../Spinner/Spinner";
 
 import request from "../../../helpers/request";
-import { nip24, NIP24 } from "../../../helpers/nip24pl";
 import { StoreContext } from "../../../Store/StoreProvider";
 
 import styles from "./SearchModal.module.scss";
-import LoggedMenu from "../../../vievs/LoggedMenu/LoggedMenu";
 
 const SearchModal = (props) => {
   const { setSerchedClient, user, cookie } = useContext(StoreContext);

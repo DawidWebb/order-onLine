@@ -1,0 +1,25 @@
+@import "../../../Root/common.scss";
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  transform: translateY(-50%);
+
+  .outside {
+    position: relative;
+    border: 1px solid $text-first-color;
+    border-radius: 20px;
+    height: 40px;
+    width: 20px;
+    .inside {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: white;
+    }
+  }
+}
