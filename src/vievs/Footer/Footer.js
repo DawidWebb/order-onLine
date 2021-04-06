@@ -2,8 +2,10 @@ import styles from "./Footer.module.scss";
 
 function Footer() {
   return (
-    <div className={styles.container}>
-      <h3> </h3>
+    <div className={styles.wrapper}>
+      <a href="http://www.developerweb.pl" target="blanc">
+        &copy; developerweb 2021
+      </a>
     </div>
   );
 }

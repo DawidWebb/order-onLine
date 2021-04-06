@@ -16,9 +16,9 @@ function App() {
         <>
           <MainSwitch />
         </>
-        <Footer />
-        <UpButton />
       </Router>
+      <Footer />
+      <UpButton />
     </StoreProvider>
   );
 }

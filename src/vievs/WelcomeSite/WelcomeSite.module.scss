@@ -2,6 +2,33 @@
 
 .wrapper {
   @include sectionWrapper;
-
   color: $text-second-color;
+  h1 {
+    text-align: center;
+    font-size: $m-font-size;
+  }
+  ul {
+    margin: 30px;
+    list-style: square;
+    li {
+      font-size: $xs-font-size;
+      margin: 15px auto;
+    }
+    li:nth-last-child(1) {
+      font-weight: 700;
+    }
+  }
+
+  @media screen and (min-width: map-get($breakpoints, medium)) {
+    h1 {
+      font-size: $xl-font-size;
+    }
+    ul {
+      margin: 50px;
+      li {
+        font-size: $l-font-size;
+        margin: 20px auto;
+      }
+    }
+  }
 }

@@ -1,8 +1,7 @@
 @import "../../Root/common.scss";
 
 .wrapper {
-  height: 180px;
-  margin-top: 100px;
+  @include sectionWrapper;
   h1 {
     padding-top: 20px;
     padding-bottom: 20px;

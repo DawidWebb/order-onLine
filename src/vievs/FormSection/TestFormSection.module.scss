@@ -1,9 +1,7 @@
 @import "../../Root/common.scss";
 
 .wrapper {
-  width: 90vw;
-  margin: 130px auto 0 auto;
-
+  @include sectionWrapper;
   .buttons {
     display: flex;
     justify-content: space-around;

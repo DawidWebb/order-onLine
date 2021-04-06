@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import OrderPrintViev from "../../components/AppFormModule/OrderPrintViev/OrderPrintViev";
 import MainSection from "../../vievs/MainSection/MainSection";
+import Rodo from "../../vievs/AdditionalInformations/Rodo";
+import Instruction from "../../vievs/AdditionalInformations/Instruction";
 import TestFormSection from "../../vievs/FormSection/TestFormSection";
 import Orders from "../../vievs/Orders/Orders";
 import AddOrder from "../../vievs/Orders/AddOrder/AddOrder";
@@ -20,9 +22,10 @@ const MainSwitch = () => {
     <>
       <Switch>
         <Route exact path="/" render={() => <MainSection />} />
+        <Route exact path="/rodo" render={() => <Rodo />} />
+        <Route exact path="/instruction" render={() => <Instruction />} />
         <Route exact path="/test-form" render={() => <TestFormSection />} />
         <Route exact path="/order-print" render={() => <OrderPrintViev />} />
-
         <Route exact path="/orders" render={() => <Orders />} />
 
         {user || cookie ? (

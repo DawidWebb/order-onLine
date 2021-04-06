@@ -1,0 +1,29 @@
+@import "../../Root/common.scss";
+
+.wrapper {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  .smallCircle {
+    width: 25px;
+    height: 25px;
+    background: $fifth-color;
+    border-radius: 50%;
+  }
+  .bigCircle {
+    width: 60px;
+    height: 60px;
+    background: $text-information-color;
+    border-radius: 50%;
+  }
+  @media screen and (min-width: map-get($breakpoints, medium)) {
+    .smallCircle {
+      width: 35px;
+      height: 35px;
+    }
+    .bigCircle {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
