@@ -8,7 +8,7 @@ import { OWNED_COMPANY } from "../../../helpers/companyData";
 
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./OrderViev.module.scss";
+import styles from "./orderViev.module.scss";
 
 const OrderPrintViev = () => {
   const componentRef = useRef();

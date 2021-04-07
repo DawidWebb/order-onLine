@@ -2,7 +2,7 @@ import BackButton from "../../components/Buttons/BackButton/BackButton";
 import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
 
-import styles from "./Instruction.module.scss";
+import styles from "./instruction.module.scss";
 
 const Instruction = () => {
   return (

@@ -3,7 +3,7 @@ import { Form, Field } from "react-final-form";
 import Modal from "../../Modal/Modal";
 import MainButton from "../../Buttons/MainButton/MainButton";
 
-import styles from "./AddOrderForm.module.scss";
+import styles from "./addOrderForm.module.scss";
 
 const AddOrderForm = (props) => {
   const onSubmit = async (values) => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./UpButton.module.scss";
+import styles from "./upButton.module.scss";
 
 const UpButton = () => {
   //   const { windowScroll, setWindowScroll } = useContext(StoreContext);

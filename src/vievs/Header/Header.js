@@ -9,7 +9,7 @@ import TestMenu from "../../vievs/TestMenu/TestMenu";
 
 import { StoreContext } from "../../Store/StoreProvider";
 
-import styles from "./Header.module.scss";
+import styles from "./header.module.scss";
 
 function Header() {
   const {

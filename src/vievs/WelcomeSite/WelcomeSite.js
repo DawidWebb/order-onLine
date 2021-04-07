@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import SpinnerStatic from "../../components/Spinner/SpinnerStatic";
 
-import styles from "./WelcomeSite.module.scss";
+import styles from "./welcomeSite.module.scss";
 
 const WelcomeSite = () => {
   return (
@@ -28,7 +28,8 @@ const WelcomeSite = () => {
             <Link to={"/instruction"}>tutaj</Link>
           </li>
           <li>
-            Jesteś zainteresowany pełną wersją? <a href="">KLIKNIJ</a>
+            Jesteś zainteresowany pełną wersją?{" "}
+            <Link to={"/contact"}>KLIKNIJ</Link>
           </li>
         </ul>
       </div>

@@ -14,7 +14,7 @@ import AddConditionsForm from "../../../components/AppFormModule/AddConditionsFo
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./AddOrder.module.scss";
+import styles from "./addOrder.module.scss";
 
 const AddOrder = () => {
   let history = useHistory();

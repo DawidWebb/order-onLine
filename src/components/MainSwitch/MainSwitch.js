@@ -5,6 +5,7 @@ import OrderPrintViev from "../../components/AppFormModule/OrderPrintViev/OrderP
 import MainSection from "../../vievs/MainSection/MainSection";
 import Rodo from "../../vievs/AdditionalInformations/Rodo";
 import Instruction from "../../vievs/AdditionalInformations/Instruction";
+import Contact from "../../vievs/Contact/Contact";
 import TestFormSection from "../../vievs/FormSection/TestFormSection";
 import Orders from "../../vievs/Orders/Orders";
 import AddOrder from "../../vievs/Orders/AddOrder/AddOrder";
@@ -24,6 +25,7 @@ const MainSwitch = () => {
         <Route exact path="/" render={() => <MainSection />} />
         <Route exact path="/rodo" render={() => <Rodo />} />
         <Route exact path="/instruction" render={() => <Instruction />} />
+        <Route exact path="/contact" render={() => <Contact />} />
         <Route exact path="/test-form" render={() => <TestFormSection />} />
         <Route exact path="/order-print" render={() => <OrderPrintViev />} />
         <Route exact path="/orders" render={() => <Orders />} />

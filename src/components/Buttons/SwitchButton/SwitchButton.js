@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./SwitchButton.module.scss";
+import styles from "./switchButton.module.scss";
 
 function SwitchButton(props) {
   const { colorCookie, setColorCookie } = useContext(StoreContext);

@@ -7,7 +7,7 @@ import DeleteConfirmation from "../../../components/DeleteConfirmation/DeleteCon
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./OrderObject.module.scss";
+import styles from "./orderObject.module.scss";
 
 const OrderObject = ({ order, setTaskInformation }) => {
   let history = useHistory();

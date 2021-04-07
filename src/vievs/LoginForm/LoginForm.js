@@ -7,7 +7,7 @@ import Spinner from "../../components/Spinner/Spinner";
 
 import { StoreContext } from "../../Store/StoreProvider";
 
-import styles from "./LoginForm.module.scss";
+import styles from "./loginForm.module.scss";
 
 const LoginForm = (props) => {
   const { setUser, setCookie } = useContext(StoreContext);

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import BackButton from "../../components/Buttons/BackButton/BackButton";
 import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 
-import styles from "./TestFormSection.module.scss";
+import styles from "./testFormSection.module.scss";
 
 function TestFormSection() {
   return (

@@ -6,7 +6,7 @@ import DeleteConfirmation from "../../components/DeleteConfirmation/DeleteConfir
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
 
-import styles from "./CustomerData.module.scss";
+import styles from "./customerData.module.scss";
 
 const CustomerData = ({ client, setTaskInformation }) => {
   const { setClientsData, serchedClient, setSerchedClient } = useContext(

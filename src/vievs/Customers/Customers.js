@@ -11,7 +11,7 @@ import InformationPopup from "../../components/InformationPopup/InforationPopup"
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
 
-import styles from "./Customers.module.scss";
+import styles from "./customers.module.scss";
 
 const Customers = () => {
   const {

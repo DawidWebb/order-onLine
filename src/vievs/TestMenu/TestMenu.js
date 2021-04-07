@@ -5,7 +5,7 @@ import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
 
 import { StoreContext } from "../../Store/StoreProvider";
 
-import styles from "../Menu/Menu.module.scss";
+import styles from "../Menu/menuTop.module.scss";
 
 const links = [
   { name: "start", path: "/" },
