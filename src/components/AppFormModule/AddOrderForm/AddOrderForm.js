@@ -8,7 +8,7 @@ import styles from "./addOrderForm.module.scss";
 const AddOrderForm = (props) => {
   const onSubmit = async (values) => {
     const newOrderObject = {
-      loadDate: values.loadDate,
+      loadDate: !values.loadDate ? props.orderObject.loadDate : values.loadDate,
       loadHrs: values.loadHrs,
       loadCountry: !values.loadCountry
         ? props.orderObject.loadCountry
@@ -18,7 +18,9 @@ const AddOrderForm = (props) => {
       loadAdress: !values.loadAdress
         ? props.orderObject.loadAdress
         : values.loadAdress,
-      unloadDate: values.unloadDate,
+      unloadDate: !values.unloadDate
+        ? props.orderObject.unloadDate
+        : values.unloadDate,
       unloadHrs: values.unloadHrs,
       unloadCountry: !values.unloadCountry
         ? props.orderObject.unloadCountry

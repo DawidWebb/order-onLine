@@ -6,10 +6,10 @@ import MainSection from "../../vievs/MainSection/MainSection";
 import Rodo from "../../vievs/AdditionalInformations/Rodo";
 import Instruction from "../../vievs/AdditionalInformations/Instruction";
 import Contact from "../../vievs/Contact/Contact";
-import TestFormSection from "../../vievs/FormSection/TestFormSection";
+import TestFormSection from "../../vievs/TestSection/TestFormSection";
 import Orders from "../../vievs/Orders/Orders";
 import AddOrder from "../../vievs/Orders/AddOrder/AddOrder";
-import AddTestOrder from "../../vievs/FormSection/AddTestOrder/AddTestOrder";
+import AddTestOrder from "../../vievs/TestSection/AddTestOrder/AddTestOrder";
 import ShowOrders from "../../vievs/Orders/ShowOrders/ShowOrders";
 import Customers from "../../vievs/Customers/Customers";
 

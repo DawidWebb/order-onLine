@@ -38,7 +38,6 @@ const AddClientForm = (props) => {
       vatNo: values.vatNo,
       eMail: values.eMail,
       info: values.info,
-      _id: 0,
     };
     if (user || cookie) {
       const { data, status } = await request.post("/clients", clientObject);

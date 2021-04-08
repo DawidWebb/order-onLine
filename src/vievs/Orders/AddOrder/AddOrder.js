@@ -10,7 +10,7 @@ import SerchModal from "../../../components/ClientModule/SearchModal/SearchModal
 import InformationPopup from "../../../components/InformationPopup/InforationPopup";
 import AddOrderForm from "../../../components/AppFormModule/AddOrderForm/AddOrderForm";
 import AddConditionsForm from "../../../components/AppFormModule/AddConditionsForm/AddConditionsForm";
-import CreateOrderNumber from "../../../components/CreateOrderNumber/createOrderNumber";
+import CreateOrderNumber from "../../../components/FunctionsForOrders/CreateOrderNumber/CreateOrderNumber";
 
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
@@ -238,6 +238,7 @@ const AddOrder = () => {
   const handleOnEditOrder = async () => {
     setShowSpinner(true);
     const editOrderObject = orderFullObject();
+
     const { data, status } = await request.put("/orders", editOrderObject);
 
     if (status === 202) {
@@ -246,7 +247,8 @@ const AddOrder = () => {
       setOrdersData([data.data]);
     } else {
       setShowSpinner(false);
-      console.log(data.message, status);
+
+      console.log(status, data.message);
     }
   };
 
@@ -272,16 +274,12 @@ const AddOrder = () => {
     </div>
   );
 
-  const loadData = `${!orderObject.loadCity ? "?" : orderObject.loadCity} - ${
-    !orderObject.unloadCity ? "?" : orderObject.unloadCity
-  }`;
-
   const operationButtons = () => {
     if (!vievClient || !vievCarrier || !orderObject || !conditions) {
       return "";
     } else if (kindOfTask === "edit") {
       return (
-        <SelectButton name="Zmień dane zlecenia" onClick={handleOnEditOrder} />
+        <SelectButton name="Aktualizuj zlecenie" onClick={handleOnEditOrder} />
       );
     } else if (!vievClient || vievCarrier || orderObject || conditions) {
       return (
@@ -343,8 +341,29 @@ const AddOrder = () => {
       </div>
       <div className={styles.order}>
         <div className={styles.dataInfo}>
-          <p>Zlecenie:</p>
-          <div> {!orderObject ? "" : loadData}</div>
+          <table className={styles.dataInfoTable}>
+            <tbody>
+              <tr>
+                <th></th>
+                <th>Załadunek</th>
+                <th>Rozładunek</th>
+              </tr>
+              <tr>
+                <th>Data</th>
+                <td>{!orderObject.loadDate ? "?" : orderObject.loadDate}</td>
+                <td>
+                  {!orderObject.unloadDate ? "?" : orderObject.unloadDate}
+                </td>
+              </tr>
+              <tr>
+                <th>Miejsce</th>
+                <td>{!orderObject.loadCity ? "?" : orderObject.loadCity}</td>
+                <td>
+                  {!orderObject.unloadCity ? "?" : orderObject.unloadCity}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div className={styles.buttons}>
           <MainButton
@@ -389,6 +408,7 @@ const AddOrder = () => {
             name={!conditions ? "dodaj" : "zmień"}
             onClick={handleAddConditionsModalOpen}
           />
+          <MainButton name="cenniki" />
         </div>
       </div>
       <AddClientForm

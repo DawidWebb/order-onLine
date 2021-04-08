@@ -11,7 +11,6 @@ import InformationPopup from "../../../components/InformationPopup/InforationPop
 import AddOrderForm from "../../../components/AppFormModule/AddOrderForm/AddOrderForm";
 import AddConditionsForm from "../../../components/AppFormModule/AddConditionsForm/AddConditionsForm";
 
-import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
 
 import styles from "./addTestOrder.module.scss";
@@ -19,12 +18,7 @@ import styles from "./addTestOrder.module.scss";
 const AddTestOrder = () => {
   let history = useHistory();
   //global state
-  const {
-    serchedClient,
-    setOrdersData,
-    currentOrderNumber,
-    setNewOdredNumber,
-  } = useContext(StoreContext);
+  const { serchedClient, setOrdersData } = useContext(StoreContext);
 
   // state for Modals
   const [addModalOpen, setAddModalOpen] = useState(false);
@@ -45,59 +39,6 @@ const AddTestOrder = () => {
   const [conditions, setConditions] = useState(false);
 
   const spinner = showSpinner ? <Spinner /> : "";
-
-  // const setUpCopiedOrderData = () => {
-  //   if (!copiedOrderData) {
-  //     return;
-  //   }
-  //   setVievClient([
-  //     {
-  //       companyName: copiedOrderData.clientName,
-  //       companyAdress: copiedOrderData.clientAdress,
-  //       vatNo: copiedOrderData.clientVatNo,
-  //     },
-  //   ]);
-  //   setVievCarrier([
-  //     {
-  //       companyName: copiedOrderData.carrierName,
-  //       companyAdress: copiedOrderData.carrierAdress,
-  //       vatNo: copiedOrderData.carrierVatNo,
-  //     },
-  //   ]);
-  //   setOrderObject({
-  //     loadDate: copiedOrderData.orderLoadDate,
-  //     loadHrs: copiedOrderData.orderLoadHrs,
-  //     loadCountry: copiedOrderData.orderLoadCountry,
-  //     loadZip: copiedOrderData.orderLoadZip,
-  //     loadCity: copiedOrderData.orderLoadCity,
-  //     loadAdress: copiedOrderData.orderLoadAdress,
-  //     unloadDate: copiedOrderData.orderUnloadDate,
-  //     unloadHrs: copiedOrderData.orderUnloadHrs,
-  //     unloadCountry: copiedOrderData.orderUnloadCountry,
-  //     unloadZip: copiedOrderData.orderUnloadZip,
-  //     unloadCity: copiedOrderData.orderUnloadCity,
-  //     unloadAdress: copiedOrderData.orderUnloadAdress,
-  //     goodsSpecification: copiedOrderData.orderGoodsSpecyfications,
-  //     driver: copiedOrderData.orderDriver,
-  //     truck: copiedOrderData.orderTruck,
-  //     fix: [`${copiedOrderData.orderFix}`],
-  //     adr: [`${copiedOrderData.orderAdr}`],
-  //     info: copiedOrderData.orderInfo,
-  //   });
-
-  //   setConditions({
-  //     clientPrice: copiedOrderData.orderClientPrice,
-  //     clientCurr: copiedOrderData.orderClientCurr,
-  //     clientTerms: copiedOrderData.orderClientTerms,
-  //     carrierPrice: copiedOrderData.orderCarrierPrice,
-  //     carrierCurr: copiedOrderData.orderCarrierCurr,
-  //     carrierTerms: copiedOrderData.orderCarrierTerms,
-  //   });
-  // };
-  // // effect for set copied data
-  // useEffect(() => {
-  //   setUpCopiedOrderData();
-  // }, [copiedOrderData]);
 
   // effect for viev client or carrier
   useEffect(() => {
@@ -123,11 +64,6 @@ const AddTestOrder = () => {
   }, [taskInformation]);
 
   // handlers for open/close modals
-
-  // const handleSearchClientModalOpen = () => {
-  //   setSearchModalOpen(true);
-  //   setSelectedClient(true);
-  // };
 
   const handleAddClientModalOpen = () => {
     setAddModalOpen(true);
@@ -237,23 +173,6 @@ const AddTestOrder = () => {
     localStorage.setItem(`orderData`, JSON.stringify(orderData));
   };
 
-  //edit selected order
-
-  // const handleOnEditOrder = async () => {
-  //   setShowSpinner(true);
-  //   const editOrderObject = orderFullObject();
-  //   const { data, status } = await request.put("/orders", editOrderObject);
-
-  //   if (status === 202) {
-  //     setTaskInformation("Dane zlecenia zmodyfikowane");
-  //     setShowSpinner(false);
-  //     setOrdersData([data.data]);
-  //   } else {
-  //     setShowSpinner(false);
-  //     console.log(data.message, status);
-  //   }
-  // };
-
   // constans for data and button viev
   const clientInformationViev = !vievClient ? (
     ""
@@ -328,8 +247,29 @@ const AddTestOrder = () => {
       </div>
       <div className={styles.order}>
         <div className={styles.dataInfo}>
-          <p>Zlecenie:</p>
-          <div> {!orderObject ? "" : loadData}</div>
+          <table className={styles.dataInfoTable}>
+            <tbody>
+              <tr>
+                <th></th>
+                <th>Załadunek</th>
+                <th>Rozładunek</th>
+              </tr>
+              <tr>
+                <th>Data</th>
+                <td>{!orderObject.loadDate ? "?" : orderObject.loadDate}</td>
+                <td>
+                  {!orderObject.unloadDate ? "?" : orderObject.unloadDate}
+                </td>
+              </tr>
+              <tr>
+                <th>Miejsce</th>
+                <td>{!orderObject.loadCity ? "?" : orderObject.loadCity}</td>
+                <td>
+                  {!orderObject.unloadCity ? "?" : orderObject.unloadCity}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div className={styles.buttons}>
           <MainButton
@@ -374,6 +314,7 @@ const AddTestOrder = () => {
             name={!conditions ? "dodaj" : "zmień"}
             onClick={handleAddConditionsModalOpen}
           />
+          <MainButton name="cenniki" disabled />
         </div>
       </div>
       <AddClientForm
