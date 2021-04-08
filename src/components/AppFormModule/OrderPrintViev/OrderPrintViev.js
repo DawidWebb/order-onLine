@@ -13,13 +13,17 @@ import styles from "./orderViev.module.scss";
 const OrderPrintViev = () => {
   const componentRef = useRef();
 
-  const { printOrderData } = useContext(StoreContext);
+  const { printOrderData, cookie, user } = useContext(StoreContext);
 
   const [companyDataFromLocal, setCompanyDataFromLocal] = useState(false);
 
   const checkCompanyData = () => {
-    if (!localStorage.length) {
-      return;
+    if (!localStorage.getItem("companyData")) {
+      setCompanyDataFromLocal({
+        companyName: "",
+        companyAdress: "",
+        vatNo: "",
+      });
     } else if (localStorage.length) {
       setCompanyDataFromLocal(JSON.parse(localStorage.getItem("companyData")));
     }
@@ -77,15 +81,11 @@ const OrderPrintViev = () => {
         <h2>Zlecenie transportowe nr: {orderNumber}</h2>
         <div className={styles.client}>
           <p>Zleceniodawca:</p>
-          <h3>
-            {!companyDataFromLocal ? name : companyDataFromLocal.companyName}
-          </h3>
+          <h3>{!user || !cookie ? companyDataFromLocal.companyName : name}</h3>
           <p>
-            {!companyDataFromLocal
-              ? adress
-              : companyDataFromLocal.companyAdress}
+            {!user || !cookie ? companyDataFromLocal.companyAdress : adress}
           </p>
-          <p>{!companyDataFromLocal ? vatNo : companyDataFromLocal.vatNo}</p>
+          <p> {!user || !cookie ? companyDataFromLocal.vatNo : vatNo}</p>
         </div>
         <div className={styles.carrier}>
           <p>Zleceniobiorca:</p>
@@ -186,12 +186,6 @@ const OrderPrintViev = () => {
         ></ReactToPrint>
         <BackButton />
       </div>
-      {/* <iframe
-        className={styles.ifmcontentstoprint}
-        title="Wydruk z programu zlecenie Online"
-        id="ifmcontentstoprint"
-        style={{ height: "0px", width: "0px", position: "absolute" }}
-      ></iframe> */}
     </div>
   );
 };

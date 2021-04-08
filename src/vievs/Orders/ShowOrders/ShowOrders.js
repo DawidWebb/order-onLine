@@ -54,6 +54,9 @@ const ShowOrders = () => {
   };
 
   const handleSearchOrder = async (value) => {
+    if (!user || !cookie) {
+      return;
+    }
     setShowSpinner(true);
     const { data, status } = await request.get(`/orders/${value.search}`);
     if (status === 200) {
