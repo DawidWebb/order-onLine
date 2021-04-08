@@ -116,9 +116,11 @@ const AddOrder = () => {
   // // effect for viev task information
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (taskInformation) {
+      if (taskInformation === "Dodano zlecenie") {
         setTaskInformation(false);
         history.push("./showorders");
+      } else if (taskInformation === "Dodano klienta") {
+        setTaskInformation(false);
       }
     }, 2000);
     return () => clearInterval(timeout);
@@ -258,9 +260,13 @@ const AddOrder = () => {
     ""
   ) : (
     <div>
-      <h3>{vievClient[0].companyName}</h3>
-      <p>{vievClient[0].companyAdress}</p>
-      <p>{vievClient[0].vatNo}</p>
+      <h3>
+        {!vievClient[0]
+          ? "Pobierz zapisanego klienta"
+          : vievClient[0].companyName}
+      </h3>
+      <p>{!vievClient[0] ? "" : vievClient[0].companyAdress}</p>
+      <p>{!vievClient[0] ? "" : vievClient[0].vatNo}</p>
     </div>
   );
 
@@ -268,9 +274,13 @@ const AddOrder = () => {
     ""
   ) : (
     <div>
-      <h3>{vievCarrier[0].companyName}</h3>
-      <p>{vievCarrier[0].companyAdress}</p>
-      <p>{vievCarrier[0].vatNo}</p>
+      <h3>
+        {!vievCarrier[0]
+          ? "Pobierz zapisanego przewoźnika"
+          : vievCarrier[0].companyName}
+      </h3>
+      <p>{!vievCarrier[0] ? "" : vievCarrier[0].companyAdress}</p>
+      <p>{!vievCarrier[0] ? "" : vievCarrier[0].vatNo}</p>
     </div>
   );
 
