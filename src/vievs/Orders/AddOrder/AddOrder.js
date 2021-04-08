@@ -10,6 +10,7 @@ import SerchModal from "../../../components/ClientModule/SearchModal/SearchModal
 import InformationPopup from "../../../components/InformationPopup/InforationPopup";
 import AddOrderForm from "../../../components/AppFormModule/AddOrderForm/AddOrderForm";
 import AddConditionsForm from "../../../components/AppFormModule/AddConditionsForm/AddConditionsForm";
+import CreateOrderNumber from "../../../components/CreateOrderNumber/createOrderNumber";
 
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
@@ -20,8 +21,6 @@ const AddOrder = () => {
   let history = useHistory();
   // global state
   const {
-    user,
-    cookie,
     serchedClient,
     setOrdersData,
     copiedOrderData,
@@ -159,51 +158,14 @@ const AddOrder = () => {
 
   //handlers and helpers for viev clear and save order data
 
-  const putNewOrderNumber = async (number) => {
-    const objectNumber = {
-      orderNo: number,
-      id: currentOrderNumber._id,
-    };
-
-    const { data, status } = await request.put("/ordernumber", objectNumber);
-    if (status === 202) {
-      setNewOdredNumber(number);
-    } else {
-      console.log(status, data.messages);
-    }
-  };
-
-  const createOrderNumber = () => {
-    const number = currentOrderNumber.orderNo + 1;
-    putNewOrderNumber(number);
-
-    const months = [
-      "styczeń",
-      "luty",
-      "marzec",
-      "kwiecień",
-      "maj",
-      "czerwiec",
-      "lipiec",
-      "sierpień",
-      "wrzeseiń",
-      "paźdzeirnik",
-      "listopad",
-      "grudzeiń",
-    ];
-    let date = new Date();
-    const year = date.getFullYear();
-    const monthNo = date.getMonth();
-    const month = months[monthNo];
-    const orderNumber = `${number}/${month}/${year}`;
-    return orderNumber;
-  };
-
   const orderFullObject = () => {
     let newOrderNumber;
     const switchOrderNumber = () => {
       if (!kindOfTask || kindOfTask === "copy") {
-        newOrderNumber = createOrderNumber();
+        newOrderNumber = CreateOrderNumber({
+          currentOrderNumber,
+          setNewOdredNumber,
+        });
       } else if (kindOfTask === "edit") {
         newOrderNumber = copiedOrderData._id;
       }
@@ -289,6 +251,7 @@ const AddOrder = () => {
   };
 
   // constans for data and button viev
+
   const clientInformationViev = !vievClient ? (
     ""
   ) : (
@@ -309,14 +272,16 @@ const AddOrder = () => {
     </div>
   );
 
-  const loadData = `${orderObject.loadCity} - ${orderObject.unloadCity}`;
+  const loadData = `${!orderObject.loadCity ? "?" : orderObject.loadCity} - ${
+    !orderObject.unloadCity ? "?" : orderObject.unloadCity
+  }`;
 
   const operationButtons = () => {
     if (!vievClient || !vievCarrier || !orderObject || !conditions) {
       return "";
     } else if (kindOfTask === "edit") {
       return (
-        <SelectButton name="Zmien dane zlecenia" onClick={handleOnEditOrder} />
+        <SelectButton name="Zmień dane zlecenia" onClick={handleOnEditOrder} />
       );
     } else if (!vievClient || vievCarrier || orderObject || conditions) {
       return (
