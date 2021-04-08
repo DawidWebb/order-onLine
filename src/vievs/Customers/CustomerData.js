@@ -12,6 +12,7 @@ const CustomerData = ({ client, setTaskInformation }) => {
   const { setClientsData, serchedClient, setSerchedClient } = useContext(
     StoreContext
   );
+
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 

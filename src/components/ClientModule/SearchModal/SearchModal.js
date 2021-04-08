@@ -50,7 +50,6 @@ const SearchModal = (props) => {
         setShowSpinner(false);
       }
     } else {
-      console.log("search by VAT");
       setShowSpinner(false);
     }
   };
@@ -73,7 +72,6 @@ const SearchModal = (props) => {
         setShowSpinner(false);
       }
     } else {
-      console.log("search by name");
       setShowSpinner(false);
     }
   };

@@ -45,7 +45,7 @@ const Customers = () => {
   ) : (
     <CustomerData
       key={serchedClient._id}
-      client={serchedClient}
+      client={serchedClient[0]}
       setTaskInformation={setTaskInformation}
     />
   );
