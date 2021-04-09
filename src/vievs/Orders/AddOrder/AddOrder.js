@@ -82,8 +82,8 @@ const AddOrder = () => {
       goodsSpecification: copiedOrderData.orderGoodsSpecyfications,
       driver: copiedOrderData.orderDriver,
       truck: copiedOrderData.orderTruck,
-      fix: [`${copiedOrderData.orderFix}`],
-      adr: [`${copiedOrderData.orderAdr}`],
+      fix: copiedOrderData.orderFix,
+      adr: copiedOrderData.orderAdr,
       info: copiedOrderData.orderInfo,
     });
 
@@ -116,10 +116,16 @@ const AddOrder = () => {
   // // effect for viev task information
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (taskInformation === "Dodano zlecenie") {
-        setTaskInformation(false);
+      if (
+        taskInformation === "Dodano zlecenie" ||
+        taskInformation === "Dane zlecenia zmodyfikowane"
+      ) {
         history.push("./showorders");
-      } else if (taskInformation === "Dodano klienta") {
+        setTaskInformation(false);
+      } else if (
+        taskInformation === "Dodano klienta" ||
+        taskInformation === "Potwierdź lub zmień daty"
+      ) {
         setTaskInformation(false);
       }
     }, 2000);
@@ -185,31 +191,41 @@ const AddOrder = () => {
       carrierAdress: vievCarrier[0].companyAdress,
       carrierVatNo: vievCarrier[0].vatNo,
       //order data
-      orderLoadDate: orderObject.loadDate,
-      orderLoadHrs: orderObject.loadHrs,
-      orderLoadCountry: orderObject.loadCountry,
-      orderLoadZip: orderObject.loadZip,
-      orderLoadCity: orderObject.loadCity,
-      orderLoadAdress: orderObject.loadAdress,
-      orderUnloadDate: orderObject.unloadDate,
-      orderUnloadHrs: orderObject.unloadHrs,
-      orderUnloadCountry: orderObject.unloadCountry,
-      orderUnloadZip: orderObject.unloadZip,
-      orderUnloadCity: orderObject.unloadCity,
-      orderUnloadAdress: orderObject.unloadAdress,
-      orderGoodsSpecyfications: orderObject.goodsSpecyfications,
-      orderDriver: orderObject.driver,
-      orderTruck: orderObject.truck,
+      orderLoadDate: !orderObject.loadDate ? "" : orderObject.loadDate,
+      orderLoadHrs: !orderObject.loadHrs ? "" : orderObject.loadHrs,
+      orderLoadCountry: !orderObject.loadCountry ? "" : orderObject.loadCountry,
+      orderLoadZip: !orderObject.loadZip ? "" : orderObject.loadZip,
+      orderLoadCity: !orderObject.loadCity ? "" : orderObject.loadCity,
+      orderLoadAdress: !orderObject.loadAdress ? "" : orderObject.loadAdress,
+      orderUnloadDate: !orderObject.unloadDate ? "" : orderObject.unloadDate,
+      orderUnloadHrs: !orderObject.unloadHrs ? "" : orderObject.unloadHrs,
+      orderUnloadCountry: !orderObject.unloadCountry
+        ? ""
+        : orderObject.unloadCountry,
+      orderUnloadZip: !orderObject.unloadZip ? "" : orderObject.unloadZip,
+      orderUnloadCity: !orderObject.unloadCity ? "" : orderObject.unloadCity,
+      orderUnloadAdress: !orderObject.unloadAdress
+        ? ""
+        : orderObject.unloadAdress,
+      orderGoodsSpecyfications: !orderObject.goodsSpecyfications
+        ? ""
+        : orderObject.goodsSpecyfications,
+      orderDriver: !orderObject.driver ? "" : orderObject.driver,
+      orderTruck: !orderObject.truck ? "" : orderObject.truck,
       orderAdr: !orderObject.adr ? "" : orderObject.adr,
       orderFix: !orderObject.fix ? "" : orderObject.fix,
-      orderInfo: orderObject.info,
+      orderInfo: !orderObject.info ? "" : orderObject.info,
       //conditions data
-      orderClientPrice: conditions.clientPrice,
-      orderClientCurr: conditions.clientCurr,
-      orderClientTerms: conditions.clientTerms,
-      orderCarrierPrice: conditions.carrierPrice,
-      orderCarrierCurr: conditions.carrierCurr,
-      orderCarrierTerms: conditions.carrierTerms,
+      orderClientPrice: !conditions.clientPrice ? "" : conditions.clientPrice,
+      orderClientCurr: !conditions.clientCurr ? "" : conditions.clientCurr,
+      orderClientTerms: !conditions.clientTerms ? "" : conditions.clientTerms,
+      orderCarrierPrice: !conditions.carrierPrice
+        ? ""
+        : conditions.carrierPrice,
+      orderCarrierCurr: !conditions.carrierCurr ? "" : conditions.carrierCurr,
+      orderCarrierTerms: !conditions.carrierTerms
+        ? ""
+        : conditions.carrierTerms,
     };
   };
 
@@ -231,8 +247,9 @@ const AddOrder = () => {
       setTaskInformation("Dodano zlecenie");
       setShowSpinner(false);
       setOrdersData([data.data]);
-    } else if (status === 409) {
+    } else {
       console.log(data.message);
+      setShowSpinner(false);
     }
   };
 
@@ -240,7 +257,6 @@ const AddOrder = () => {
   const handleOnEditOrder = async () => {
     setShowSpinner(true);
     const editOrderObject = orderFullObject();
-
     const { data, status } = await request.put("/orders", editOrderObject);
 
     if (status === 202) {
@@ -249,7 +265,7 @@ const AddOrder = () => {
       setOrdersData([data.data]);
     } else {
       setShowSpinner(false);
-
+      setTaskInformation("Potwierdź lub zmień daty");
       console.log(status, data.message);
     }
   };

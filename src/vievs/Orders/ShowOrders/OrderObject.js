@@ -70,7 +70,7 @@ const OrderObject = ({ order, setTaskInformation }) => {
   ) : (
     <MainButton name="ukryj" onClick={handleShowDetails} />
   );
-  // odred details after clickshowDetails Button
+  // odred details after clickShowDetails Button
   const showDetailsOrder = !showDetails ? (
     ""
   ) : (

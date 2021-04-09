@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { deleteCoockie } from "../../helpers/session";
 
 import SelectButton from "../../components/Buttons/SelectButton/SelectButton";
@@ -12,6 +12,7 @@ import { StoreContext } from "../../Store/StoreProvider";
 import styles from "./header.module.scss";
 
 function Header() {
+  let history = useHistory();
   const {
     loginModalOpen,
     setLoginModalOpen,
@@ -56,6 +57,7 @@ function Header() {
     setUser(false);
     deleteCoockie(cookie);
     setCookie(false);
+    history.push("./");
   };
 
   const handleCloseModal = () => {
