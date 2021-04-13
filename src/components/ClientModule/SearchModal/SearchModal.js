@@ -41,7 +41,6 @@ const SearchModal = (props) => {
 
       if (status === 200) {
         setSerchedClient(data.client);
-
         resetStateOfInput();
         props.handleCloseModal();
         setShowSpinner(false);

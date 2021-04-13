@@ -31,6 +31,7 @@ const Customers = () => {
   const spinner = showSpinner ? <Spinner /> : "";
 
   //all clients from handleGetClients
+
   const clientsInfo = clientsData.map((client) => (
     <CustomerData
       key={client._id}
@@ -45,7 +46,7 @@ const Customers = () => {
   ) : (
     <CustomerData
       key={serchedClient._id}
-      client={serchedClient[0]}
+      client={!serchedClient[0] ? serchedClient : serchedClient[0]}
       setTaskInformation={setTaskInformation}
     />
   );

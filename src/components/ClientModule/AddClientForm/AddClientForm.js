@@ -41,12 +41,12 @@ const AddClientForm = (props) => {
     };
     if (user || cookie) {
       const { data, status } = await request.post("/clients", clientObject);
-
       if (status === 201) {
         props.handleOnClose();
         resetStateOfInput();
         setClientsData((prev) => [...prev, data.data]);
         setSerchedClient(data.data);
+
         setShowSpinner(false);
         props.setTaskInformation("Dodano klienta");
       } else if (status === 409) {
