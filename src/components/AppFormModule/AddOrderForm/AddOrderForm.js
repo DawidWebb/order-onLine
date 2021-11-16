@@ -3,7 +3,7 @@ import { Form, Field } from "react-final-form";
 import Modal from "../../Modal/Modal";
 import MainButton from "../../Buttons/MainButton/MainButton";
 
-import styles from "./addOrderForm.module.scss";
+import styles from "./AddOrderForm.module.scss";
 
 const AddOrderForm = (props) => {
   const onSubmit = async (values) => {
@@ -41,7 +41,7 @@ const AddOrderForm = (props) => {
       truck: !values.truck ? props.orderObject.truck : values.truck,
       adr: !values.adr ? "" : values.adr[0],
       fix: !values.fix ? "" : values.fix[0],
-      info: values.info,
+      orderID: !values.orderID ? "" : values.orderID,
     };
     props.setOrderObject(newOrderObject);
     props.handleOnClose();
@@ -249,9 +249,9 @@ const AddOrderForm = (props) => {
                 </div>
                 <div>
                   <Field
-                    name="notes"
+                    name="orderID"
                     component="textarea"
-                    placeholder={"uwagi..."}
+                    placeholder={"order ID"}
                   />
                 </div>
               </div>

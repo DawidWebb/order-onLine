@@ -7,7 +7,7 @@ import DeleteConfirmation from "../../../components/DeleteConfirmation/DeleteCon
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./orderObject.module.scss";
+import styles from "./OrderObject.module.scss";
 
 const OrderObject = ({ order, setTaskInformation }) => {
   let history = useHistory();
@@ -50,7 +50,7 @@ const OrderObject = ({ order, setTaskInformation }) => {
     orderTruck,
     orderFix,
     orderAdr,
-    orderInfo,
+    orderID,
     orderClientPrice,
     orderClientCurr,
     orderClientTerms,
@@ -114,8 +114,8 @@ const OrderObject = ({ order, setTaskInformation }) => {
         <p>{orderAdr}</p>
       </div>
       <div className={styles.item}>
-        <p>info:</p>
-        <span>{orderInfo}</span>
+        <p>Order ID:</p>
+        <span>{orderID}</span>
       </div>
       <h3>Warunki i terminy:</h3>
       <div className={styles.item}>

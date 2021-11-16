@@ -8,7 +8,7 @@ import InformationPopup from "../../components/InformationPopup/InforationPopup"
 
 import { StoreContext } from "../../Store/StoreProvider";
 
-import styles from "./orders.module.scss";
+import styles from "./Orders.module.scss";
 
 const Orders = () => {
   const {

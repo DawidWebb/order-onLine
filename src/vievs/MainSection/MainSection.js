@@ -4,7 +4,7 @@ import WelcomeSite from "../WelcomeSite/WelcomeSite";
 import LoggedMenu from "../LoggedMenu/LoggedMenu";
 
 import { StoreContext } from "../../Store/StoreProvider";
-import styles from "./mainSection.module.scss";
+import styles from "./MainSection.module.scss";
 
 function MainSection() {
   const { user, cookie } = useContext(StoreContext);

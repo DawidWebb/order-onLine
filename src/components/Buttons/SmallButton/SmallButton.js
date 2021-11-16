@@ -1,4 +1,4 @@
-import styles from "./smallButton.module.scss";
+import styles from "./SmallButton.module.scss";
 
 function SmallButton({ name, onClick }) {
   return (

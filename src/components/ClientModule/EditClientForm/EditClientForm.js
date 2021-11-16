@@ -7,17 +7,13 @@ import MainButton from "../../Buttons/MainButton/MainButton";
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./editClientForm.module.scss";
+import styles from "./EditClientForm.module.scss";
 
 const required = (value) => (value ? undefined : "Pole wymagane");
 
 const AddClientForm = (props) => {
-  const {
-    clientsData,
-    setClientsData,
-    serchedClient,
-    setSerchedClient,
-  } = useContext(StoreContext);
+  const { clientsData, setClientsData, serchedClient, setSerchedClient } =
+    useContext(StoreContext);
 
   const [showSpinner, setShowSpinner] = useState(false);
 

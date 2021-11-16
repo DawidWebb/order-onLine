@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import SpinnerStatic from "../../components/Spinner/SpinnerStatic";
 
-import styles from "./welcomeSite.module.scss";
+import styles from "./WelcomeSite.module.scss";
 
 const WelcomeSite = () => {
   return (

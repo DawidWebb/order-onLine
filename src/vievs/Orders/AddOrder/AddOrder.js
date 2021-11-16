@@ -15,7 +15,7 @@ import CreateOrderNumber from "../../../components/FunctionsForOrders/CreateOrde
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./addOrder.module.scss";
+import styles from "./AddOrder.module.scss";
 
 const AddOrder = () => {
   let history = useHistory();
@@ -47,6 +47,8 @@ const AddOrder = () => {
   const [vievCarrier, setVievCarrier] = useState(false);
   const [orderObject, setOrderObject] = useState(false);
   const [conditions, setConditions] = useState(false);
+
+  console.log(orderObject);
 
   const setUpCopiedOrderData = () => {
     if (!copiedOrderData) {
@@ -84,7 +86,7 @@ const AddOrder = () => {
       truck: copiedOrderData.orderTruck,
       fix: copiedOrderData.orderFix,
       adr: copiedOrderData.orderAdr,
-      info: copiedOrderData.orderInfo,
+      orderID: "",
     });
 
     setConditions({
@@ -214,7 +216,7 @@ const AddOrder = () => {
       orderTruck: !orderObject.truck ? "" : orderObject.truck,
       orderAdr: !orderObject.adr ? "" : orderObject.adr,
       orderFix: !orderObject.fix ? "" : orderObject.fix,
-      orderInfo: !orderObject.info ? "" : orderObject.info,
+      orderID: !orderObject.orderID ? "" : orderObject.orderID,
       //conditions data
       orderClientPrice: !conditions.clientPrice ? "" : conditions.clientPrice,
       orderClientCurr: !conditions.clientCurr ? "" : conditions.clientCurr,

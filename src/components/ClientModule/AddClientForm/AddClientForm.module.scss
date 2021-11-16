@@ -3,28 +3,34 @@
 .wrapper {
   position: relative;
   width: 70vw;
+
   h3 {
     margin-bottom: 20px;
     text-align: center;
   }
+
   .validateMessage {
     text-align: center;
     color: $text-warring-color;
   }
+
   .form {
     .inputs {
       div {
         display: flex;
         flex-wrap: wrap;
+
         ::placeholder {
           color: $first-color;
           font-weight: 700;
           font-size: $xs-font-size;
         }
+
         input,
         textarea {
           @include inputViev;
         }
+
         span {
           flex-basis: 90%;
           color: $text-warring-color;
@@ -34,32 +40,39 @@
       }
     }
   }
+
   .buttons {
     display: flex;
     justify-content: space-around;
     margin: 20px auto;
   }
+
   .spinnerWrapper {
     @include spinnerWrapper;
   }
+
   @media screen and (orientation: landscape) {
     width: 60vw;
     height: 80vh;
+
     h3 {
       margin-bottom: 0;
     }
+
     .form {
       .inputs {
         div {
           ::placeholder {
             font-weight: 600;
           }
+
           input,
           textarea {
             @include inputViev;
             margin: 0;
             font-size: $xs-font-size;
           }
+
           span {
             font-weight: 600;
             font-size: $xs-font-size;
@@ -67,14 +80,17 @@
         }
       }
     }
+
     .buttons {
       margin: 10px auto;
     }
   }
+
   @media screen and (min-width: map-get($breakpoints, medium)) {
     width: 40vw;
     height: 50vh;
   }
+
   .buttons {
     margin: 20px auto;
   }

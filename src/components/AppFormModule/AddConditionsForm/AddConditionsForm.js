@@ -4,7 +4,7 @@ import Modal from "../../Modal/Modal";
 
 import MainButton from "../../Buttons/MainButton/MainButton";
 
-import styles from "./addConditionsForm.module.scss";
+import styles from "./AddConditionsForm";
 
 const AddConditionsForm = (props) => {
   const onSubmit = async (values) => {

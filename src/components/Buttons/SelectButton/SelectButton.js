@@ -1,4 +1,4 @@
-import styles from "./selectButton.module.scss";
+import styles from "./SelectButton.module.scss";
 
 function SelectButton({ name, onClick, disabled }) {
   return (

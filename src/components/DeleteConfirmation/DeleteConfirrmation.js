@@ -1,7 +1,7 @@
 import Modal from "../Modal/Modal";
 import MainButton from "../Buttons/MainButton/MainButton";
 
-import styles from "./deleteConfirmation.module.scss";
+import styles from "./DeleteConfirmation.module.scss";
 
 const DeleteConfirmation = ({
   deleteConfirm,

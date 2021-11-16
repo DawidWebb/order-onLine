@@ -10,7 +10,7 @@ import BackButton from "../../../components/Buttons/BackButton/BackButton";
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./showOrders.module.scss";
+import styles from "./ShowOrders.module.scss";
 
 const ShowOrders = () => {
   const { ordersData, setOrdersData, user, cookie } = useContext(StoreContext);

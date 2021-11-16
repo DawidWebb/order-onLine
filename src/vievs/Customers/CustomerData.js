@@ -6,12 +6,11 @@ import DeleteConfirmation from "../../components/DeleteConfirmation/DeleteConfir
 import request from "../../helpers/request";
 import { StoreContext } from "../../Store/StoreProvider";
 
-import styles from "./customerData.module.scss";
+import styles from "./CustomerData.module.scss";
 
 const CustomerData = ({ client, setTaskInformation }) => {
-  const { setClientsData, serchedClient, setSerchedClient } = useContext(
-    StoreContext
-  );
+  const { setClientsData, serchedClient, setSerchedClient } =
+    useContext(StoreContext);
 
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);

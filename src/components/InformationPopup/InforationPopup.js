@@ -1,6 +1,6 @@
 import Modal from "../Modal/Modal";
 
-import styles from "./informationPopup.module.scss";
+import styles from "./InformationPopup.module.scss";
 
 const InformationPopup = ({ taskInformation }) => {
   return (

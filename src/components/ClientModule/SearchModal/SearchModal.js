@@ -6,7 +6,7 @@ import Spinner from "../../Spinner/Spinner";
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./searchModal.module.scss";
+import styles from "./SearchModal.module.scss";
 
 const SearchModal = (props) => {
   const { setSerchedClient, user, cookie } = useContext(StoreContext);

@@ -1,6 +1,6 @@
 import BackButton from "../../components/Buttons/BackButton/BackButton";
 
-import styles from "./rodo.module.scss";
+import styles from "./Rodo.module.scss";
 
 const Rodo = () => {
   return (

@@ -8,7 +8,7 @@ import { OWNED_COMPANY } from "../../../helpers/companyData";
 
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./orderViev.module.scss";
+import styles from "./OrderViev.module.scss";
 
 const OrderPrintViev = () => {
   const componentRef = useRef();
@@ -50,11 +50,9 @@ const OrderPrintViev = () => {
     carrierAdress,
     carrierName,
     carrierVatNo,
-    _id,
     orderDriver,
     orderFix,
     orderAdr,
-    orderNotes,
     orderGoodsSpecyfications,
     orderLoadDate,
     orderLoadHrs,
@@ -139,11 +137,6 @@ const OrderPrintViev = () => {
             {" "}
             <p>pojazd:</p>
             <span>{!orderTruck ? "" : orderTruck}</span>
-          </div>
-          <div>
-            {" "}
-            <p>uwagi:</p>
-            <span>{!orderNotes ? "" : orderNotes}</span>
           </div>
           <div>
             {" "}

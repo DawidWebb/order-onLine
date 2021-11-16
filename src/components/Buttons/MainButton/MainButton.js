@@ -1,4 +1,4 @@
-import styles from "./mainButton.module.scss";
+import styles from "./MainButton.module.scss";
 
 function MainButton({ name, onClick, disabled, type }) {
   return (

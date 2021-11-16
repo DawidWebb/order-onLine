@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 
-import styles from "./backButton.module.scss";
+import styles from "./BackButton.module.scss";
 
 const BackButton = () => {
   const history = useHistory();
