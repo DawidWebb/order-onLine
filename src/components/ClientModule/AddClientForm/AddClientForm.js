@@ -7,7 +7,7 @@ import MainButton from "../../Buttons/MainButton/MainButton";
 import request from "../../../helpers/request";
 import { StoreContext } from "../../../Store/StoreProvider";
 
-import styles from "./addClientForm.module.scss";
+import styles from "./AddClientForm.module.scss";
 
 const required = (value) => (value ? undefined : "Pole wymagane");
 

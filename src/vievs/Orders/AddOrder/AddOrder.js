@@ -48,7 +48,7 @@ const AddOrder = () => {
   const [orderObject, setOrderObject] = useState(false);
   const [conditions, setConditions] = useState(false);
 
-  console.log(orderObject);
+
 
   const setUpCopiedOrderData = () => {
     if (!copiedOrderData) {

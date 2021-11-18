@@ -46,7 +46,8 @@ const ShowOrders = () => {
 
     if (status === 200) {
       setShowSpinner(false);
-      setOrdersData(data.data);
+      setOrdersData(data.data.reverse());
+    
     } else {
       setShowSpinner(false);
       console.log(data.message);

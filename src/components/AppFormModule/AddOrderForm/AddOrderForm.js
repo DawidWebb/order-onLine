@@ -6,7 +6,9 @@ import MainButton from "../../Buttons/MainButton/MainButton";
 import styles from "./AddOrderForm.module.scss";
 
 const AddOrderForm = (props) => {
+
   const onSubmit = async (values) => {
+    console.log(values.orderID);
     const newOrderObject = {
       loadDate: !values.loadDate ? props.orderObject.loadDate : values.loadDate,
       loadHrs: values.loadHrs,
@@ -41,7 +43,7 @@ const AddOrderForm = (props) => {
       truck: !values.truck ? props.orderObject.truck : values.truck,
       adr: !values.adr ? "" : values.adr[0],
       fix: !values.fix ? "" : values.fix[0],
-      orderID: !values.orderID ? "" : values.orderID,
+      orderID: !values.orderID ? props.orderObject.orderID : values.orderID,
     };
     props.setOrderObject(newOrderObject);
     props.handleOnClose();
@@ -251,7 +253,12 @@ const AddOrderForm = (props) => {
                   <Field
                     name="orderID"
                     component="textarea"
-                    placeholder={"order ID"}
+                    placeholder={
+                      !props.orderObject.orderID
+                        ? "order ID"
+                        : props.orderObject.orderID
+                    }
+                
                   />
                 </div>
               </div>
