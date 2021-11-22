@@ -6,9 +6,7 @@ import MainButton from "../../Buttons/MainButton/MainButton";
 import styles from "./AddOrderForm.module.scss";
 
 const AddOrderForm = (props) => {
-
   const onSubmit = async (values) => {
-    console.log(values.orderID);
     const newOrderObject = {
       loadDate: !values.loadDate ? props.orderObject.loadDate : values.loadDate,
       loadHrs: values.loadHrs,
@@ -39,10 +37,12 @@ const AddOrderForm = (props) => {
       goodsSpecyfications: !values.goodsSpecification
         ? props.orderObject.goodsSpecification
         : values.goodsSpecification,
+      weight: !values.weight ? props.orderObject.weight : values.weight,
       driver: !values.driver ? props.orderObject.driver : values.driver,
       truck: !values.truck ? props.orderObject.truck : values.truck,
       adr: !values.adr ? "" : values.adr[0],
       fix: !values.fix ? "" : values.fix[0],
+      transitTime: !values.transitTime ? "" : values.transitTime,
       orderID: !values.orderID ? props.orderObject.orderID : values.orderID,
     };
     props.setOrderObject(newOrderObject);
@@ -211,6 +211,12 @@ const AddOrderForm = (props) => {
                 </div>
                 <div>
                   <Field
+                    name="weight"
+                    type="number"
+                    component="input"
+                    placeholder="waga w kilogramach"
+                  />
+                  <Field
                     name="driver"
                     type="text"
                     placeholder={
@@ -240,6 +246,13 @@ const AddOrderForm = (props) => {
                     value="Daty i Godziny FIX"
                   />
                   <label>FIX</label>
+                  <Field
+                    name="transitTime"
+                    component="input"
+                    type="text"
+                    placeholder="transit time"
+                    value=""
+                  />
 
                   <Field
                     name="adr"
@@ -258,7 +271,6 @@ const AddOrderForm = (props) => {
                         ? "order ID"
                         : props.orderObject.orderID
                     }
-                
                   />
                 </div>
               </div>

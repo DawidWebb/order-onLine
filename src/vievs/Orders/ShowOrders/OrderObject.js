@@ -46,10 +46,12 @@ const OrderObject = ({ order, setTaskInformation }) => {
     orderUnloadCity,
     orderUnloadAdress,
     orderGoodsSpecyfications,
+    orderWeight,
     orderDriver,
     orderTruck,
     orderFix,
     orderAdr,
+    orderTransitTime,
     orderID,
     orderClientPrice,
     orderClientCurr,
@@ -98,7 +100,11 @@ const OrderObject = ({ order, setTaskInformation }) => {
         <p>{orderUnloadCity}</p>
         <p>{orderUnloadAdress}</p>
       </div>
-      <div className={styles.item}></div>
+      <h3>specyfikacja</h3>
+      <div className={styles.item}>
+        <p>ADR:{orderAdr}</p>
+        <p>Waga: {orderWeight} kg</p>
+      </div>
       <div className={styles.item}>
         <p>{orderGoodsSpecyfications}</p>
       </div>
@@ -110,8 +116,8 @@ const OrderObject = ({ order, setTaskInformation }) => {
       </div>
       <div className={styles.item}></div>
       <div className={styles.item}>
-        <p>{orderFix}</p>
-        <p>{orderAdr}</p>
+        <p> FIX: {orderFix}</p>
+        <p>TT: {orderTransitTime}</p>
       </div>
       <div className={styles.item}>
         <p>Order ID:</p>

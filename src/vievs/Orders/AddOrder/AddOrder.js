@@ -48,8 +48,6 @@ const AddOrder = () => {
   const [orderObject, setOrderObject] = useState(false);
   const [conditions, setConditions] = useState(false);
 
-
-
   const setUpCopiedOrderData = () => {
     if (!copiedOrderData) {
       return;
@@ -212,10 +210,12 @@ const AddOrder = () => {
       orderGoodsSpecyfications: !orderObject.goodsSpecyfications
         ? ""
         : orderObject.goodsSpecyfications,
+      orderWeight: !orderObject.weight ? 1000 : orderObject.weight,
       orderDriver: !orderObject.driver ? "" : orderObject.driver,
       orderTruck: !orderObject.truck ? "" : orderObject.truck,
       orderAdr: !orderObject.adr ? "" : orderObject.adr,
       orderFix: !orderObject.fix ? "" : orderObject.fix,
+      orderTransitTime: !orderObject.transitTime ? "" : orderObject.transitTime,
       orderID: !orderObject.orderID ? "" : orderObject.orderID,
       //conditions data
       orderClientPrice: !conditions.clientPrice ? "" : conditions.clientPrice,
@@ -243,6 +243,7 @@ const AddOrder = () => {
     setKindOfTask(false);
     setShowSpinner(true);
     const postOrderObject = orderFullObject();
+    console.log(postOrderObject);
     const { data, status } = await request.post("/orders", postOrderObject);
 
     if (status === 201) {
