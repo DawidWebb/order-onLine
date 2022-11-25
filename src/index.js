@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./Root/index.scss";
 import App from "./App";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -13,5 +14,7 @@ import App from "./App";
 const rootElement = document.getElementById("root");
 
 if (rootElement) {
-  ReactDOM.render(<App />, rootElement);
+	ReactDOM.render(<App />, rootElement);
 }
+
+serviceWorkerRegistration.register();
