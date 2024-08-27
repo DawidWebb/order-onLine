@@ -1,4 +1,5 @@
 export const COMPANY_DATA = [
+  "Dokumenty wraz z FV proszę przesłać wyłacznie na maila: biuro@omega-dulowski.pl / PROSIMY NIE WYSYŁAĆ DOKUMENTÓW POCZTĄ TRADYCYJNĄ",
   "Termin płatności jest liczony od daty wpływu FV zleceniobiorcy, wraz z dokumentami dotyczącymi tras zawartych w FV.",
   "Skrócony termin płatności: skonto 5%, płatność w 48h po otrzymaniu FV wraz z kompletem dokumentów przewozowych. W przypadku skonta FV powinna zostać pomniejszona o 5%, opis: 'FV pomniejszona o 5% ze względu na wcześniejszą płatność'.",
   "Informujemy że nie akceptujemy faktur na których, na których skonto udzeilane jest przez zewnętrzne podmioty.",

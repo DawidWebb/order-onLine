@@ -10,7 +10,7 @@
     "bem-css-modules": "^1.4.2",
     "final-form": "^4.20.1",
     "nip24client": "^1.2.6",
-    "node-sass": "^5.0.0",
+    "node-sass": "^9.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-final-form": "^6.5.2",
@@ -32,7 +32,7 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
